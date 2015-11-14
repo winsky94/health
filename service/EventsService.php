@@ -72,7 +72,7 @@ class EventsService {
             $detail = $rt["detail"];
             $peopleNum = $rt["peopleNum"];
             $event = new Event($name, $introduction, $startDate, $endDate, $detail, $peopleNum);
-            $event->setState($this->judgeStateByTime($startDate,$endDate));//每次获得活动时动态设置活动状态
+            $event->setState($this->judgeStateByTime($startDate, $endDate));//每次获得活动时动态设置活动状态
             array_push($events, $event);
         }
 
@@ -95,12 +95,15 @@ class EventsService {
 
 //$eventsService->createTable();
 
-//$event = new Event("浦发银行，为爱开跑4", "浦发银行，为爱开跑", "2015-11-10", "2015-11-20", "我们是一个公益活动哦~",0);
-//if ($eventsService->insert($event) == true) {
-//    echo "success";
-//} else {
-//    echo "failed";
+//for ($i = 5; $i < 25; $i++) {
+//    $event = new Event("浦发银行，为爱开跑" . $i, "浦发银行，为爱开跑", "2015-11-10", "2015-11-20", "我们是一个公益活动哦~", 0);
+//    if ($eventsService->insert($event) == true) {
+//        echo "success<br>";
+//    } else {
+//        echo "failed<br>";
+//    }
 //}
+
 
 //print_r($eventsService->getAllEvents());
 
