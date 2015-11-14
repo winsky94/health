@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sportsData>
+    <data id="1">
+        <!-- 日期 -->
+        <date>2015-11-07 11:11:11</date>
+        <!-- 运动距离(公里) -->
+        <meters>0.62</meters>
+        <!-- 运动时长(分钟) -->
+        <minutes>19.6</minutes>
+        <!-- 平均速度(公里/小时) -->
+        <speed>1.90</speed>
+        <!-- 燃烧热量(大卡) -->
+        <calories>39.9</calories>
+    </data>
+    <data id="2">
+        <!-- 日期 -->
+        <date>2015-11-07 11:11:11</date>
+        <!-- 运动距离(公里) -->
+        <meters>0.62</meters>
+        <!-- 运动时长(分钟) -->
+        <minutes>19.6</minutes>
+        <!-- 平均速度(公里/小时) -->
+        <speed>1.90</speed>
+        <!-- 燃烧热量(大卡) -->
+        <calories>39.9</calories>
+    </data>
+</sportsData>

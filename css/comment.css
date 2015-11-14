@@ -1,0 +1,110 @@
+    article, aside, figure, footer, header, hgroup, menu, nav, section { 
+    	display: block;
+    }
+        
+    a {        
+        color: #6d84b4;        
+        text-decoration: none;
+    }
+
+	.comments {
+	    background: rgba(255,255,255,0.9);
+	    padding-right: 85px;
+	    padding-top: 20px;
+	    padding-bottom: 20px;
+	    height: 100%;
+	    margin: auto;
+	    margin-top: 20px;
+	    border-top: 1px solid #26a69a;
+	    border-bottom: 1px solid #26a69a;
+	}
+
+    .comment {
+        overflow: hidden;
+        padding: 0 0 1em;
+        border-bottom: 1px solid #ddd;
+        margin: 0 0 1em;
+        margin-left: 40px;
+        *zoom: 1;
+        width: 100%;
+    }
+
+	.comment-img {
+	    float: left;
+	    margin-right: 33px;
+	    overflow: hidden;
+	}
+
+	.comment-img img { display: block }
+
+	.comment-body { overflow: hidden }
+
+	.comment .text {
+	    padding: 10px;
+	    border: 1px dashed #26a69a;
+	    border-radius: 5px;
+	    background: #fff;
+	}
+
+	.comment .text p:last-child { margin: 0 }
+
+	.comment .attribution {
+	    margin: 0.5em 0 0;
+	    font-size: 14px;
+	    color: #666;
+	}
+
+	.comments, .comment { position: relative }
+
+	.comments:before, .comment:before, .comment .text:before {
+	    content: "";
+	    position: absolute;
+	    top: 0;
+	    left: 65px;
+	}
+
+	.comments:before {
+	    width: 3px;
+	    left: 105px;
+	    bottom: 0px;
+	    background: rgba(0,0,0,0.1);
+	}
+
+	.comment:before {
+	    width: 11px;
+	    height: 11px;
+	    border: 3px solid #fff;
+	    border-radius: 100px;
+	    margin: 16px 0 0 -6px;
+	    box-shadow: 0 1px 1px rgba(0,0,0,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+	    background: #ccc;
+	}
+
+	.comment:hover:before { background: #26a69a }
+
+	.comment .text:before {
+	    top: 18px;
+	    left: 78px;
+	    width: 9px;
+	    height: 9px;
+	    border-width: 0 0 1px 1px;
+	    border-style: dashed;
+	    border-color: #26a69a;
+	    background: #fff;
+	    -webkit-transform: rotate(45deg);
+	    -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	    -o-transform: rotate(45deg);
+	}
+
+	.response{
+		float: right;
+	}
+
+	#my-comment-area{
+		margin-top: 40px;
+	}
+
+	.btn-comment{
+		float: right;
+	}
