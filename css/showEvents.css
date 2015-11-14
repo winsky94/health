@@ -1,0 +1,71 @@
+#jsfoot02 li {
+    font-size: 12px;
+    margin-bottom: 10px;
+    line-height: 20px;
+}
+
+.noticTipTxt {
+    height: 247px;
+    position: absolute;
+    width: 226px;
+    top: 0px;
+}
+
+.float_left {
+    float: left;
+}
+
+.float_right {
+    float: right;
+}
+
+.incubate_des .inner {
+    height: 380px;
+    overflow: hidden;
+}
+
+.font12 {
+    font-size: 12px
+}
+
+.font16 {
+    font-size: 16px
+}
+
+/*活动内容*/
+.action_content {
+    background-color: #F4F4F4;
+    width: 540px;
+    height: 100px;
+    border-radius: 0 8px 8px 0;
+    padding-left: 20px;
+}
+
+/*活动宣传图片*/
+.radius6 {
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+/*活动已结束的“已结束”字体颜色*/
+.action_over {
+    color: #949494;
+}
+
+/*活动报名人数和状态*/
+.action_num_state {
+    float: right;
+    background-color: #A6D003;
+    width: 100px;
+    height: 100px;
+    border-radius: 0 8px 8px 0;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+/*空白高度为10*/
+.blank10{
+    height:10px;clear:both;font-size:0px;overflow:hidden;
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>sign_up</title>
+    <script src="../js/writeHTML.js"></script>
+    <script src="../js/cookie.js"></script>
+    <script src="../js/jQuery.js"></script>
+    <script src="../js/lazyload-min.js"></script>
+    <script src="../js/SignUpAjax.js"></script>
+    <script src="../js/LoginAjax.js"></script>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+    <style type="text/css">
+        .table-container {
+            display: table;
+        }
+
+        .row-container {
+            display: table-row;
+        }
+
+        .cell {
+            display: table-cell;
+        }
+    </style>
+
+</head>
+<body onload='write_header();write_footer()'>
+
+<header></header>
+
+<div class="main container">
+    <div class="row">
+        <div class="col s12">
+            <h4 style="font-family: '楷体';">
+                注册账号
+            </h4>
+        </div>
+        <div class="col s12 m4 l2"></div>
+        <div class="col s12 m8 l8">
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <div class="input-field col s6 ">
+                        <input id="nickname" type="text" name="nickname" class="validate">
+                        <label for="nickname">昵　称</label>
+                    </div>
+
+                    <div class="input-field col s6 ">
+                        <input id="age" type="text" name="age" class="validate">
+                        <label for="age">年　龄</label>
+                    </div>
+
+                </div>
+
+                <div class="input-field col s12">
+                    <div class="input-field col s6">
+                        <select class="browser-default" id="sex">
+                            <option value="" disabled selected>请选择性别</option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                            <option value="保密">保密</option>
+                        </select>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <select class="browser-default" id="type">
+                            <option value="" disabled selected>请选择角色</option>
+                            <option value="user">个人用户</option>
+                            <option value="doctor">医生</option>
+                            <option value="coach">教练</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-field col s12">
+                    <div class="input-field col s6">
+                        <input id="password-signup" type="password" name="password" class="validate">
+                        <label for="password-signup">密　码</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="password-verify" type="password" name="password" class="validate">
+                        <label for="password-verify">确认密码</label>
+                    </div>
+                </div>
+
+                <div class="input-field col s12">
+                    <div class="input-field col s6">
+                        <input id="height" type="text" name="height" class="validate">
+                        <label for="height">身　高</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="weight" type="text" name="weight" class="validate">
+                        <label for="weight">体　重</label>
+                    </div>
+                </div>
+
+                <div class="input-field col s12">
+                    <div class="input-field col s6">
+                        <input id="email" type="email" name="email" class="validate">
+                        <label for="email">邮　箱</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="phonenumber" type="tel" name="phonenumber" class="validate">
+                        <label for="phonenumber">电　话</label>
+                    </div>
+                </div>
+
+
+                <!--<div>
+                    <div class="input-field col s8">
+                        <input id="code" type="text" name="code" class="validate">
+                        <label for="code">checkCode</label>
+                    </div>
+
+                    <div>
+                        <img src="http://localhost:80/myProject/health/utils/code.php"
+                             onclick="this.src='http://localhost/myProject/health/utils/code.php?id='+Math.random()" id="checkCode"/>
+                    </div>
+                </div>-->
+            </div>
+
+            <div class="table-container col s12">
+                <div class="row-container">
+                    <div class="input-field cell">
+                        <a class="btn btn-primary" style="margin-left: 30px;" onclick="verify_signup()">注册</a>
+                        <font color="red" size="3"><span id="result" style="margin-left: 100px;"></span></font>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col s12 m4 l2"></div>
+        </div>
+        <div class="row">
+            <div class="col s12 m6 l3"></div>
+            <div class="col s12 m6 l3"></div>
+            <div class="col s12 m6 l3"></div>
+            <div class="col s12 m6 l3"></div>
+        </div>
+
+
+        <!--  Scripts-->
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../js/materialize.js"></script>
+    </div>
+</div>
+<div id="footer"></div>
+</body>
+</html>
