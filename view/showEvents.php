@@ -79,88 +79,101 @@
                 $events = $eventService->getAllEvents();
 
                 foreach ($events as $event) {
-                    $name = $event->getName();
-                    $introduction = $event->getIntroduction();
-                    $startDate = $event->getStartDate();
-                    $endDate = $event->getEndDate();
-                    $detail = $event->getDetail();
-                    $state = $event->getState();
-                    $peopleNum = $event->getPeopleNum();
-                    ?>
+                $name = $event->getName();
+                $introduction = $event->getIntroduction();
+                $startDate = $event->getStartDate();
+                $endDate = $event->getEndDate();
+                $detail = $event->getDetail();
+                $state = $event->getState();
+                $peopleNum = $event->getPeopleNum();
 
-                    <!-- 活动 -->
-                    <div class="row">
-                        <div style="height: 100px;overflow:hidden;">
-                            <!-- 左侧图片 -->
-                            <!--<div class="float_left">
-                                <a href="">
-                                    <img class="radius6"
-                                         src="http://img3.codoon.com/backend_ad62428b-e2a5-4123-9160-567263f622b7_1445218660332_280_180_jpeg"
-                                         width="180" height="100"/>
-                                </a>
-                            </div>-->
-                            <!-- 左侧图片结束 -->
-
-
-                            <!-- 中间内容-->
-                            <div class="action_content float_left">
-                                <!-- 简短介绍 -->
-                                <div class="act_c_d float_left">
-                                    <div class="blank10"></div>
-                                    <div style="min-height: 30px;">
-                                        <a class="font16" style="font-weight:bold;" href="" title="title">
-                                            <?php echo $name; ?>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        开始日期：<span style="font-weight: 900"><?php echo $startDate; ?></span>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        结束日期：<span style="font-weight: 900"><?php echo $endDate; ?></span>
-                                    </div>
-                                    <div class="blank10"></div>
-                                    <div class="font12">
-                                        <?php echo $introduction; ?>
-                                    </div>
-
-                                </div>
-                                <!-- 简短介绍结束 -->
-
-                                <!-- 参与人数与活动情况-->
-                                <div class="action_num_state">
-                                    <div class="proceed_1"
-                                         style="text-align:center;font-weight:bold;line-height: 60px;">
-                                        <?php echo $state; ?>
-                                    </div>
-                                    <div style="text-align:center;">
-                                        <?php echo $peopleNum; ?>人参与
-                                    </div>
-                                </div>
-                                <!-- 参与人数结束-->
-                            </div>
-                        </div>
-                    </div>
-                    <!--活动结束 -->
-
-                    <?php
-                }
                 ?>
 
-                <!-- 页数导航 -->
-                <br>
+                <!-- 活动 -->
+                <div class="row">
+                    <div style="height: 100px;overflow:hidden;">
+                        <!-- 左侧图片 -->
+                        <!--<div class="float_left">
+                            <a href="">
+                                <img class="radius6"
+                                     src="http://img3.codoon.com/backend_ad62428b-e2a5-4123-9160-567263f622b7_1445218660332_280_180_jpeg"
+                                     width="180" height="100"/>
+                            </a>
+                        </div>-->
+                        <!-- 左侧图片结束 -->
 
-                <div class="pagination" style="text-align: center">
+                        <!-- 中间内容-->
+                        <div class="action_content float_left">
+                            <!-- 简短介绍 -->
+                            <div class="act_c_d float_left">
+                                <div class="blank10"></div>
+                                <div style="min-height: 30px;">
+
+                                    <a class="font16" style="font-weight:bold;" href="" title="title">
+                                        <?php echo $name; ?>
+                                    </a>
+                                </div>
+                                <div>
+                                    开始日期：<span style="font-weight: 900"><?php echo $startDate; ?></span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    结束日期：<span style="font-weight: 900"><?php echo $endDate; ?></span>
+                                </div>
+                                <div class="blank10"></div>
+                                <div class="font12">
+                                    <?php echo $introduction; ?>
+                                </div>
+
+                                <a class="font16" style="font-weight:bold;" target="_blank"
+                                   href=""
+                                   title="浦发银行 为爱开跑">浦发银行 为爱开跑</a>
+                            </div>
+                            <div>
+                                09月07日 00:00-11月15日 23:59
+                            </div>
+                            <div class="blank10"></div>
+                            <div class="font12">浦发银行 为爱开跑</div>
+                        </div>
+                        <!-- 简短介绍结束 -->
+
+                        <!-- 参与人数与活动情况-->
+                        <div class="action_num_state">
+                            <div class="proceed_1"
+                                 style="text-align:center;font-weight:bold;line-height: 60px;">
+                                <?php echo $state; ?>
+                            </div>
+                            <div style="text-align:center;">
+                                <?php echo $peopleNum; ?>人参与
+                            </div>
+                            style="text-align:center;font-weight:bold;line-height: 60px;">进行中
+                        </div>
+                        <div style="text-align:center;">97163人参与</div>
+                    </div>
+                    <!-- 参与人数结束-->
                 </div>
-
             </div>
         </div>
-        <!--中间活动列表结束-->
+        <!--活动结束 -->
 
-        <!--右侧快速返回顶部-->
-        <div id="back-up"></div>
-        <!--右侧快速返回顶部结束-->
+        <?php
+        }
+        ?>
+
+        <!-- 页数导航 -->
+        <br>
+
+        <div class="pagination" style="text-align: center">
+        </div>
 
     </div>
-    <!--12列结束-->
+</div>
+<!--中间活动列表结束-->
+
+<!--右侧快速返回顶部-->
+<div id="back-up"></div>
+<!--右侧快速返回顶部结束-->
+
+</div>
+<!--12列结束-->
 </div>
 
 
