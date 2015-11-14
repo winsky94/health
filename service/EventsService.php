@@ -92,10 +92,10 @@ class EventsService {
 }
 
 //$eventsService = new EventsService();
-//
+
 //$eventsService->createTable();
-//
-//$event = new Event("浦发银行，为爱开跑", "浦发银行，为爱开跑", "2015-11-10", "2015-11-20", "我们是一个公益活动哦~",0);
+
+//$event = new Event("浦发银行，为爱开跑4", "浦发银行，为爱开跑", "2015-11-10", "2015-11-20", "我们是一个公益活动哦~",0);
 //if ($eventsService->insert($event) == true) {
 //    echo "success";
 //} else {
