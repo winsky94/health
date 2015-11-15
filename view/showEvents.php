@@ -103,7 +103,7 @@
                             <!-- 左侧图片结束 -->
 
                             <!-- 中间内容-->
-                            <div class="action_content float_left">
+                            <div class="action_content float_left" id="event_content">
                                 <!-- 简短介绍 -->
                                 <div class="act_c_d float_left">
                                     <div class="blank10"></div>
@@ -179,6 +179,7 @@
 <script src="../js/ChangePWAjax.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/LoginAjax.js"></script>
+<script src="../js/eventAjax.js"></script>
 <script>
     var jQ = jQuery.noConflict();
     var $ = jQ;
@@ -186,7 +187,7 @@
 
 <!--显示页码-->
 <script>
-    write_pagination(1, 10, 5, 5);
+    get_page_num();
 </script>
 
 <!-- 滚动显示 -->
