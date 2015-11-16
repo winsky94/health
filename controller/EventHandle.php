@@ -39,7 +39,7 @@ if ($action == "release") {
         $message = "<message>请选择有效的活动开始和结束日期</message>";
         echo $message;
     } else {
-        $event = new Event($name, $introduction, $startDate, $endDate, $detail,0);//新发布的活动参与人数为0
+        $event = new Event($name, $introduction, $startDate, $endDate, $detail, 0);//新发布的活动参与人数为0
         $result = $eventService->insert($event);
 
         if ($result == true) {
@@ -50,6 +50,40 @@ if ($action == "release") {
 
         echo $message;
     }
+} elseif ($action == "getEventsPageNum") {
+    echo $eventService->getPageNum();
+} elseif ($action == "getEvents") {
+    $pageNum = $_POST["pageNum"];
+    $events = $eventService->getEventsByPage($pageNum);
 
+    header('Content-Type: text/xml');
+
+    // 写xml信息
+    $dom = new DOMDocument('1.0', 'UTF-8');
+    $dom->formatOutput = true;
+    $rootElement = $dom->createElement("events");
+    foreach ($events as $event) {
+        $eventElement = $dom->createElement("event");
+        $name = $dom->createElement("name", $event->getName());
+        $introduction = $dom->createElement("introduction", $event->getIntroduction());
+        $startDate = $dom->createElement("startDate", $event->getStartDate());
+        $endDate = $dom->createElement("endDate", $event->getEndDate());
+        $detail = $dom->createElement("detail", $event->getDetail());
+        $peopleNum = $dom->createElement("peopleNum", $event->getPeopleNum());
+        $state = $dom->createElement("state", $event->getState());
+
+        $eventElement->appendChild($name);
+        $eventElement->appendChild($introduction);
+        $eventElement->appendChild($startDate);
+        $eventElement->appendChild($endDate);
+        $eventElement->appendChild($detail);
+        $eventElement->appendChild($peopleNum);
+        $eventElement->appendChild($state);
+
+        $rootElement->appendChild($eventElement);
+    }
+
+    $dom->appendChild($rootElement);
+    echo $dom->saveXML();
 
 }
