@@ -212,14 +212,14 @@ function write_pagination(start, end, active_num, page_num) {
     var txt;
     if (start == 1 && active_num == 1) {
         txt = '<li class="disabled"> \
-                <a href="#!">  \
-                    <i class="material-icons">chevron_left</i> \
+                <a onclick="return false;">  \
+                    <i class="mdi-navigation-chevron-left"></i> \
                 </a> \
             </li>';
     } else {
         txt = '<li class="waves-effect"> \
-                <a href="#!" onclick="page_up(active_num)">  \
-                    <i class="material-icons">chevron_left</i> \
+                <a onclick="page_up(active_num);return false;">  \
+                    <i class="mdi-navigation-chevron-left"></i> \
                 </a> \
             </li>';
     }
@@ -227,31 +227,78 @@ function write_pagination(start, end, active_num, page_num) {
 
     for (i = start; i <= end; i++) {
         if (i == active_num) {
-            txt = txt + '<li class="page-selector active" title="' + i + '"> \
-                        <a href="#!">' + i + '</a> \
+            txt = txt + '<li class="active" title="' + i + '"> \
+                        <a onclick="return false;">' + i + '</a> \
                     </li>';
         } else {
-            txt = txt + '<li class="page-selector waves-effect" title="' + i + '" onclick="turn_to_page(this.title)"> \
-                        <a href="#!">' + i + '</a> \
+            txt = txt + '<li class="waves-effect" title="' + i + ' " onclick="turn_to_page(this.title);scrollTo(0,0);return false;"> \
+                        <a>' + i + '</a> \
                     </li>';
         }
     }
 
     if (end == page_num && active_num == page_num) {
         txt = txt + '<li class="disabled"> \
-                <a href="#!"> \
-                    <i class="material-icons">chevron_right</i> \
+                <a onclick="return false;"> \
+                    <i class="mdi-navigation-chevron-right"></i> \
                 </a> \
              </li>';
     } else {
         txt = txt + '<li class="waves-effect"> \
-                <a href="#!" onclick="page_down(active_num)"> \
-                    <i class="material-icons">chevron_right</i> \
+                <a onclick="page_down(active_num);scrollTo(0,0);return false;"> \
+                    <i class="mdi-navigation-chevron-right"></i> \
                 </a> \
              </li>';
     }
 
     $(".pagination").html(txt);
+}
+
+function write_event_list(events) {
+    var txt = '';
+    for (var i = 0; i < events.length; i++) {
+        var event = events[i];
+        var name = event.getElementsByTagName("name")[0].firstChild.nodeValue;
+        var introduction = event.getElementsByTagName("introduction")[0].firstChild.nodeValue;
+        var startDate = event.getElementsByTagName("startDate")[0].firstChild.nodeValue;
+        var endDate = event.getElementsByTagName("endDate")[0].firstChild.nodeValue;
+        var detail = event.getElementsByTagName("detail")[0].firstChild.nodeValue;
+        var peopleNum = event.getElementsByTagName("peopleNum")[0].firstChild.nodeValue;
+        var state = event.getElementsByTagName("state")[0].firstChild.nodeValue;
+        txt += '<div class="row">\
+                <div style="height: 100px;overflow:hidden;">\
+                    <div class="action_content float_left">\
+                        <div class="act_c_d float_left">\
+                            <div class="blank10"></div>\
+                            <div style="min-height: 30px;">\
+                                <a class="font16" style="font-weight:bold;" href="" title="title">' + name + '\
+                                </a>\
+                            </div>\
+                            <div>\
+                                开始日期：<span style="font-weight: 900">' + startDate + '</span>\
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+                                结束日期：<span style="font-weight: 900">' + endDate + '</span>\
+                            </div>\
+                            <div class="blank10"></div>\
+                            <div class="font12">\
+                                ' + introduction + '\
+                            </div>\
+                        </div>\
+                        <div class="action_num_state">\
+                            <div class="proceed_1"\
+                                style="text-align:center;font-weight:bold;line-height: 60px;">\
+                                ' + state + '\
+                            </div>\
+                            <div style="text-align:center;">\
+                                ' + peopleNum + '人参与\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>\
+            </div>';
+    }
+
+    return txt;
 }
 
 function write_health_right_content(e){

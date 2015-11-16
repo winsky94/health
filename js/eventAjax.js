@@ -7,7 +7,6 @@ var end = 1;
 var active_num = 1;
 
 function turn_to_page(select_page) {
-    alert(select_page);
     active_num = parseInt(select_page);
 
     if (active_num - 2 >= 1 && active_num + 2 <= page_num) {
@@ -21,9 +20,8 @@ function turn_to_page(select_page) {
         end = page_num;
     }
 
-
     write_pagination(start, end, active_num, page_num);
-    //get_documents_by_course(department, course, active_num);
+    get_events(active_num);
 }
 
 function page_up(current_page) {
@@ -65,55 +63,28 @@ function on_page_num_response(xmlhttp) {
         }
         active_num = 1;
         write_pagination(start, end, active_num, page_num);	 //初始化页码
-        //get_documents_by_course(department, course, 1);  //请求第一页
+        get_events(1);  //请求第一页
     }
 }
 
-function get_course_list(xmlhttp_course) {
-    if (xmlhttp_course.readyState == 4 && xmlhttp_course.status == 200) {
-        //file_elements是一个数组
-        var text = xmlhttp_course.responseText;
-        try {
-            var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-            xmlDoc.async = "false";
-            xmlDoc.loadXML(text);
-        } catch (e) {
-            try {
-                var parser = new DOMParser();
-                xmlDoc = parser.parseFromString(text, "text/xml");
-            } catch (e) {
-                alert(e.message);
-            }
-        }
-        var departments = xmlDoc.getElementsByTagName("department");
-        var txt = write_course_list(departments, 0);
-        $("#course_list").html(txt);
-    }
-}
-
-function get_documents_by_course(department_chosen, course_chosen, current_page) {
-    var school = $('#university-info').attr('title');
-    var nickname = $("#user-name").attr("title");
+function get_events(current_page) {
     var xmlhttp = getXmlHttp();
     if (xmlhttp != null) {
-        xmlhttp.open('GET', '/UniNote/DocumentOverViewServlet?school=' + school + '&department=' + department_chosen +
-            '&course=' + course_chosen + '&nickname=' + nickname + "&page=" + current_page, true);
+        xmlhttp.open('POST', '../controller/EventHandle.php');
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xmlhttp.onreadystatechange = function () {
-            onResponse(xmlhttp)
+            onEventsResponse(xmlhttp)
         };
-        xmlhttp.send();
+        xmlhttp.send("action=getEvents&pageNum=" + current_page);
     } else {
         alert('Your browser does not support XMLHttpRequest.');
     }
 }
 
-function onResponse(xmlhttp) {
-    alert(xmlhttp);
+function onEventsResponse(xmlhttp) {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         //file_elements是一个数组
         var text = xmlhttp.responseText;
-        alert(text);
         try {
             var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
             xmlDoc.async = "false";
@@ -126,27 +97,11 @@ function onResponse(xmlhttp) {
                 alert(e.message);
             }
         }
-        var file_elements = xmlDoc.getElementsByTagName("document");
-        var txt = write_document_list(file_elements);
-        $("#filelist").html(txt);
+        var file_elements = xmlDoc.getElementsByTagName("event");
+        var txt = write_event_list(file_elements);
+        $("#events_list").html(txt);
     }
 }
-
-function init_left_list() {
-    var xmlhttp_course = getXmlHttp();
-    var school = $('#university-info').attr('title');
-    if (xmlhttp_course != null) {
-        xmlhttp_course.open("GET", "/UniNote/CategoryServlet?school=" + encodeURI(encodeURI(school)), true);
-        xmlhttp_course.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xmlhttp_course.onreadystatechange = function () {
-            get_course_list(xmlhttp_course)
-        };
-        xmlhttp_course.send();
-    } else {
-        alert("Your browser does not support XMLHttpRequest.");
-    }
-}
-
 
 function search_function() {
     var keyword = $("input[name='keyword']").val();
