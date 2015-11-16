@@ -6,8 +6,7 @@
     <title>查看活动</title>
 
     <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet">
+    <link href="../css/material_icons.css" rel="stylesheet" media="screen,projection">
     <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../css/showEvents.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -71,80 +70,7 @@
                 <div class="font16">最新活动</div>
                 <div class="blank10"></div>
 
-                <?php
-                require_once("../service/EventsService.php");
-                require_once("../model/Event.php");
-
-                $eventService = new EventsService();
-                $events = $eventService->getAllEvents();
-
-                foreach ($events as $event) {
-                    $name = $event->getName();
-                    $introduction = $event->getIntroduction();
-                    $startDate = $event->getStartDate();
-                    $endDate = $event->getEndDate();
-                    $detail = $event->getDetail();
-                    $state = $event->getState();
-                    $peopleNum = $event->getPeopleNum();
-
-                    ?>
-
-                    <!-- 活动 -->
-                    <div class="row">
-                        <div style="height: 100px;overflow:hidden;">
-                            <!-- 左侧图片 -->
-                            <!--<div class="float_left">
-                                <a href="">
-                                    <img class="radius6"
-                                         src="http://img3.codoon.com/backend_ad62428b-e2a5-4123-9160-567263f622b7_1445218660332_280_180_jpeg"
-                                         width="180" height="100"/>
-                                </a>
-                            </div>-->
-                            <!-- 左侧图片结束 -->
-
-                            <!-- 中间内容-->
-                            <div class="action_content float_left" id="event_content">
-                                <!-- 简短介绍 -->
-                                <div class="act_c_d float_left">
-                                    <div class="blank10"></div>
-                                    <div style="min-height: 30px;">
-
-                                        <a class="font16" style="font-weight:bold;" href="" title="title">
-                                            <?php echo $name; ?>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        开始日期：<span style="font-weight: 900"><?php echo $startDate; ?></span>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        结束日期：<span style="font-weight: 900"><?php echo $endDate; ?></span>
-                                    </div>
-                                    <div class="blank10"></div>
-                                    <div class="font12">
-                                        <?php echo $introduction; ?>
-                                    </div>
-                                </div>
-                                <!-- 简短介绍结束 -->
-
-                                <!-- 参与人数与活动情况-->
-                                <div class="action_num_state">
-                                    <div class="proceed_1"
-                                         style="text-align:center;font-weight:bold;line-height: 60px;">
-                                        <?php echo $state; ?>
-                                    </div>
-                                    <div style="text-align:center;">
-                                        <?php echo $peopleNum; ?>人参与
-                                    </div>
-
-                                </div>
-                                <!-- 参与人数结束-->
-                            </div>
-                        </div>
-                    </div>
-                    <!--活动结束 -->
-
-                    <?php
-                }
-                ?>
+                <div id="events_list"></div>
 
                 <!-- 页数导航 -->
                 <br>
@@ -168,7 +94,7 @@
 <div id="footer"></div>
 
 <!--  javaScripts -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/cookie.js"></script>
 <script src="../js/writeHTML.js"></script>
