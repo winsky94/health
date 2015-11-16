@@ -9,6 +9,8 @@
 
 require_once("../utils/SqliteHelper.php");
 require_once("../model/Event.php");
+require_once("../utils/FinalVar.php");
+
 
 class EventsService {
     var $db_name = "events";
@@ -63,8 +65,7 @@ class EventsService {
         $result = $this->DB->getList($sql);
 
         $events = array();
-        for ($i = 0; $i < sizeof($result); $i++) {
-            $rt = $result[$i];
+        foreach ($result as $rt) {
             $name = $rt["name"];
             $introduction = $rt["introduction"];
             $startDate = $rt["startDate"];
@@ -77,6 +78,42 @@ class EventsService {
         }
 
         return $events;
+    }
+
+    public function getEventsByPage($pageNum) {
+        $start = ($pageNum - 1) * numPerPage;
+        $sql = "select * from " . $this->db_name . " order by startDate desc limit " . $start . "," . numPerPage;
+        $result = $this->DB->getList($sql);
+
+        $events = array();
+        foreach ($result as $rt) {
+            $name = $rt["name"];
+            $introduction = $rt["introduction"];
+            $startDate = $rt["startDate"];
+            $endDate = $rt["endDate"];
+            $detail = $rt["detail"];
+            $peopleNum = $rt["peopleNum"];
+            $event = new Event($name, $introduction, $startDate, $endDate, $detail, $peopleNum);
+            $event->setState($this->judgeStateByTime($startDate, $endDate));//每次获得活动时动态设置活动状态
+            array_push($events, $event);
+        }
+        return $events;
+    }
+
+    public function getPageNum() {
+        $sql = "select count(*) from " . $this->db_name;
+        $result = $this->DB->getList($sql);
+        $num = $result[0][0];
+
+        //注意，php中/得到的是完整的结果
+
+        //附：php对数的保留位数操作操作
+        //float ceil ( float value ) 返回不小于 value 的下一个整数，value 如果有小数部分则进一位。ceil() 返回的类型仍然是 float
+        //float floor ( float value ) 返回不大于 value 的下一个整数，将 value 的小数部分舍去取整。floor() 返回的类型仍然是 float
+        //float round ( float val [, int precision] ) 返回将 val 根据指定精度 precision（十进制小数点后数字的数目）进行四舍五入的结果
+
+        $result = ceil($num / numPerPage);
+        return $result;
     }
 
     private function judgeStateByTime($startDate, $endDate) {
@@ -95,7 +132,7 @@ class EventsService {
 
 //$eventsService->createTable();
 
-//for ($i = 5; $i < 25; $i++) {
+//for ($i = 25; $i < 35; $i++) {
 //    $event = new Event("浦发银行，为爱开跑" . $i, "浦发银行，为爱开跑", "2015-11-10", "2015-11-20", "我们是一个公益活动哦~", 0);
 //    if ($eventsService->insert($event) == true) {
 //        echo "success<br>";
@@ -106,4 +143,8 @@ class EventsService {
 
 
 //print_r($eventsService->getAllEvents());
+
+//echo $eventsService->getPageNum();
+
+//print_r($eventsService->getEventsByPage(2));
 
