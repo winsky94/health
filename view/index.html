@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
     <title>home</title>
 
+
+    <!--  javaScripts -->
+    <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/materialize.js"></script>
+    <script type="text/javascript" src="../js/LoginAjax.js"></script>
+
+
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -33,6 +41,8 @@
             height: 610px;
         }
     </style>
+
+
     <script src="../js/cookie.js"></script>
     <script src="../js/writeHTML.js"></script>
     <script src="../js/xmlhttp.js"></script>
@@ -49,9 +59,14 @@
 
     </script>
 
+
 </head>
-<body onload="write_header();func();" onresize="func()">
+<body onload="func();" onresize="func()">
+
 <header></header>
+<script type="text/javascript">
+    write_header();
+</script>
 <div class="main" id="div1">
     <div class="slider">
         <ul class="slides">
@@ -77,11 +92,6 @@
     </div>
 </div>
 
-
-<!--  javaScripts -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="../js/materialize.js"></script>
-<script type="text/javascript" src="../js/LoginAjax.js"></script>
 
 </body>
 </html>
