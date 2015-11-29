@@ -45,13 +45,13 @@
                 <li class="collection-header">
                     <img src="../images/back1.jpg" width="150px" height="150px">
                     <?php
-                     $userName = $_GET["userName"];
+                    $userName = $_GET["userName"];
                     require_once("../service/UserService.php");
                     $userService = new UserService();
                     $user = $userService->getUserByName($userName);
                     $lastLoadTime = $user->getLastLoadTime();
-                    $height = $user->getHeight()."cm";
-                    $weight = $user->getWeight()."kg";
+                    $height = $user->getHeight() . "cm";
+                    $weight = $user->getWeight() . "kg";
                     $age = $user->getAge();
                     $sex = $user->getSex();
                     $telephone = $user->getTelephone();
@@ -81,7 +81,7 @@
             <div>
                 <input type="text" name="keyword" onkeydown='if(event.keyCode==13){search_function()}'>
                 &nbsp;&nbsp; &nbsp;&nbsp;
-                <a class="btn btn-primary" onclick="alert('监听监听')">搜索</a>
+                <a class="btn btn-primary" onclick="search_function();">搜索</a>
 
                 <div>
 
@@ -95,44 +95,22 @@
                 </div>
             </div>
             <br>
-            <ul class="collection">
-                <li class="collection-item avatar">
+            <ul class="collection" id="suggestions_list">
+                <!--<li class="collection-item avatar">
                     <img src="../images/back1.jpg" class="circle">
-                    <span class="title" style="font-weight: bold;">标题：多跑步喔~</span>
+                    <span class="title" style="font-weight: bold;">多跑步喔~</span>
 
-                    <p>跑步有益于身心健康 <br>
-                        珍爱生命，勤于跑步！
+                    <p style="font-family: 微软雅黑;margin-left: 50px">发布者：捕风 <span style="margin-left: 20px">2015-11-29 11:11:11</span>
                     </p>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="mdi-file-folder circle"></i>
-                    <span class="title">Title</span>
 
-                    <p>First Line <br>
-                        Second Line
+                    <p style="text-indent: 2ex;">跑步有益于身心健康.珍爱生命，勤于跑步！
                     </p>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="mdi-action-assessment circle green"></i>
-                    <span class="title">Title</span>
-
-                    <p>First Line <br>
-                        Second Line
-                    </p>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="mdi-av-play-arrow circle red"></i>
-                    <span class="title">Title</span>
-
-                    <p>First Line <br>
-                        Second Line
-                    </p>
-                </li>
+                </li>-->
             </ul>
 
-            <!-- 页数导航 -->
-            <br>
 
+            <br>
+            <!-- 页数导航 -->
             <div class="pagination" style="text-align: center">
             </div>
         </div>
@@ -160,10 +138,11 @@
 <script src="../js/ChangePWAjax.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/LoginAjax.js"></script>
+<script src="../js/showSuggestionAjax.js"></script>
 
 <!--显示页码-->
 <script>
-    write_pagination(1, 10, 5, 5);
+    get_page_num();
 </script>
 
 </body>

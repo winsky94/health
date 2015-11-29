@@ -301,6 +301,34 @@ function write_event_list(events) {
     return txt;
 }
 
+function write_suggestion_list(suggestions) {
+    var txt = '';
+    for (var i = 0; i < suggestions.length; i++) {
+        var suggestion = suggestions[i];
+        var title = suggestion.getElementsByTagName("title")[0].firstChild.nodeValue;
+        var content = suggestion.getElementsByTagName("content")[0].firstChild.nodeValue;
+        var author = suggestion.getElementsByTagName("author")[0].firstChild.nodeValue;
+        var type = suggestion.getElementsByTagName("type")[0].firstChild.nodeValue;
+        var email = suggestion.getElementsByTagName("email")[0].firstChild.nodeValue;
+        var telephone = suggestion.getElementsByTagName("telephone")[0].firstChild.nodeValue;
+        var time = suggestion.getElementsByTagName("time")[0].firstChild.nodeValue;
+        txt += '<li class="collection-item avatar">\
+            <img src="../images/back1.jpg" class="circle">\
+            <span class="title" style="font-weight: bold;">' + title + '</span>\
+            <p style="font-family: 微软雅黑;margin-left: 50px">\
+                发布者：' + author + '\
+                <span style="margin-left: 20px">' + time + '</span>\
+            </p>\
+        <p style="text-indent: 2ex;">\
+            ' + content + '\
+        </p>\
+        </li>\
+        ';
+    }
+
+    return txt;
+}
+
 function write_health_right_content(e){
     var txt='\
     <script src="../js/jQuery.js"></script>\

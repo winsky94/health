@@ -194,7 +194,7 @@ function write_header_login(userName,type){
 			<!-- Dropdown Structure -->\
 			<ul id="dropdown6" class="dropdown-content">\
     			<li><a href="">发布建议</a></li>\
-    			<li><a href="../view/realeaseSuggestion.php?userName='+userName+'">在线填写</a></li>\
+    			<li><a href="../view/releaseSuggestion.php?userName=' + userName + '">在线填写</a></li>\
     			<li><a href="../view/uploadSuggestion.php?userName='+userName+'">文件导入</a></li>\
     		</ul>\
 			<ul id="dropdown7" class="dropdown-content">\

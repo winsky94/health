@@ -6,8 +6,8 @@
     <title>在线发布建议</title>
 
     <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet">
+    <!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <link href="../css/material_icons.css" rel="stylesheet" media="screen,projection">
     <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
@@ -70,8 +70,8 @@
             <div class="row">
                 <div class="input-field col s12 m12 l12">
                     <div class="input-field col s6 ">
-                        <input id="userName" type="text" name="userName" class="validate" value="捕风" disabled>
-                        <label for="userName">昵　称</label>
+                        <input id="author" type="text" name="author" class="validate" value="捕风" disabled>
+                        <label for="author">昵　称</label>
                     </div>
 
                     <div class="input-field col s6 ">
@@ -94,8 +94,14 @@
 
                 <div class="input-field col s12">
                     <i class="mdi-editor-mode-edit prefix"></i>
-                    <textarea id="message" class="materialize-textarea" length="100"></textarea>
-                    <label for="message">请输入您的建议...</label>
+                    <input id="title" type="text" length="10">
+                    <label for="title">请输入标题...</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <i class="mdi-editor-mode-edit prefix"></i>
+                    <textarea id="content" class="materialize-textarea" length="100"></textarea>
+                    <label for="content">请输入您的建议...</label>
                 </div>
 
 
@@ -104,10 +110,11 @@
             <div class="table-container col s12">
                 <div class="row-container">
                     <div class="input-field cell">
-                        <a class="btn btn-primary" onclick="alert('监听监听')">发布</a>
+                        <a class="btn btn-primary" style="margin-left: 30px;"
+                           onclick="verify_releaseSuggestions()">发布</a>
+                        <font color="red" size="3"><span id="result" style="margin-left: 100px;"></span></font>
                     </div>
-                    <div class="input-field cell"><font color="red" size="2"><span id="result"></span></font>
-                    </div>
+
                 </div>
 
             </div>
@@ -134,8 +141,7 @@
 <script src="../js/LoginAjax.js"></script>
 <script src="../js/userAjax.js"></script>
 
-<script type="text/javascript">
-</script>
+<script src="../js/releaseSuggestionsAjax.js"></script>
 
 </body>
 </html>
