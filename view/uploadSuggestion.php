@@ -77,9 +77,9 @@
 
         <div id="i_stream_files_queue">
         </div>
-        <a class="uploadFunction btn waves-effect waves-light" onclick="javascript:_t.upload();">开始上传</a>
-        <a class="uploadFunction btn waves-effect waves-light" onclick="javascript:_t.stop();">停止上传</a>
-        <a class="uploadFunction btn waves-effect waves-light" onclick="javascript:_t.cancel();"> 取　消 </a>
+        <a class="uploadFunction btn" onclick="javascript:_t.upload();">开始上传</a>
+        <a class="uploadFunction btn" onclick="javascript:_t.stop();">停止上传</a>
+        <a class="uploadFunction btn" onclick="javascript:_t.cancel();"> 取　消 </a>
         <h6>Messages:</h6>
         <div id="i_stream_message_container" class="stream-main-upload-box" style="overflow: auto;height:200px;">
         </div>
@@ -90,12 +90,12 @@
 
 
 <!--  javaScripts -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/cookie.js"></script>
 <script src="../js/writeHTML.js"></script>
 <script src="../js/xmlhttp.js"></script>
-<script type="text/javascript" src="../js/LoginAjax.js"></script>
+<script src="../js/LoginAjax.js"></script>
 <script src="../js/jQuery.js"></script>
 <script src="../js/ChangeUserInfoAjax.js"></script>
 <script src="../js/ChangePWAjax.js"></script>

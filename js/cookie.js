@@ -4,64 +4,63 @@
 
 
 //函数返回名称为name的cookie值，如果不存在则返回空
-function get_cookie(name){
-      var strcookie=document.cookie;
-      var arrcookie=strcookie.split("; ");
-      for(var i=0;i<arrcookie.length;i++){
-            var arr=arrcookie[i].split("=");
-            if(arr[0]==name)return unescape(arr[1]);
-      }
-      return "";
+function get_cookie(name) {
+    var strcookie = document.cookie;
+    var arrcookie = strcookie.split("; ");
+    for (var i = 0; i < arrcookie.length; i++) {
+        var arr = arrcookie[i].split("=");
+        if (arr[0] == name)return unescape(arr[1]);
+    }
+    return "";
 }
 
-function add_cookie(name,value,expireHours){
+function add_cookie(name, value, expireHours) {
 
-      var cookieString=name+"="+escape(value);
-      //判断是否设置过期时间
-      if(expireHours>0){
-             var date=new Date();
-             date.setTime(date.getTime+expireHours*3600*1000);
-             cookieString=cookieString+"; expire="+date.toGMTString();
-      }
-      document.cookie=cookieString;
+    var cookieString = name + "=" + escape(value);
+    //判断是否设置过期时间
+    if (expireHours > 0) {
+        var date = new Date();
+        date.setTime(date.getTime + expireHours * 3600 * 1000);
+        cookieString = cookieString + "; expire=" + date.toGMTString();
+    }
+    document.cookie = cookieString;
 }
 
-function delete_cookie(){
-    var date=new Date();
-    date.setTime(date.getTime()-10000);
-    document.cookie='userName'+'=v; expire='+date.toGMTString();
+function delete_cookie() {
+    var date = new Date();
+    date.setTime(date.getTime() - 10000);
+    document.cookie = 'userName' + '=v; expire=' + date.toGMTString();
 }
 
 
-function check_cookie(){
-  var userName=get_cookie('userName');
-  if (userName!=null && userName!="" && userName!='v'){
-      return true;
-  }else{
-      return false;
-  }
+function check_cookie() {
+    var userName = get_cookie('userName');
+    if (userName != null && userName != "" && userName != 'v') {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-function write_header(){
-  var login=check_cookie();
-  if(!login){
-    write_header_not_login();
-  }else{
-    var userName=get_cookie('userName');
-    var type=get_cookie('type');
-    write_header_login(userName,type);
-  }
+function write_header() {
+    var login = check_cookie();
+    if (!login) {
+        write_header_not_login();
+    } else {
+        var userName = get_cookie('userName');
+        var type = get_cookie('type');
+        write_header_login(userName, type);
+    }
 }
 
-function exit(){
-   delete_cookie('userName');
-   window.location.href="../view/index.html";
+function exit() {
+    delete_cookie('userName');
 }
 
-function write_header_login(userName,type){
-	if(type=='admin'){
-		// 系统管理员的页头
-		var txt=' \
+function write_header_login(userName, type) {
+    if (type == 'admin') {
+        // 系统管理员的页头
+        var txt = ' \
 			<script> \
 				$(document).ready(function(){  \
 					$(".dropdown-button").dropdown();  \
@@ -72,14 +71,14 @@ function write_header_login(userName,type){
 			<!-- Dropdown Structure -->\
     		<ul id="dropdown1" class="dropdown-content">\
       			<li><a href="">活动管理</a></li>\
-      			<li><a href="../view/releaseEvents.php?userName='+userName+'">发布活动</a></li>\
+      			<li><a href="../view/releaseEvents.php?userName=' + userName + '">发布活动</a></li>\
       			<li><a href="../view/showEvents.php">查看活动</a></li>\
     		</ul>\
     		<!-- Dropdown Structure -->\
     		<ul id="dropdown2" class="dropdown-content">\
-    			<li><a href="">'+userName+'</a></li>\
-    			<li><a href="user.php?userName='+userName+'">个人信息</a></li>\
-    			<li><a href="" onclick="exit()">退出登录</a></li>\
+    			<li><a href="">' + userName + '</a></li>\
+    			<li><a href="user.php?userName=' + userName + '">个人信息</a></li>\
+    			<li><a href="../view/index.html" onclick="exit();">退出登录</a></li>\
     		</ul>\
         <!-- Dropdown Structure -->\
         <ul id="dropdown8" class="dropdown-content">\
@@ -111,7 +110,7 @@ function write_header_login(userName,type){
 	                                   <a href="">查看举报</a> \
 	                               </li> \
 	                               <li> \
-                                    <a class="dropdown-button" id="user-name" title="'+userName+'" href="" data-activates="dropdown2">'+userName+'<i class="material-icons right">arrow_drop_down</i> \
+                                    <a class="dropdown-button" id="user-name" title="' + userName + '" href="" data-activates="dropdown2">' + userName + '<i class="material-icons right">arrow_drop_down</i> \
                                     </a> \
                                 </li> \
                            	</ul> \
@@ -121,8 +120,8 @@ function write_header_login(userName,type){
                </nav> \
            </div> \
 		';
-	}else if(type=='user'){
-		var txt='\
+    } else if (type == 'user') {
+        var txt = '\
 			<script> \
 				$(document).ready(function(){  \
 					$(".dropdown-button").dropdown();  \
@@ -133,14 +132,14 @@ function write_header_login(userName,type){
     		<!-- Dropdown Structure -->\
     		<ul id="dropdown4" class="dropdown-content">\
     			<li><a href="">建议管理</a></li>\
-      			<li><a href="../view/showSuggestions.php?userName='+userName+'">查看建议</a></li>\
-      			<li><a href="../view/reserve.php?userName='+userName+'&type=doctor-coach">预约</a></li>\
+      			<li><a href="../view/showSuggestions.php?userName=' + userName + '">查看建议</a></li>\
+      			<li><a href="../view/reserve.php?userName=' + userName + '&type=doctor-coach">预约</a></li>\
     		</ul>\
     		<!-- Dropdown Structure -->\
     		<ul id="dropdown5" class="dropdown-content">\
-    			<li><a href="">'+userName+'</a></li>\
-    			<li><a href="user.php?userName='+userName+'">个人信息</a></li>\
-    			<li><a href="" onclick="exit()">退出登录</a></li>\
+    			<li><a href="">' + userName + '</a></li>\
+    			<li><a href="user.php?userName=' + userName + '">个人信息</a></li>\
+    			<li><a href="../view/index.html" onclick="exit()">退出登录</a></li>\
     		</ul>\
 		    <div class="navbar-fixed"> \
         		<nav> \
@@ -171,7 +170,7 @@ function write_header_login(userName,type){
 	                                </li> \
 	                                <!-- Dropdown Trigger --> \
 	                                <li> \
-	                                    <a class="dropdown-button" id="user-name" title="'+userName+'" href="" data-activates="dropdown5">'+userName+'<i class="material-icons right">arrow_drop_down</i> \
+	                                    <a class="dropdown-button" id="user-name" title="' + userName + '" href="" data-activates="dropdown5">' + userName + '<i class="material-icons right">arrow_drop_down</i> \
 	                                    </a> \
 	                                </li> \
 	                            </ul> \
@@ -181,8 +180,8 @@ function write_header_login(userName,type){
                 </nav>\
             </div>\
 		';
-	}else if(type=='coach'||type=='doctor'){
-		var txt='\
+    } else if (type == 'coach' || type == 'doctor') {
+        var txt = '\
 			<script> \
 				$(document).ready(function(){  \
 					$(".dropdown-button").dropdown();  \
@@ -195,19 +194,19 @@ function write_header_login(userName,type){
 			<ul id="dropdown6" class="dropdown-content">\
     			<li><a href="">发布建议</a></li>\
     			<li><a href="../view/releaseSuggestion.php?userName=' + userName + '">在线填写</a></li>\
-    			<li><a href="../view/uploadSuggestion.php?userName='+userName+'">文件导入</a></li>\
+    			<li><a href="../view/uploadSuggestion.php?userName=' + userName + '">文件导入</a></li>\
     		</ul>\
 			<ul id="dropdown7" class="dropdown-content">\
-    			<li><a href="">'+userName+'</a></li>\
-    			<li><a href="user.php?userName='+userName+'">个人信息</a></li>\
-    			<li><a href="" onclick="exit()">退出登录</a></li>\
+    			<li><a href="">' + userName + '</a></li>\
+    			<li><a href="user.php?userName=' + userName + '">个人信息</a></li>\
+    			<li><a href="../view/index.html" onclick="exit()">退出登录</a></li>\
     		</ul>\
     		<div class="navbar-fixed"> \
         		<nav> \
             		<div class="nav-wrapper teal lighten-3"> \
                 		<div class="container"> \
                     		<div class="row"> \
-                            	<a href="" class="brand-logo">uniFIT</a> \
+                            	<a href="#" class="brand-logo">uniFIT</a> \
                             	<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> \
                             	<ul class="right hide-on-med-and-down"> \
                                 	<li> \
@@ -223,7 +222,7 @@ function write_header_login(userName,type){
                                 	</li> \
 	                                <!-- Dropdown Trigger --> \
 	                                <li> \
-	                                    <a class="dropdown-button" id="user-name" title="'+userName+'" href="" data-activates="dropdown7">'+userName+'<i class="material-icons right">arrow_drop_down</i> \
+	                                    <a class="dropdown-button" id="user-name" title="' + userName + '" href="" data-activates="dropdown7">' + userName + '<i class="material-icons right">arrow_drop_down</i> \
 	                                    </a> \
 	                                </li> \
 	                            </ul> \
@@ -233,13 +232,13 @@ function write_header_login(userName,type){
                 </nav>\
             </div>\
 		';
-	}
-    
+    }
+
     $("header").html(txt);
 }
 
-function write_header_not_login(){
-    var txt='<script>  \
+function write_header_not_login() {
+    var txt = '<script>  \
        $(document).ready(function(){  \
          $(".dropdown-button").dropdown();  \
          $(".button-collapse").sideNav();  \
@@ -300,5 +299,5 @@ function write_header_not_login(){
                 </section> \
             </div> \
         </div>';
-        $("header").html(txt);
+    $("header").html(txt);
 }

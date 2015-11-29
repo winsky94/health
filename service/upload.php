@@ -38,7 +38,7 @@ class upload
 				mkdir($path, 0700);
 			}
 			//上传文件保存目录
-			$file['filePath'] = $path . $file['token'] .'.'. $pathInfo['extension'];
+            $file['filePath'] = $path . $file['name'] . '.' . $pathInfo['extension'];
 			$file['modified'] = $_GET['modified'];      //上传文件的修改日期
 			//保存令牌信息
 			$this->setTokenInfo($file['token'], $file);
@@ -79,9 +79,10 @@ class upload
 		if($fileInfo['size'] > $fileInfo['up_size']){
 			//取得上传内容
 			$data = file_get_contents('php://input', 'r');
-			if(! empty($data)){
+            if (!empty($data)) {
 				//上传内容写入目标文件
-				$fp = fopen($fileInfo['filePath'], 'a');
+                $file_name = iconv("utf-8", "gb2312", $fileInfo['filePath']);   //解决中文乱码问题
+                $fp = fopen($file_name, 'a');
 				flock($fp, LOCK_EX);
 				fwrite($fp, $data);
 				flock($fp, LOCK_UN);
@@ -120,7 +121,6 @@ class upload
 	 * 生成文件内容
 	 */
 	protected function setTokenInfo($token, $data){
-		
 		file_put_contents($this->_tokenPath . $token . '.token', json_encode($data));
 	}
 
