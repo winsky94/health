@@ -79,10 +79,9 @@ class UserService {
         }
     }
 
-    public function modify($id, $user) {
+    //用户名不可以改，密码，身份不是通过这个方法修改
+    public function modifyInfo($user) {
         $userName = $user->getUserName();
-        $password = $this->encrypt($user->getPassword(), 'ENCODE');
-        $type = $user->getType();
         $telephone = $user->getTelephone();
         $email = $user->getEmail();
         $age = $user->getAge();
@@ -90,19 +89,36 @@ class UserService {
         $height = $user->getHeight();
         $weight = $user->getWeight();
 
-        $sql = "update " . $this->db_user_base_info . " set userName=:userName,password=:password,type=:type,age=:age,sex=:sex,height=:height,weight=:weight,telephone=:telephone,email=:email where id=:id";
+        error_log($userName . "\r\n", 3, "../log.txt");
+
+
+        $sql = "update " . $this->db_user_base_info . " set age=:age,sex=:sex,height=:height,weight=:weight,telephone=:telephone,email=:email where userName=:userName";
         $stmt = $this->DB->conn->prepare($sql);
-        $stmt->bindValue(":userName", $userName);
-        $stmt->bindValue(":password", "$password");
-        $stmt->bindValue(":type", "$type");
         $stmt->bindValue(":age", "$age");
         $stmt->bindValue(":sex", "$sex");
         $stmt->bindValue(":height", "$height");
         $stmt->bindValue(":weight", "$weight");
         $stmt->bindValue(":telephone", "$telephone");
         $stmt->bindValue(":email", "$email");
-        $stmt->bindValue(":id", $id);
+        $stmt->bindValue(":userName", $userName);
         $stmt->execute();
+
+        return true;
+    }
+
+    /**
+     * 修改密码
+     * @param $userName 用户名
+     * @param $password 加密后的密码
+     * @return bool
+     */
+    public function modifyPassword($userName, $password) {
+        $sql = "update " . $this->db_user_base_info . " set password=:password where userName=:userName";
+        $stmt = $this->DB->conn->prepare($sql);
+        $stmt->bindValue(":userName", $userName);
+        $stmt->bindValue(":password", "$password");
+        $stmt->execute();
+        return true;
     }
 
     public function delete($id) {
@@ -440,7 +456,7 @@ class UserService {
     }
 }
 
-$user = new UserService();
+//$user = new UserService();
 
 //$user->createTable();
 
@@ -453,7 +469,9 @@ $user = new UserService();
 //$newUser = new User("admin","22","男","admin","admin",177,76,"1195413185@qq.com","18013878510");
 //$user->insert($newUser);
 
-//$user->modify(1,$newUser);
+//$newUser = new User("winsky","22","男","user","12345a",177,76,"1195413185@qq.com","18013878511");
+//$user->modifyInfo($newUser);
+
 //$user->delete(1);
 
 //$user->show();

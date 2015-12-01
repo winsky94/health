@@ -117,19 +117,19 @@ function write_edit_user_info() {
             <label for="sex" class="active">性　别：</label>  \
         </div> \
         <div class="input-field col s12">  \
-            <input id="age" type="text" name="sex" value="' + age + '"> \
+            <input id="age" type="text" name="age" value="' + age + '"> \
             <label for="age" class="active">年　龄：</label>  \
         </div> \
         <div class="input-field col s12">  \
-            <input id="height" type="text" name="sex" value="' + height + '"> \
+            <input id="height" type="text" name="height" value="' + height + '"> \
             <label for="height" class="active">身　高：</label>  \
         </div> \
         <div class="input-field col s12">  \
-            <input id="weight" type="text" name="sex" value="' + weight + '"> \
+            <input id="weight" type="text" name="weight" value="' + weight + '"> \
             <label for="weight" class="active">体　重：</label>  \
         </div> \
         <div class="input-field col s12">  \
-            <input id="telephone" type="text" name="sex" value="' + telephone + '"> \
+            <input id="telephone" type="text" name="telephone" value="' + telephone + '"> \
             <label for="telephone" class="active">电　话：</label>  \
         </div> \
         <div class="input-field col s12">  \
@@ -441,7 +441,7 @@ function write_chat_list(chats) {
         <img src=\"images/portrait.jpg\" alt=\"\" width=\"50\" height=\"50\"></a>\
         <div class=\"comment-body\"><div class=\"text\"><p>";
         txt = txt + content + "</p></div><p class=\"attribution\">by&nbsp;<a href=\"#non\">";
-        txt = txt + username + "</a>&nbsp;at&nbsp;" + date + "</p></div></article>";
+        txt = txt + userName + "</a>&nbsp;at&nbsp;" + date + "</p></div></article>";
     }
     return txt;
 }

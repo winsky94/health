@@ -117,7 +117,7 @@ function search_function() {
     if (!login) {
         nickname = "undefined";
     } else {
-        nickname = get_cookie("username");
+        nickname = get_cookie("userName");
     }
     var xmlhttp = getXmlHttp();
     if (xmlhttp != null) {

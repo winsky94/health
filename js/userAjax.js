@@ -9,9 +9,18 @@ function get_user_info() {
         xmlhttp.onreadystatechange = function () {
             onUserInfoResponse(xmlhttp)
         };
-        xmlhttp.open("GET", "../controller/userHandle.php?userName=" + userName, true);
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xmlhttp.send();
+
+        // post方式请求的代码并访问
+        xmlhttp.open("POST", "../controller/userHandle.php", true);
+        // post方式需要自己设置http的请求头
+        xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        // post方式发送数据
+        xmlhttp.send("action=getUserInfo" + "&userName=" + userName);
+        // 4.发送数据，开始和服务器端进行交互
+        // 同步方式下，send这句话全在服务器端数据回来后才执行完
+        // 异步方式下，send这句话会立即完成执行
+        // xmlHttp.send(null);
+
     } else {
         alert("Your browser does not support XMLHttpRequest.");
     }

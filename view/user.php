@@ -164,7 +164,7 @@
                     <div class="pagination" style="text-align: center">
                     </div>
                     <!--显示页码-->
-                    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+                    <script src="../js/jquery-2.1.1.min.js"></script>
                     <script src="../js/writeHTML.js"></script>
                     <script>
                         write_pagination(1,10,5,5);
