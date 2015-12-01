@@ -167,19 +167,19 @@ function write_changepw() {
     </style> \
                 <div class="input-field col s12"> \
                     <input disabled type="text" id="userName" name="userName" class="validate" value="' + userName + '"> \
-                    <label for="last_name" class="active">Nickname</label> \
+                    <label for="userName" class="active">Nickname</label> \
                 </div> \
                 <div class="input-field col s12"> \
                     <input id="password" type="password" name="password" class="validate"> \
                     <label for="password">当前密码:</label> \
                 </div> \
                 <div class="input-field col s12"> \
-                    <input id="newpassword" type="password" name="newpassword" class="validate"> \
-                    <label for="newpassword">修改密码:</label> \
+                    <input id="newPassword" type="password" name="newPassword" class="validate"> \
+                    <label for="newPassword">修改密码:</label> \
                 </div> \
                 <div class="input-field col s12"> \
-                    <input id="confirmpassword" type="password" name="confirmpassword" class="validate"> \
-                    <label for="confirmpassword">确认密码:</label> \
+                    <input id="confirmPassword" type="password" name="confirmPassword" class="validate"> \
+                    <label for="confirmPassword">确认密码:</label> \
                 </div> \
                 <div class="col s12 table-container"> \
                     <div class="row row-container"> \
@@ -189,7 +189,7 @@ function write_changepw() {
                         </div> \
                         <a class="btn btn-primary" onclick="window.location.reload(true)">取消</a> \
                         <div class="input-field cell">  \
-                            <font color="red" size="2"><span id="result" >23</span></font>  \
+                            <font color="red" size="2"><span id="result" ></span></font>  \
                         </div> \
                     </div> \
             </div>';

@@ -89,9 +89,6 @@ class UserService {
         $height = $user->getHeight();
         $weight = $user->getWeight();
 
-        error_log($userName . "\r\n", 3, "../log.txt");
-
-
         $sql = "update " . $this->db_user_base_info . " set age=:age,sex=:sex,height=:height,weight=:weight,telephone=:telephone,email=:email where userName=:userName";
         $stmt = $this->DB->conn->prepare($sql);
         $stmt->bindValue(":age", "$age");
@@ -109,16 +106,22 @@ class UserService {
     /**
      * 修改密码
      * @param $userName 用户名
-     * @param $password 加密后的密码
+     * @param $password 原密码
+     * @param $newPassword 新密码
      * @return bool
      */
-    public function modifyPassword($userName, $password) {
-        $sql = "update " . $this->db_user_base_info . " set password=:password where userName=:userName";
+    public function modifyPassword($userName, $password, $newPassword) {
+        $encryptP = $this->encrypt($password, 'ENCODE');
+        $encryptNP = $this->encrypt($newPassword, 'ENCODE');
+
+        $sql = "update " . $this->db_user_base_info . " set password=:newPassword where userName=:userName and password=:password";
         $stmt = $this->DB->conn->prepare($sql);
         $stmt->bindValue(":userName", $userName);
-        $stmt->bindValue(":password", "$password");
-        $stmt->execute();
-        return true;
+        $stmt->bindValue(":newPassword", $encryptNP);
+        $stmt->bindValue(":password", $encryptP);
+        $result = $stmt->execute();
+
+        return $result;
     }
 
     public function delete($id) {

@@ -81,8 +81,21 @@ if ($action == "getUserInfo") {
         }
 
     }
+    echo $message;
+
+} elseif ($action == "changePW") {
+    header('Content-Type: text/xml');
+    $userName = $_POST["userName"];
+    $password = $_POST["password"];
+    $newPassword = $_POST["newPassword"];
+
+    $result = $userService->modifyPassword($userName, $password, $newPassword);
+
+    if ($result == true) {
+        $message = "<message>success</message>";
+    } else {
+        $message = "<message>修改失败</message>";
+    }
 
     echo $message;
-} elseif ($action == "") {
-
 }
