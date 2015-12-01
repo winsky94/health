@@ -148,8 +148,6 @@ class EventsService {
             }
             return $result;
         }
-
-
     }
 
     public function getJoinedEvents($userName) {
