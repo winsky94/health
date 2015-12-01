@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suggestions>
+    <suggestion id="1">
+        <!-- 标题 -->
+        <title>建议1</title>
+        <!-- 内容 -->
+        <content>这是建议1的内容</content>
+        <!-- 发布者 -->
+        <author>捕风</author>
+        <!-- 角色 -->
+        <type>doctor</type>
+        <!-- email -->
+        <email>1195413185@qq.com</email>
+        <!-- telephone -->
+        <telephone>17766088236</telephone>
+        <!-- time -->
+        <time>2015-11-30 11:11:11</time>
+    </suggestion>
+    <suggestion id="2">
+        <!-- 标题 -->
+        <title>建议2</title>
+        <!-- 内容 -->
+        <content>这是建议2的内容</content>
+        <!-- 发布者 -->
+        <author>捕风</author>
+        <!-- 角色 -->
+        <type>doctor</type>
+        <!-- email -->
+        <email>1195413185@qq.com</email>
+        <!-- telephone -->
+        <telephone>17766088236</telephone>
+        <!-- time -->
+        <time>2015-11-30 11:11:11</time>
+    </suggestion>
+</suggestions>

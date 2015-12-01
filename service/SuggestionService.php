@@ -34,6 +34,11 @@ class SuggestionService {
         $type = $suggestion->getType();
         $email = $suggestion->getEmail();
         $telephone = $suggestion->getTelephone();
+        $time = $suggestion->getTime();
+
+        if ($time == null || $time == "") {
+            $time = date('Y-m-d H:i:s');
+        }
 
         //将身份换为英文存储
         if ($type == "医生") {
@@ -44,7 +49,8 @@ class SuggestionService {
             $type = "user";
         }
 
-        $sql = "insert into " . $this->db_name . " values(:id,:title,:content,:author,:type,:email,:telephone,datetime('now','localtime'))";
+
+        $sql = "insert into " . $this->db_name . " values(:id,:title,:content,:author,:type,:email,:telephone,:time)";
         $stmt = $this->DB->conn->prepare($sql);
         $stmt->bindValue(":id", null);
         $stmt->bindValue(":title", $title);
@@ -53,6 +59,7 @@ class SuggestionService {
         $stmt->bindValue(":type", $type);
         $stmt->bindValue(":email", $email);
         $stmt->bindValue(":telephone", $telephone);
+        $stmt->bindValue(":time", $time);
 
         $stmt->execute();
         return true;
@@ -84,8 +91,6 @@ class SuggestionService {
         return $suggestions;
     }
 
-    //========================================================================================
-    //下面的方法还没写，只是copy前面的
     public function getSuggestionsByPage($pageNum) {
         $start = ($pageNum - 1) * numPerPage;
         $sql = "select * from " . $this->db_name . " order by time desc limit " . $start . "," . numPerPage;
@@ -124,7 +129,7 @@ class SuggestionService {
     }
 }
 
-$service = new SuggestionService();
+//$service = new SuggestionService();
 
 //$service->createTable();
 
@@ -132,3 +137,5 @@ $service = new SuggestionService();
 //    $suggestion=new Suggestion("多跑步".$i."~","跑步有益于身心健康","捕风","医生","1195413185@qq.com","17766088236");
 //    $service->insert($suggestion);
 //}
+
+//echo date('Y-m-d H:i:s');

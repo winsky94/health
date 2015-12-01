@@ -1,2 +1,3 @@
 ﻿输出信息到调试文件
 error_log($file['name']."\r\n", 3, "../log.txt");
+

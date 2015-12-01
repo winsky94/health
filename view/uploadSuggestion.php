@@ -143,6 +143,7 @@
 //		onUploadError: function(status, msg) {alert('onUploadError')} /** 文件上传出错的响应事件 */
     };
     var _t = new Stream(config);
+
 </script>
 
 </body>
