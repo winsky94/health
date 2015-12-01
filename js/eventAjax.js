@@ -51,9 +51,9 @@ function get_page_num() {
     }
 }
 
-function on_page_num_response(xmlhttp) {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        page_num = xmlhttp.responseText;
+function on_page_num_response(xmlHttp) {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        page_num = xmlHttp.responseText;
         if (page_num <= 5) {
             start = 1;
             end = page_num;
@@ -81,10 +81,10 @@ function get_events(current_page) {
     }
 }
 
-function onEventsResponse(xmlhttp) {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+function onEventsResponse(xmlHttp) {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
         //file_elements是一个数组
-        var text = xmlhttp.responseText;
+        var text = xmlHttp.responseText;
         try {
             var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
             xmlDoc.async = "false";

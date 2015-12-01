@@ -271,7 +271,7 @@ function write_event_list(events) {
                         <div class="act_c_d float_left">\
                             <div class="blank10"></div>\
                             <div style="min-height: 30px;">\
-                                <a class="font16" style="font-weight:bold;" href="" title="title">' + name + '\
+                                <a class="font16" style="font-weight:bold;" href="#" title=' + name + ' onclick="joinEvent(title);">' + name + '\
                                 </a>\
                             </div>\
                             <div>\

@@ -20,49 +20,41 @@
     <br>
 
     <div class="row">
-        <!--左侧动态消息播报-->
-        <div class="col s12 l3" id="content-left">
-            <!--<div class="blank20" style="height:20px;clear:both;font-size:0px;overflow:hidden;"></div>-->
-            <script type="text/javascript" src="../js/scrollText.js"></script>
-            <div class="incubate_des font12">
-                <div class="blank5" style="height:5px;clear:both;font-size:0px;overflow:hidden;"></div>
-                <div class="inner">
-                    <div class="blank10" style="height:10px;clear:both;font-size:0px;overflow:hidden;"></div>
-                    <h3>最新消息</h3>
+        <!-- 左侧 用户信息 3列-->
+        <div class="col s12 l3">
+            <ul class="collection with-header">
+                <li class="collection-header">
+                    <img src="../images/back1.jpg" width="150px" height="150px">
+                    <?php
+                    $userName = $_GET["userName"];
+                    require_once("../service/EventsService.php");
+                    $eventService = new EventsService();
+                    $result = $eventService->getJoinedEvents($userName);
+                    ?>
+                    <h5 id="userName"><?php echo $userName; ?></h5>
+                </li>
 
-                    <div style="overflow: hidden; height: 247px; width: 226px; position:relative;">
-
-                        <ul id="jsFoot" class="noticTipTxt float_left" style="font-size: 14px;line-height: 20px;">
-
-                            <li>【阳光奔跑 跬步大爱】@千渡 获得了咕咚手环2 08-25 00:00</li>
-
-                            <li>【阳光奔跑 跬步大爱】@c2NHuqzuser 获得了咕咚手环2 08-24 00:00</li>
-
-                            <li>【阳光奔跑 跬步大爱】@浅草妖姬 获得了咕咚手环2 08-20 00:00</li>
-
-                            <li>【阳光奔跑 跬步大爱】@鱼的石头 获得了金龙鱼阳光葵花籽油 08-20 00:00</li>
-
-                            <li>【阳光奔跑 跬步大爱】@雪山非狐0828 获得了咕咚手环2 08-19 00:00</li>
-
-                            <li>【阳光奔跑 跬步大爱】@HXY猴哥 获得了金龙鱼阳光葵花籽油 08-15 00:00</li>
-
-                            <li>【阳光奔跑 跬步大爱】@煙钬 获得了金龙鱼阳光葵花籽油 08-14 00:00</li>
-
-                            <li>【阳光奔跑 跬步大爱】@踏浪---东 获得了金龙鱼阳光葵花籽油 08-13 00:00</li>
-
-                            <li>【阳光奔跑 跬步大爱】@华丽的大卫 获得了金龙鱼阳光葵花籽油 08-12 00:00</li>
-
-                            <li>【阳光奔跑 跬步大爱】@蝈蝈蝈傲 获得了金龙鱼阳光葵花籽油 08-11 00:00</li>
-
-                        </ul>
-
-                    </div>
-                </div>
-                <div class="blank5" style="height:5px;clear:both;font-size:0px;overflow:hidden;"></div>
-            </div>
-
+                <li>
+                    <?php
+                    if (sizeof($result) == 0) {
+                        ?>
+                        <p class="collection-item" style="font-size: 18px;font-weight: 900;">尚未参加过活动：</p>
+                        <?php
+                    } else {
+                        ?>
+                        <p class="collection-item" style="font-size: 18px;font-weight: 900;">已参加的活动有：</p>
+                        <?php
+                        foreach ($result as $eventTitle) {
+                            ?>
+                            <p class="collection-item" style="margin-left: 10px;"><?php echo $eventTitle ?></p>
+                            <?php
+                        }
+                    }
+                    ?>
+                </li>
+            </ul>
         </div>
-        <!--左侧动态消息播报结束-->
+        <!-- 左侧 3列 结束-->
 
         <!--中间活动列表-->
         <div class="col s12 l8" id="content-on-middle">
@@ -106,6 +98,7 @@
 <script src="../js/materialize.js"></script>
 <script src="../js/LoginAjax.js"></script>
 <script src="../js/eventAjax.js"></script>
+<script src="../js/joinEvent.js"></script>
 <script>
     var jQ = jQuery.noConflict();
     var $ = jQ;
@@ -131,6 +124,16 @@
         _dom.append(_html);
         _dom.find("li").eq(0).remove();
         _dom.css("top", "0px");
+    }
+
+    function joinEvent(title) {
+        if (window.confirm('你确定要参加该活动吗？')) {
+            var userName = document.getElementById("login_user").innerText;
+            join(userName, title);
+            return true;
+        } else {
+            return false;
+        }
     }
 </script>
 

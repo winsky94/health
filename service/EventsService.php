@@ -126,9 +126,54 @@ class EventsService {
             return "已结束";
         }
     }
+
+    public function joinEvent($userName, $title) {
+        $sql = "select count(id) from event_user where userName='" . $userName . "' and eventTitle='" . $title . "';";
+        $hasJoined = $this->DB->getList($sql);
+        if ($hasJoined[0][0] != 0) {
+            return false;
+        } else {
+            $sql = "update " . $this->db_name . " set peopleNum=peopleNum+1 where name=:title;";
+            $stmt = $this->DB->conn->prepare($sql);
+            $stmt->bindValue(":title", $title);
+            $result = $stmt->execute();
+
+            if ($result == true) {
+                $sql = "insert into event_user values(:id,:userName,:eventTitle)";
+                $stmt = $this->DB->conn->prepare($sql);
+                $stmt->bindValue(":id", null);
+                $stmt->bindValue(":userName", $userName);
+                $stmt->bindValue(":eventTitle", $title);
+                $result = $stmt->execute();
+            }
+            return $result;
+        }
+
+
+    }
+
+    public function getJoinedEvents($userName) {
+        $sql = "select eventTitle from event_user where userName='" . $userName . "'";
+        $result = $this->DB->getList($sql);
+
+        $eventTitles = array();
+        foreach ($result as $rt) {
+            $title = $rt["eventTitle"];
+            array_push($eventTitles, $title);
+        }
+        return $eventTitles;
+
+    }
+
+    function createUserEventTable() {
+        $sql = "drop table if exists event_user";
+        $this->DB->query($sql);
+        $sql = "create table event_user(id integer primary key,userName varchar(40),eventTitle varchar(40));";
+        $this->DB->query($sql);
+    }
 }
 
-//$eventsService = new EventsService();
+$eventsService = new EventsService();
 
 //$eventsService->createTable();
 
@@ -147,4 +192,8 @@ class EventsService {
 //echo $eventsService->getPageNum();
 
 //print_r($eventsService->getEventsByPage(2));
+
+//$eventsService->createUserEventTable();
+
+//echo $eventsService->joinEvent("winsky","浦发银行，为爱开跑");
 

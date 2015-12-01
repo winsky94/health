@@ -85,5 +85,11 @@ if ($action == "release") {
 
     $dom->appendChild($rootElement);
     echo $dom->saveXML();
+} elseif ($action == "joinEvent") {
+    $userName = $_POST["userName"];
+    $title = $_POST["title"];
+    $result = $eventService->joinEvent($userName, $title);
+
+    echo $result;
 
 }

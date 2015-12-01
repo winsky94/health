@@ -76,7 +76,7 @@ function write_header_login(userName, type) {
     		</ul>\
     		<!-- Dropdown Structure -->\
     		<ul id="dropdown2" class="dropdown-content">\
-    			<li><a href="">' + userName + '</a></li>\
+    			<li><a id="login_user" href="#">' + userName + '</a></li>\
     			<li><a href="user.php?userName=' + userName + '">个人信息</a></li>\
     			<li><a href="../view/index.html" onclick="exit();">退出登录</a></li>\
     		</ul>\
@@ -137,7 +137,7 @@ function write_header_login(userName, type) {
     		</ul>\
     		<!-- Dropdown Structure -->\
     		<ul id="dropdown5" class="dropdown-content">\
-    			<li><a href="">' + userName + '</a></li>\
+    			<li><a id="login_user" href="#">' + userName + '</a></li>\
     			<li><a href="user.php?userName=' + userName + '">个人信息</a></li>\
     			<li><a href="../view/index.html" onclick="exit()">退出登录</a></li>\
     		</ul>\
@@ -197,7 +197,7 @@ function write_header_login(userName, type) {
     			<li><a href="../view/uploadSuggestion.php?userName=' + userName + '">文件导入</a></li>\
     		</ul>\
 			<ul id="dropdown7" class="dropdown-content">\
-    			<li><a href="">' + userName + '</a></li>\
+    			<li><a id="login_user" href="#">' + userName + '</a></li>\
     			<li><a href="user.php?userName=' + userName + '">个人信息</a></li>\
     			<li><a href="../view/index.html" onclick="exit()">退出登录</a></li>\
     		</ul>\
