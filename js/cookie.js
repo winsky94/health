@@ -156,10 +156,10 @@ function write_header_login(userName, type) {
                                     	<a href="../view/healthManage.php">健康管理</a> \
                                 	</li> \
                                 	<li> \
-                                    	<a href="../view/showEvents.php">参与活动</a> \
+                                    	<a href="../view/showEvents.php?userName=' + userName + '">参与活动</a> \
                                 	</li> \
                                 	<li> \
-	                                    <a class="dropdown-button" title=建议管理 href="" data-activates="dropdown4">建议管理<i class="material-icons right">arrow_drop_down</i> \
+	                                    <a class="dropdown-button" title=建议管理 href="#" data-activates="dropdown4">建议管理<i class="material-icons right">arrow_drop_down</i> \
 	                                    </a> \
 	                                </li>  \
 	                                <li> \
@@ -170,7 +170,7 @@ function write_header_login(userName, type) {
 	                                </li> \
 	                                <!-- Dropdown Trigger --> \
 	                                <li> \
-	                                    <a class="dropdown-button" id="user-name" title="' + userName + '" href="" data-activates="dropdown5">' + userName + '<i class="material-icons right">arrow_drop_down</i> \
+	                                    <a class="dropdown-button" id="user-name" title="' + userName + '" href="#" data-activates="dropdown5">' + userName + '<i class="material-icons right">arrow_drop_down</i> \
 	                                    </a> \
 	                                </li> \
 	                            </ul> \
