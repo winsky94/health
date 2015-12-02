@@ -37,16 +37,16 @@ function page_down(current_page) {
 }
 
 function get_page_num() {
-    var xmlhttp = getXmlHttp();
-    if (xmlhttp != null) {
-        xmlhttp.onreadystatechange = function () {
-            on_page_num_response(xmlhttp)
+    var xmlHttp = getXmlHttp();
+    if (xmlHttp != null) {
+        xmlHttp.onreadystatechange = function () {
+            on_page_num_response(xmlHttp)
         };
-        xmlhttp.open("POST", "../controller/EventHandle.php");
+        xmlHttp.open("POST", "../controller/EventHandle.php");
         //post方式需要自己设置http的请求头
-        xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         //post方式发送数据
-        xmlhttp.send("action=getEventsPageNum");
+        xmlHttp.send("action=getEventsPageNum");
 
     }
 }

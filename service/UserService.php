@@ -9,6 +9,7 @@
 require_once('../utils/SqliteHelper.php');
 require_once('../model/User.php');
 require_once("../utils/PasswordEncrypt.php");
+
 //header('Content-Type: text/xml');
 
 class UserService {
@@ -304,22 +305,38 @@ class UserService {
 
     /**
      * 用户上传自己的运动数据
-     * @param $userName
-     * @param $meters
-     * @param $minutes
-     * @param $speed
-     * @param $calories
+     * @param $data
      */
-    public function setUserSportData($userName, $meters, $minutes, $speed, $calories) {
-        $sql = "insert into " . $this->db_user_sport_info . " values(:id,:userName,datetime('now','localtime'),:meters,:minutes,:speed,:calories)";
-        $stmt = $this->DB->conn->prepare($sql);
-        $stmt->bindValue(":id", null);
-        $stmt->bindValue(":userName", $userName);
-        $stmt->bindValue(":meters", $meters);
-        $stmt->bindValue(":minutes", $minutes);
-        $stmt->bindValue(":speed", $speed);
-        $stmt->bindValue(":calories", $calories);
-        $stmt->execute();
+
+    public function setUserSportData($data) {
+        $sql = "insert into " . $this->db_user_sport_info . " values(:id,:userName,:time,:meters,:minutes,:speed,:calories)";
+
+        $conn = $this->DB->conn;
+        $conn->beginTransaction();
+        try {
+            foreach ($data as $row) {
+                $userName = $row[0];
+                $time = $row[1];
+                $meters = $row[2];
+                $minutes = $row[3];
+                $speed = $row[4];
+                $calories = $row[5];
+                $stmt = $this->DB->conn->prepare($sql);
+                $stmt->bindValue(":id", null);
+                $stmt->bindValue(":userName", $userName);
+                $stmt->bindValue(":time", $time);
+                $stmt->bindValue(":meters", $meters);
+                $stmt->bindValue(":minutes", $minutes);
+                $stmt->bindValue(":speed", $speed);
+                $stmt->bindValue(":calories", $calories);
+                $stmt->execute();
+            }
+            $conn->commit();
+        } catch (PDOException $ex) {
+            $conn->rollBack();
+        }
+
+
     }
 
     /**
@@ -375,29 +392,41 @@ class UserService {
 
     /**
      * 用户上传自己的睡眠数据
-     * @param $userName
-     * @param $startTime
-     * @param $endTime
-     * @param $dsNum
-     * @param $lsNum
-     * @param $wakeNum
-     * @param $wakeTime
-     * @param $score
+     * @param $data
      */
-    public function setSleepData($userName, $startTime, $endTime, $dsNum, $lsNum, $wakeNum, $wakeTime, $score) {
+    public function setSleepData($data) {
         $sql = "insert into " . $this->db_user_sleep_info . " values(:id,:userName,:startTime,:endTime,:dsNum,:lsNum,:wakeNum,:wakeTime,:score)";
-        $stmt = $this->DB->conn->prepare($sql);
-        $stmt->bindValue(":id", null);
-        $stmt->bindValue(":userName", $userName);
-        $stmt->bindValue(":startTime", $startTime);
-        $stmt->bindValue(":endTime", $endTime);
-        $stmt->bindValue(":dsNum", $dsNum);
-        $stmt->bindValue(":lsNum", $lsNum);
-        $stmt->bindValue(":wakeNum", $wakeNum);
-        $stmt->bindValue(":wakeTime", $wakeTime);
-        $stmt->bindValue(":score", $score);
 
-        $stmt->execute();
+        $conn = $this->DB->conn;
+        $conn->beginTransaction();
+        try {
+            foreach ($data as $row) {
+                $userName = $row[0];
+                $startTime = $row[1];
+                $endTime = $row[2];
+                $dsNum = $row[3];
+                $lsNum = $row[4];
+                $wakeNum = $row[5];
+                $wakeTime = $row[6];
+                $score = $row[7];
+
+                $stmt = $this->DB->conn->prepare($sql);
+                $stmt->bindValue(":id", null);
+                $stmt->bindValue(":userName", $userName);
+                $stmt->bindValue(":startTime", $startTime);
+                $stmt->bindValue(":endTime", $endTime);
+                $stmt->bindValue(":dsNum", $dsNum);
+                $stmt->bindValue(":lsNum", $lsNum);
+                $stmt->bindValue(":wakeNum", $wakeNum);
+                $stmt->bindValue(":wakeTime", $wakeTime);
+                $stmt->bindValue(":score", $score);
+
+                $stmt->execute();
+            }
+            $conn->commit();
+        } catch (PDOException $ex) {
+            $conn->rollBack();
+        }
     }
 
     /**
@@ -459,7 +488,7 @@ class UserService {
     }
 }
 
-//$user = new UserService();
+$user = new UserService();
 
 //$user->createTable();
 
@@ -505,3 +534,5 @@ class UserService {
 //$user->setSleepData("winsky", "2015-11-06 12:30:00", "2015-11-07 08:45:00", 113, 384, 0, 0, 3.0);
 
 //echo $user->getSleepData("winsky");
+
+//$user->insertManySport();

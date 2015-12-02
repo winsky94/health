@@ -183,7 +183,7 @@
        }else if(e=="body"){
            window.location.href="bodyManage.php";
        }else if(e=="upload"){
-           window.location.href="sportsUpload.php";
+           window.location.href = "uploadSports.php";
        }else if(e=="statics"){
            window.location.href="staticsAnalysis.php";
        }

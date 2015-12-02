@@ -66,9 +66,9 @@
 
             <div id="i_stream_files_queue">
             </div>
-            <a class="uploadFunction btn waves-effect waves-light" onclick="javascript:_t.upload();">开始上传</a>
-            <a class="uploadFunction btn waves-effect waves-light" onclick="javascript:_t.stop();">停止上传</a>
-            <a class="uploadFunction btn waves-effect waves-light" onclick="javascript:_t.cancel();"> 取　消 </a>
+            <a class="uploadFunction btn" onclick="javascript:_t.upload();">开始上传</a>
+            <a class="uploadFunction btn" onclick="javascript:_t.stop();">停止上传</a>
+            <a class="uploadFunction btn" onclick="javascript:_t.cancel();"> 取　消 </a>
             <h6>Messages:</h6>
             <div id="i_stream_message_container" class="stream-main-upload-box" style="overflow: auto;height:200px;">
             </div>
@@ -105,7 +105,7 @@
         }else if(e=="body"){
             window.location.href="bodyManage.php";
         }else if(e=="upload"){
-            window.location.href="sportsUpload.php";
+            window.location.href = "uploadSports.php";
         }else if(e=="statics"){
             window.location.href="staticsAnalysis.php";
         }

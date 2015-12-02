@@ -78,6 +78,9 @@
 </head>
 <body onload="write_header();write_footer()">
 <header></header>
+<?php
+$userName = $_GET["userName"];
+?>
 
 <div class="main container">
     <div class="row">
@@ -112,7 +115,7 @@
             <div style="display: inline-block;margin-left: 5px;">
                 <div>
                     <script src="../js/dateButton.js"></script>
-                    <input class="btn" type="button" onclick="HS_setDate(this)" value="今天">
+                    <input id="date" class="btn" type="button" onclick="HS_setDate(this)" value="今天">
                 </div>
 
                 <!--绘制目标完成百分比图-->
@@ -176,27 +179,12 @@
 
             <!--运动曲线图-->
             <div style="margin-top: 10px;margin-left: 5px;">
-                <h5>运动曲线图</h5>
-                <script src="../js/Chart.js"></script>
-                <canvas id="myChart" width="500px" height="200px"></canvas>
-
-                <script type="text/javascript">
-                    //Get the context of the canvas element we want to select
-                    var ctx = document.getElementById("myChart").getContext("2d");
-                    var data = {
-                        labels: ["21", "22", "23", "24", "25", "26", "27", "28", "29", "30"],
-                        datasets: [
-                            {
-                                fillColor: "rgba(151,187,205,0.5)",
-                                strokeColor: "rgba(220,220,220,1)",
-                                pointColor: "rgba(220,220,220,1)",
-                                pointStrokeColor: "#fff",
-                                data: [6500, 5900, 9000, 8100, 5600, 5500, 4000, 3000, 2500, 10000]
-                            }
-                        ]
-                    }
-                    var myNewChart = new Chart(ctx).Line(data)
-                </script>
+                <div id="main" style="height:400px"></div>
+                <div>
+                    <input type="hidden" id="userName" value="<?php echo $userName ?>">
+                </div>
+                <script src="../eChart-2.2.7/build/dist/echarts.js"></script>
+                <script src="../js/eChartsConfig.js"></script>
             </div>
             <!--运动曲线图 结束-->
 
@@ -229,13 +217,13 @@
     // 根据左侧的导航栏点击刷新右侧界面
     function change(e) {
         if(e=="events"){
-            window.location.href="healthManage.php";
+            window.location.href = "healthManage.php?userName=<?php echo $userName ?>";
         }else if(e=="body"){
-            window.location.href="bodyManage.php";
+            window.location.href = "bodyManage.php?userName=<?php echo $userName ?>";
         }else if(e=="upload"){
-            window.location.href="sportsUpload.php";
+            window.location.href = "uploadSports.php?userName=<?php echo $userName ?>";
         }else if(e=="statics"){
-            window.location.href="staticsAnalysis.php";
+            window.location.href = "staticsAnalysis.php?userName=<?php echo $userName ?>";
         }
     }
 </script>
