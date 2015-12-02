@@ -83,14 +83,13 @@
                 <a class="btn btn-primary" onclick="search_function();">搜索</a>
 
                 <div>
-
-                    <input class="with-gap" type="radio" name="type" id="uploader" value="uploader">
-                    <label for="uploader">标题</label>
-                    <input class="with-gap" type="radio" name="type" id="customName" value="customName"
+                    <input class="with-gap" type="radio" name="type" id="title" value="title">
+                    <label for="title">标题</label>
+                    <input class="with-gap" type="radio" name="type" id="content" value="content"
                            checked="checked">
-                    <label for="customName">内容</label>
-                    <input class="with-gap" type="radio" name="type" id="tag" value="tag">
-                    <label for="tag">全部</label>
+                    <label for="content">内容</label>
+                    <input class="with-gap" type="radio" name="type" id="all" value="all">
+                    <label for="all">全部</label>
                 </div>
             </div>
             <br>

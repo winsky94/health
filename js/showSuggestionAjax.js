@@ -104,9 +104,6 @@ function onSuggestionsResponse(xmlHttp) {
 }
 
 function search_function() {
-    alert("监听在ajax");
-    return;
-
     var keyword = $("input[name='keyword']").val();
     var type;
     var type_radio_pointers = document.querySelectorAll('[name="type"]');

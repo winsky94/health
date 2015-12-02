@@ -75,5 +75,36 @@ if ($action == "getSuggestionsPageNum") {
     }
 
 } elseif ($action = "search") {
+    $type = $_POST["type"];
+    $keyword = $_POST["keyword"];
 
+    $suggestions = $suggestionService->search($type, $keyword);
+
+    // 写xml信息
+    $dom = new DOMDocument('1.0', 'UTF-8');
+    $dom->formatOutput = true;
+    $rootElement = $dom->createElement("suggestions");
+    foreach ($suggestions as $suggestion) {
+        $suggestionElement = $dom->createElement("suggestion");
+        $title = $dom->createElement("title", $suggestion->getTitle());
+        $content = $dom->createElement("content", $suggestion->getContent());
+        $author = $dom->createElement("author", $suggestion->getAuthor());
+        $type = $dom->createElement("type", $suggestion->getType());
+        $email = $dom->createElement("email", $suggestion->getEmail());
+        $telephone = $dom->createElement("telephone", $suggestion->getTelephone());
+        $time = $dom->createElement("time", $suggestion->getTime());
+
+        $suggestionElement->appendChild($title);
+        $suggestionElement->appendChild($content);
+        $suggestionElement->appendChild($author);
+        $suggestionElement->appendChild($type);
+        $suggestionElement->appendChild($email);
+        $suggestionElement->appendChild($telephone);
+        $suggestionElement->appendChild($time);
+
+        $rootElement->appendChild($suggestionElement);
+    }
+
+    $dom->appendChild($rootElement);
+    echo $dom->saveXML();
 }

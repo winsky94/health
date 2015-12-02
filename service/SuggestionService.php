@@ -127,6 +127,34 @@ class SuggestionService {
         $result = ceil($num / numPerPage);
         return $result;
     }
+
+    public function search($type, $keyword) {
+        $sql = "select * from " . $this->db_name;
+        if ($keyword != "") {
+            if ($type == "content") {
+                $sql = $sql . " where content='" . $keyword . "'";
+            } elseif ($type == "title") {
+                $sql = $sql . " where title='" . $keyword . "'";
+            }
+        }
+
+        $result = $this->DB->getList($sql);
+        $suggestions = array();
+        foreach ($result as $rt) {
+            $title = $rt["title"];
+            $content = $rt["content"];
+            $author = $rt["author"];
+            $type = $rt["type"];
+            $email = $rt["email"];
+            $telephone = $rt["telephone"];
+            $time = $rt["time"];
+            $suggestion = new Suggestion($title, $content, $author, $type, $email, $telephone);
+            $suggestion->setTime($time);
+            array_push($suggestions, $suggestion);
+        }
+        return $suggestions;
+    }
+
 }
 
 //$service = new SuggestionService();
