@@ -98,13 +98,13 @@
     // 根据左侧的导航栏点击刷新右侧界面
     function change(e) {
         if(e=="events"){
-            window.location.href="healthManage.php";
+            window.location.href = "healthManage.php?userName=<?php echo $userName ?>";
         }else if(e=="body"){
-            window.location.href="bodyManage.php";
+            window.location.href = "bodyManage.php?userName=<?php echo $userName ?>";
         }else if(e=="upload"){
-            window.location.href = "uploadSports.php";
+            window.location.href = "uploadSports.php?userName=<?php echo $userName ?>";
         }else if(e=="statics"){
-            window.location.href="staticsAnalysis.php";
+            window.location.href = "staticsAnalysis.php?userName=<?php echo $userName ?>";
         }
     }
 </script>
