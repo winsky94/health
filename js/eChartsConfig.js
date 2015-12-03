@@ -2,6 +2,7 @@
  * Created by Administrator on 2015/12/2.
  */
 // 路径配置
+var myChart = "";
 require.config({
     paths: {
         echarts: '../eChart-2.2.7/build/dist'
@@ -19,8 +20,9 @@ require(
 );
 
 function getData(ec) {
-    var date = document.getElementById("date").value;
+    //var date = document.getElementById("date").value;
     var userName = document.getElementById("userName").value;
+    var date = "今天";
     if (date == "今天") {
         date = getNowFormatDate();
     }
@@ -43,72 +45,78 @@ function on_data_response(xmlHttp, ec) {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
         var text = jQuery.parseJSON(xmlHttp.responseText);
 
-        var data = [text.data1, text.data2, text.data3, text.data4, text.data5, text.data6, text.data7];
+        var sports = text.sports;
+        var sportData = [sports.data1, sports.data2, sports.data3, sports.data4, sports.data5, sports.data6, sports.data7];
+        var dates = text.dates;
+        var dateData = [dates.date1, dates.date2, dates.date3, dates.date4, dates.date5, dates.date6, dates.date7]
 
-
-        // 基于准备好的dom，初始化eCharts图表
-        var myChart = ec.init(document.getElementById('main'));
-
-        var option = {
-            title: {
-                text: '运动历史',
-                //subtext: '纯属虚构'
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            legend: {
-                data: ['运动距离']
-            },
-            toolbox: {
-                show: true,
-                feature: {
-                    mark: {show: true},
-                    dataView: {show: true, readOnly: false},
-                    magicType: {show: true, type: ['line', 'bar']},
-                    restore: {show: true},
-                    saveAsImage: {show: true}
-                }
-            },
-            calculable: true,
-            xAxis: [
-                {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ['21', '22', '23', '24', '25', '26', '27']
-                }
-            ],
-            yAxis: [
-                {
-                    type: 'value',
-                    axisLabel: {
-                        formatter: '{value} 米'
-                    }
-                }
-            ],
-            series: [
-                {
-                    name: '运动距离',
-                    type: 'line',
-                    data: data,
-                    markPoint: {
-                        data: [
-                            {type: 'max', name: '最大值'},
-                            {type: 'min', name: '最小值'}
-                        ]
-                    },
-                    markLine: {
-                        data: [
-                            {type: 'average', name: '平均值'}
-                        ]
-                    }
-                }
-            ]
-        };
-
-        // 为echarts对象加载数据
-        myChart.setOption(option);
+        setOption(sportData, dateData, ec);
     }
+}
+
+function setOption(sportData, dateData, ec) {
+    // 基于准备好的dom，初始化eCharts图表
+    myChart = ec.init(document.getElementById('main'));
+
+    var option = {
+        title: {
+            text: '运动历史',
+            //subtext: '纯属虚构'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['运动距离']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: dateData
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} 公里'
+                }
+            }
+        ],
+        series: [
+            {
+                name: '运动距离',
+                type: 'line',
+                data: sportData,
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+
+    // 为echarts对象加载数据
+    myChart.setOption(option);
 }
 
 function getNowFormatDate() {

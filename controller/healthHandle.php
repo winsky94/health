@@ -15,6 +15,9 @@ require_once("../service/healthService.php");
 $date = $_POST["date"];
 $userName = $_POST["userName"];
 
+//$date="2015-12-02 11:11:11";
+//$userName="winsky";
+
 $service = new healthService();
 $data = $service->getSportsData($userName, $date);
 

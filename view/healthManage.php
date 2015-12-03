@@ -112,11 +112,33 @@ $userName = $_GET["userName"];
         <div class="col s12 l9" id="right-content">
             <script src="../js/jQuery.js"></script>
             <script src="../js/radialIndicator.js"></script>
+            <div style="margin-left: 10px;">
+                <table>
+                    <td>
+                        <span style="float: right">周目标：</span>
+                    </td>
+                    <td>
+                        <select class="browser-default" id="sex">
+                            <option value="距离（公里）">距离(公里)</option>
+                            <option value="时长（小时）">时长(小时)</option>
+                            <option value="热量（卡路里）">热量(卡路里)</option>
+                            <option value="步数（步）">步数(步)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" value="7000" placeholder="7000">
+                    </td>
+                    <td>
+                        <button type="button" class="btn" onclick="alert('监听')">保存</button>
+                    </td>
+                </table>
+            </div>
+
             <div style="display: inline-block;margin-left: 5px;">
-                <div>
-                    <script src="../js/dateButton.js"></script>
-                    <input id="date" class="btn" type="button" onclick="HS_setDate(this)" value="今天">
-                </div>
+                <!--                <div>-->
+                <!--                    <script src="../js/dateButton.js"></script>-->
+                <!--                    <input id="date" class="btn" type="button" onclick="HS_setDate(this)" value="今天">-->
+                <!--                </div>-->
 
                 <!--绘制目标完成百分比图-->
                 <div style="margin-left: 50px; padding-top: 40px">
@@ -182,6 +204,8 @@ $userName = $_GET["userName"];
                 <div id="main" style="height:400px"></div>
                 <div>
                     <input type="hidden" id="userName" value="<?php echo $userName ?>">
+                    <!--                    <input type="button" onclick="refresh(true)" value="刷新">-->
+                    <!--                    <button type="button" class="btn btn-sm btn-success" onclick="refresh(true)">刷 新</button>-->
                 </div>
                 <script src="../eChart-2.2.7/build/dist/echarts.js"></script>
                 <script src="../js/eChartsConfig.js"></script>
