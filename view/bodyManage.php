@@ -39,6 +39,9 @@
 </head>
 <body onload="write_header();write_footer()">
 <header></header>
+<?php
+$userName = $_GET["userName"];
+?>
 
 <div class="main container">
     <div class="row">
