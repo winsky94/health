@@ -67,6 +67,12 @@ if ($action == "detailStatics") {
 
     echo $message;
 
+} elseif ($action == "getSleepData") {
+    $userName = $_POST["userName"];
+    $day = $_POST["date"];
+    $data_json = $service->getSleepDataByDay($userName, $day);
+
+    echo $data_json;
 }
 
 

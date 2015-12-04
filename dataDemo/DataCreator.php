@@ -100,7 +100,7 @@ class DataCreator {
             $wakeNumElement = $dom->createElement("wakeNum", $wakeNum);
             $item->appendChild($wakeNumElement);
 
-            $wakeTimes = $wakeNum * rand(1, 10);
+            $wakeTimes = $wakeNum * rand(10, 100);
             $wakeTimesElement = $dom->createElement("wakeTimes", $wakeTimes);
             $item->appendChild($wakeTimesElement);
 

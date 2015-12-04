@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-    <title>我的运动</title>
+    <title>数据分析</title>
 
     <!-- CSS  -->
     <link href="../css/material_icons.css" rel="stylesheet" media="screen,projection">
@@ -72,20 +72,19 @@
         .tc {
             text-align: center
         }
-
     </style>
 
-    <script src="../js/healManageAjax.js"></script>
-
-    <!-- 这个位置不能移到后面去，否则百分比的图在更新目标后画不出来 -->
+    <script src="../js/sleepManageAjax.js"></script>
     <script src="../js/jquery-2.1.1.min.js"></script>
 
 </head>
-<body onload="write_footer();initStaticsData();write_header();">
+<body onload="write_header();write_footer();getSleepData('2015-12-04')">
 <header></header>
+
 <?php
 $userName = $_GET["userName"];
 ?>
+<input type="hidden" id="userName" value="<?php echo $userName ?>">
 
 <div class="main container">
     <div class="row">
@@ -117,73 +116,17 @@ $userName = $_GET["userName"];
         <div class="col s12 l9" id="right-content">
             <script src="../js/jQuery.js"></script>
             <script src="../js/radialIndicator.js"></script>
-            <div style="margin-left: 10px;">
-                <table>
-                    <?php
-                    require_once("../service/healthService.php");
-                    $service = new HealthService();
-                    $data = json_decode($service->getWeekGoal($userName));
-                    $type = $data->goal_type;
-                    $value = $data->value;
-                    ?>
-                    <td>
-                        <span style="float: right">周目标：</span>
-                    </td>
-                    <td>
-                        <select class="browser-default" id="type">
-                            <?php
-                            if ($type == "距离(公里)") {
-                                ?>
-                                <option value="距离(公里)" selected>距离(公里)</option>
-                                <option value="时长(小时)">时长(小时)</option>
-                                <option value="热量(卡路里)">热量(卡路里)</option>
-
-                                <?php
-                            } elseif ($type == "时长(小时)") {
-                                ?>
-                                <option value="距离(公里)">距离(公里)</option>
-                                <option value="时长(小时)" selected>时长(小时)</option>
-                                <option value="热量(卡路里)">热量(卡路里)</option>
-
-                                <?php
-                            } elseif ($type == "calories") {
-                                ?>
-                                <option value="距离(公里)">距离(公里)</option>
-                                <option value="时长(小时)">时长(小时)</option>
-                                <option value="热量(卡路里)" selected>热量(卡路里)</option>
-                                <?php
-                            }
-                            ?>
-                        </select>
-                    </td>
-                    <td>
-                        <input id="value" type="text" value="<?php echo $value; ?>" placeholder="<?php echo $value; ?>">
-                    </td>
-                    <td>
-                        <button type="button" class="btn" onclick="setGoal();">保存</button>
-                    </td>
-                    <td>
-                        <font color="red" size="3"><span id="result" style="margin-right: 50px;"></span></font>
-                    </td>
-                </table>
-            </div>
-
             <div style="display: inline-block;margin-left: 5px;">
-                <!--                <div>-->
-                <!--                    <script src="../js/dateButton.js"></script>-->
-                <!--                    <input id="date" class="btn" type="button" onclick="HS_setDate(this)" value="今天">-->
-                <!--                </div>-->
+                <div>
+                    <!--                    <script src="../js/dateButton.js"></script>-->
+                    <!--                    <input id="date" class="btn" type="button" onclick="HS_setDate(this)" value="今天" onFocus="updateSleep();">-->
+                    <script src="../My97DatePicker/WdatePicker.js"></script>
+                    <input class="btn" type="button" onClick="WdatePicker()" width='270px' onFocus="updateSleep()"
+                           value="今天">
+
+                </div>
 
                 <!--绘制目标完成百分比图-->
-                <?php
-                require_once("../service/healthService.php");
-                $service = new HealthService();
-                $data = $service->getStaticsPerWeek($userName);
-                $meters_total = $data["meters_total"];
-                $minutes_total_hour = $data["minutes_total_hour"];
-                $minutes_total_minute = $data["minutes_total_minute"];
-                $calories_total = $data["calories_total"];
-                ?>
                 <div style="margin-left: 50px; padding-top: 40px">
                     <div class="prg-cont rad-prg" id="indicatorContainer" style="display: inline;float: left"></div>
                     <script>
@@ -201,22 +144,8 @@ $userName = $_GET["userName"];
                             percentage: true
                         });
 
-                        var type = "<?php echo $type; ?>";
-                        var goal_value =<?php echo $value;?>;
-                        var true_value = -1;
-
-                        if (type == "距离(公里)") {
-                            true_value =<?php echo $meters_total;?>;
-                        } else if (type == "时长(小时)") {
-                            true_value =<?php echo ($minutes_total_hour+$minutes_total_minute/60);?>;
-                        } else if (type == "热量(卡路里)") {
-                            true_value =<?php echo $calories_total;?>;
-                        }
-                        updateRate(true_value, goal_value);
-
-
                     </script>
-                    <p style="margin-left: 30px;font-weight: bold;" class="co8">目标完成</p>
+                    <p style="margin-left: 25px;font-weight: bold;" class="co8">睡眠有效率</p>
                 </div>
                 <!--绘制目标完成百分比图 结束-->
 
@@ -224,46 +153,30 @@ $userName = $_GET["userName"];
 
 
             <!--统计数据-->
-
             <div style="display:inline-block;margin-left: 50px;padding-bottom: 60px;">
                 <div class="steps_report_data" style="float:left;">
                     <ul>
-                        <li class="rp_contentBoxFirst co6 tc">
-                            <span class="co8">运动距离</span>
+                        <li class="rp_contentBox co6 tc">
+                            <span class="co8">睡眠开始</span>
                             <br/>
-                            <span class="f30 co6" id="meters_total"><?php echo $meters_total ?></span>公里
+                            <span class=" co6" id="startTime">0</span>
                         </li>
                         <li class="rp_contentBox co6 tc">
-                            <span class="co8">运动时长</span>
+                            <span class="co8">睡眠结束</span>
                             <br/>
-                            <span class="f30 co6"
-                                  id="minutes_total_hour"><?php echo $minutes_total_hour ?></span>小时
-                            <span class="f30 co6"
-                                  id="minutes_total_minute"><?php echo $minutes_total_minute ?></span>分钟
+                            <span class=" co6" id="endTime">0</span>
                         </li>
                         <li class="rp_contentBoxLast co6 tc" style="padding-top:0;">
-                            <span class="co8">燃烧热量</span>
+                            <span class="co8">有效睡眠</span>
                             <br/>
-                            <span class="f30 co6" id="calories_total"><?php echo $calories_total ?></span>大卡
+                            <span class="co6"
+                                  id="valid_hour">0</span>小时
+                            <span class="co6" id="valid_minute">0</span>分钟
                         </li>
                     </ul>
                 </div>
             </div>
             <!--统计数据 结束-->
-
-            <!--运动曲线图-->
-            <div style="margin-top: 10px;margin-left: 5px;">
-                <div id="main" style="height:400px"></div>
-                <div>
-                    <input type="hidden" id="userName" value="<?php echo $userName ?>">
-                    <!--                    <input type="button" onclick="refresh(true)" value="刷新">-->
-                    <!--                    <button type="button" class="btn btn-sm btn-success" onclick="refresh(true)">刷 新</button>-->
-                </div>
-                <script src="../eChart-2.2.7/build/dist/echarts.js"></script>
-                <script src="../js/eChartsConfig.js"></script>
-            </div>
-            <!--运动曲线图 结束-->
-
         </div>
         <!-- 右侧 9列 结束 -->
 
@@ -276,18 +189,19 @@ $userName = $_GET["userName"];
 <div id="footer"></div>
 
 <!--  javaScripts -->
-
+<!--<script src="../js/jquery-2.1.1.min.js"></script>-->
 <script src="../js/materialize.js"></script>
 <script src="../js/cookie.js"></script>
 <script src="../js/writeHTML.js"></script>
 <script src="../js/xmlhttp.js"></script>
-<script src="../js/LoginAjax.js"></script>
+<script type="text/javascript" src="../js/LoginAjax.js"></script>
 
 <script src="../js/ChangeUserInfoAjax.js"></script>
 <script src="../js/ChangePWAjax.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/LoginAjax.js"></script>
 <script src="../js/userAjax.js"></script>
+
 
 <script type="text/javascript">
     // 根据左侧的导航栏点击刷新右侧界面
@@ -302,8 +216,6 @@ $userName = $_GET["userName"];
             window.location.href = "sleepManage.php?userName=<?php echo $userName ?>";
         }
     }
-
-
 </script>
 
 </body>

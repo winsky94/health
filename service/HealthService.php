@@ -148,27 +148,36 @@ class HealthService {
      * @return string 身体数据
      */
     public function getUserBodyData($userName, $num) {
-        $sql = "select * from " . $this->db_name_body . " where userName='" . $userName . "' order by upLoadTime desc limit " . $num;
+        $sql = "select * from " . $this->db_name_body . " where userName='" . $userName . "' order by upLoadTime desc";
+
+        if ($num > 0) {
+            $sql = $sql . " limit " . $num . ";";
+        }
         $result = $this->DB->getList($sql);
 
-        $rt = $result[0];
-        $id = $rt["id"];
-        $height = $rt["height"];
-        $weight = $rt["weight"];
-        $weightGoal = $rt["weightGoal"];
-        $heart = $rt["heart"];
-        $blood = $rt["blood"];
-        $upLoadTime = $rt["upLoadTime"];
+        $data = array();
+        foreach ($result as $rt) {
+            $id = $rt["id"];
+            $height = $rt["height"];
+            $weight = $rt["weight"];
+            $weightGoal = $rt["weightGoal"];
+            $heart = $rt["heart"];
+            $blood = $rt["blood"];
+            $upLoadTime = $rt["upLoadTime"];
 
-        $data = array("height" => $height, "weight" => $weight, "weightGoal" => $weightGoal, "heart" => $heart, "blood" => $blood);
-        return json_encode($data);
+            $bodyData = array("height" => $height, "weight" => $weight, "weightGoal" => $weightGoal, "heart" => $heart, "blood" => $blood, "upLoadTime" => $upLoadTime);
+
+            array_push($data, $bodyData);
+        }
+        return $data;
     }
 
     /**
      * 用户上传自己的运动数据
      * @param $data
      */
-    public function setUserSportData($data) {
+    public
+    function setUserSportData($data) {
         $sql = "insert into " . $this->db_name_sport . " values(:id,:userName,:time,:meters,:minutes,:speed,:calories)";
 
         $conn = $this->DB->conn;
@@ -204,7 +213,8 @@ class HealthService {
      * @param $userName 用户名
      * @return string 数据
      */
-    public function getSportData($userName) {
+    public
+    function getSportData($userName) {
         $sql = "select * from " . $this->db_name_sport . " where userName='" . $userName . "'";
         $result = $this->DB->getList($sql);
 
@@ -347,6 +357,35 @@ class HealthService {
         return $doc->saveXML();
     }
 
+    public function getSleepDataByDay($userName, $day) {
+        $sql = "select * from " . $this->db_name_sleep . " where userName='" . $userName . "' and substr(startTime,0,11)='" . $day . "' limit 1";
+        $result = $this->DB->getList($sql);
+
+        if (sizeof($result) == 1) {
+            $startTime = $result[0]["startTime"];
+            $endTime = $result[0]["endTime"];
+            $wakeTime = $result[0]["wakeTime"];
+
+            $total = (strtotime($endTime) - strtotime($startTime)) - $wakeTime;
+
+            $hour = floor($total % 86400 / 3600);
+            $minute = floor($total % 86400 % 3600 / 60);
+
+            $validPerCent = $total / (strtotime($endTime) - strtotime($startTime));
+        } else {
+            $startTime = 0;
+            $endTime = 0;
+
+            $hour = 0;
+            $minute = 0;
+            $validPerCent = 0;
+        }
+
+        $data = array("startTime" => $startTime, "endTime" => $endTime, "hour" => $hour, "minute" => $minute, "validPerCent" => $validPerCent);
+
+        return json_encode($data);
+
+    }
 }
 
 $service = new HealthService();
@@ -361,3 +400,7 @@ $service = new HealthService();
 //echo $service->setWeekGoal("winsky","距离(公里)",22);
 
 //echo $service->getWeekGoal("winsky");
+
+//print_r($service->getUserBodyData("winsky",5));
+
+//$service->getSleepDataByDay("winsky","2015-12-02");

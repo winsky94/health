@@ -49,13 +49,13 @@ $userName = $_GET["userName"];
                     <i class="small grey-text mdi-action-perm-contact-cal"></i>
                     身体管理
                 </a>
+                <a class="collection-item waves-effect waves-light" onclick="return change('sleep')">
+                    <i class="small grey-text mdi-editor-functions"></i>
+                    睡眠分析
+                </a>
                 <a class="collection-item waves-effect waves-light" onclick="return change('upload')">
                     <i class="small grey-text mdi-file-file-upload"></i>
                     数据上传
-                </a>
-                <a class="collection-item waves-effect waves-light" onclick="return change('statics')">
-                    <i class="small grey-text mdi-editor-functions"></i>
-                    数据分析
                 </a>
             </div>
         </div>
@@ -109,8 +109,8 @@ $userName = $_GET["userName"];
             window.location.href = "bodyManage.php?userName=<?php echo $userName ?>";
         }else if(e=="upload"){
             window.location.href = "uploadSports.php?userName=<?php echo $userName ?>";
-        }else if(e=="statics"){
-            window.location.href = "staticsAnalysis.php?userName=<?php echo $userName ?>";
+        } else if (e == "sleep") {
+            window.location.href = "sleepManage.php?userName=<?php echo $userName ?>";
         }
     }
 </script>

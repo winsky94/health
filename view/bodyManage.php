@@ -58,13 +58,13 @@ $userName = $_GET["userName"];
                     <i class="small grey-text mdi-action-perm-contact-cal"></i>
                     身体管理
                 </a>
+                <a class="collection-item waves-effect waves-light" onclick="return change('sleep')">
+                    <i class="small grey-text mdi-editor-functions"></i>
+                    睡眠分析
+                </a>
                 <a class="collection-item waves-effect waves-light" onclick="return change('upload')">
                     <i class="small grey-text mdi-file-file-upload"></i>
                     数据上传
-                </a>
-                <a class="collection-item waves-effect waves-light" onclick="return change('statics')">
-                    <i class="small grey-text mdi-editor-functions"></i>
-                    数据分析
                 </a>
             </div>
         </div>
@@ -77,13 +77,12 @@ $userName = $_GET["userName"];
             <?php
             require_once("../service/healthService.php");
             $healthService = new HealthService();
-            $data_json = $healthService->getUserBodyData($userName, 1);
-            $data = json_decode($data_json);
-            $height = $data->height;
-            $weight = $data->weight;
-            $weightGoal = $data->weightGoal;
-            $heart = $data->heart;
-            $blood = $data->blood;
+            $data = $healthService->getUserBodyData($userName, 1);
+            $height = $data[0]["height"];
+            $weight = $data[0]["weight"];
+            $weightGoal = $data[0]["weightGoal"];
+            $heart = $data[0]["heart"];
+            $blood = $data[0]["blood"];
 
             ?>
             <div class="card grey lighten-4">
@@ -136,37 +135,40 @@ $userName = $_GET["userName"];
 
             <!-- 体重变化表-->
             <div class="card grey lighten-4">
-                <table class="striped centered responsive-table">
+                <table class="striped centered responsive-table display" id="example">
                     <thead>
                     <tr>
                         <th data-field="date">日　期</th>
                         <th data-field="weight">体　重(kg)</th>
-                        <th data-field="rate">变化率</th>
                         <th data-field="gap">距离目标体重差(kg)</th>
+                        <th data-field="idealGap">距离理想体重差(kg)</th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td>2015-10-31</td>
-                        <td>76</td>
-                        <td>0%</td>
-                        <td>8.6</td>
-                    </tr>
+                    <?php
+                    $bodyData = $healthService->getUserBodyData($userName, 5);
 
-                    <tr>
-                        <td>2015-10-31</td>
-                        <td>76</td>
-                        <td>0%</td>
-                        <td>8.6</td>
-                    </tr>
+                    foreach ($bodyData as $row) {
+                        $date = $row["upLoadTime"];
+                        $weight = $row["weight"];
+                        $weightGoal = $row["weightGoal"];
+                        $gap = $weight - $weightGoal;
 
-                    <tr>
-                        <td>2015-10-31</td>
-                        <td>76</td>
-                        <td>0%</td>
-                        <td>8.6</td>
-                    </tr>
+                        $height = $row["height"];
+                        $idealGap = round($weight - 21.2 * $height * $height / 10000, 1);
+                        ?>
+
+                        <tr>
+                            <td><?php echo $date; ?></td>
+                            <td><?php echo $weight; ?></td>
+                            <td><?php echo $gap; ?></td>
+                            <td><?php echo $idealGap; ?></td>
+                        </tr>
+
+                        <?php
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -207,8 +209,8 @@ $userName = $_GET["userName"];
             window.location.href = "bodyManage.php?userName=<?php echo $userName ?>";
         } else if (e == "upload") {
             window.location.href = "uploadSports.php?userName=<?php echo $userName ?>";
-        } else if (e == "statics") {
-            window.location.href = "staticsAnalysis.php?userName=<?php echo $userName ?>";
+        } else if (e == "sleep") {
+            window.location.href = "sleepManage.php?userName=<?php echo $userName ?>";
         }
     }
 </script>
