@@ -3,7 +3,7 @@
 require_once("../utils/ExcelUtil.php");
 require_once("../model/Suggestion.php");
 require_once("../service/SuggestionService.php");
-require_once("../service/UserService.php");
+require_once("../service/healthService.php");
 
 $action = $_GET['action'];
 $actions = array('tk', 'up', 'fd');
@@ -225,7 +225,7 @@ class upload {
         $doc = new DOMDocument();
         $doc->load($file); //读取xml文件
         $sports = $doc->getElementsByTagName("data"); //取得humans标签的对象数组
-        $service = new UserService();
+        $service = new HealthService();
 
         $data = array();
         foreach ($sports as $sport) {
@@ -272,7 +272,7 @@ class upload {
         $doc->load($file); //读取xml文件
         $sleeps = $doc->getElementsByTagName("data"); //取得humans标签的对象数组
 
-        $service = new UserService();
+        $service = new HealthService();
         $data = array();
         foreach ($sleeps as $sleep) {
             $row = array();
