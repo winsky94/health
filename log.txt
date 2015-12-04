@@ -1,4 +1,5 @@
 ﻿输出信息到调试文件
 error_log($file['name']."\r\n", 3, "../log.txt");
 
-参加过，Array
+21
+22 winsky 距离（公里）

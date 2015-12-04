@@ -6,22 +6,39 @@
  * Description：
  */
 
-//$newObj = array("data1" => 6500, "data2" => 2000, "data3" => 3000, "data4" => 4000, "data5" => 5000, "data6" => 6000, "data7" => 7000);
-//echo json_encode($newObj);
-
 require_once("../service/healthService.php");
 
-
-$date = $_POST["date"];
-$userName = $_POST["userName"];
-
-//$date="2015-12-02 11:11:11";
-//$userName="winsky";
-
 $service = new healthService();
-$data = $service->getSportsData($userName, $date);
+$action = $_POST["action"];
 
-echo json_encode($data);
+if ($action == "detailStatics") {
+    $date = $_POST["date"];
+    $userName = $_POST["userName"];
+
+    $data = $service->getSportsData($userName, $date);
+
+    echo json_encode($data);
+} elseif ($action == "totalStatics") {
+    $userName = $_POST["userName"];
+    echo json_encode($service->getStaticsPerWeek($userName));
+} elseif ($action == "setWeekGoal") {
+    $type = $_POST["type"];
+    $value = $_POST["value"];
+    $userName = $_POST["userName"];
+
+    if ($value == "") {
+        $message = "<message>请输入目标值</message>";
+    } else {
+        $result = $service->setWeekGoal($userName, $type, $value);
+        if ($result) {
+            $message = "<message>success</message>";
+        } else {
+            $message = "<message>修改失败</message>";
+        }
+    }
+
+    echo $message;
+}
 
 
 /**

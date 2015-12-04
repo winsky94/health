@@ -36,7 +36,7 @@ function getData(ec) {
         //post方式需要自己设置http的请求头
         xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         //post方式发送数据
-        xmlHttp.send("date=" + date + "&userName=" + userName);
+        xmlHttp.send("action=detailStatics" + "&date=" + date + "&userName=" + userName);
 
     }
 }
@@ -45,11 +45,12 @@ function on_data_response(xmlHttp, ec) {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
         var text = jQuery.parseJSON(xmlHttp.responseText);
 
-        var sports = text.sports;
+        //var sports = text.sports;
+        var sports = text;
         var sportData = [sports.data1, sports.data2, sports.data3, sports.data4, sports.data5, sports.data6, sports.data7];
-        var dates = text.dates;
-        var dateData = [dates.date1, dates.date2, dates.date3, dates.date4, dates.date5, dates.date6, dates.date7]
-
+        //var dates = text.dates;
+        //var dateData = [dates.date1, dates.date2, dates.date3, dates.date4, dates.date5, dates.date6, dates.date7]
+        var dateData = getForeSevenDay();
         setOption(sportData, dateData, ec);
     }
 }
@@ -117,6 +118,21 @@ function setOption(sportData, dateData, ec) {
 
     // 为echarts对象加载数据
     myChart.setOption(option);
+}
+
+function getForeSevenDay() {
+    var myDate = new Date(); //获取今天日期
+    myDate.setDate(myDate.getDate() - 7);
+    var dateArray = [];
+    var dateTemp;
+    var flag = 1;
+    for (var i = 0; i < 7; i++) {
+        dateTemp = (myDate.getMonth() + 1) + "-" + myDate.getDate();
+        dateArray.push(dateTemp);
+        myDate.setDate(myDate.getDate() + flag);
+    }
+
+    return dateArray;
 }
 
 function getNowFormatDate() {
