@@ -43,6 +43,8 @@
 $userName = $_GET["userName"];
 ?>
 
+<input type="hidden" id="userName" value="<?php echo $userName ?>">
+
 <div class="main container">
     <div class="row">
         <!-- 左侧 3列-->
@@ -72,45 +74,62 @@ $userName = $_GET["userName"];
         <!-- 右侧 9列 -->
         <div class="col s12 l9" id="right-content">
             <!-- 身体基本数据 -->
+            <?php
+            require_once("../service/healthService.php");
+            $healthService = new HealthService();
+            $data_json = $healthService->getUserBodyData($userName, 1);
+            $data = json_decode($data_json);
+            $height = $data->height;
+            $weight = $data->weight;
+            $weightGoal = $data->weightGoal;
+            $heart = $data->heart;
+            $blood = $data->blood;
+
+            ?>
             <div class="card grey lighten-4">
                 <h5 style="margin-left: 20px;font-weight: 100;font-family: '微软雅黑';color:#545454;">基本数据</h5>
 
                 <div class="input-field col s12">
-                    <div class="input-field col s4 l3">
-                        <input id="height" type="text" name="sex" value="177">
+                    <div class="input-field col s4 l2">
+                        <input id="height" type="text" name="height" value="<?php echo $height; ?>">
                         <label for="height" class="active">身　高：</label>
                     </div>
 
-                    <div class="input-field col s4 l3">
-                        <input id="weight" type="text" name="sex" value="76">
+                    <div class="input-field col s4 l2">
+                        <input id="weight" type="text" name="weight" value="<?php echo $weight; ?>">
                         <label for="weight" class="active">体　重：</label>
                     </div>
 
-                    <div class="input-field col s4 l3">
-                        <input id="heart" type="text" name="heart," value="100">
+                    <div class="input-field col s4 l2">
+                        <input id="weightGoal" type="text" name="weightGoal" value="<?php echo $weightGoal; ?>">
+                        <label for="weightGoal" class="active">目标体重：</label>
+                    </div>
+
+                    <div class="input-field col s4 l2">
+                        <input id="heart" type="text" name="heart" value="<?php echo $heart; ?>">
                         <label for="heart" class="active">心　率：</label>
                     </div>
 
-                    <div class="input-field col s4 l3">
-                        <input id="blood" type="text" name="blood" class="validate" value="120/78">
+                    <div class="input-field col s4 l2">
+                        <input id="blood" type="text" name="blood" class="validate" value="<?php echo $blood; ?>">
                         <label for="blood" class="active">血　压：</label>
                     </div>
 
                     <div class="col s8 table-container">
                         <div class="row-container">
                             <div class="input-field cell">
-                                <input id="flag" type="hidden" name="flag" value="userinfo">
-                                <input type="submit" value="保存" onclick="alert('监听')" class="btn btn-primary">
+                                <input type="submit" value="保存" onclick="updateBody();" class="btn btn-primary">
                             </div>
                             <div class="input-field cell">
-                                <font color="red" size="2"><span id="result"></span></font>
+                                <font color="red" size="3"><span id="result" style="margin-left: 100px;"></span></font>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div style="color:#545454;font-size: 18px;padding-left: 20px;float: left">
-                    你的理想体重<span style="font-size: 36px;font-weight: bold;" id="idealWeight">67.4</span>公斤...干巴爹~~~
+                    你的理想体重<span style="font-size: 36px;font-weight: bold;"
+                                id="idealWeight"><?php echo round(21.2 * $height * $height / 10000, 1); ?></span>公斤...干巴爹~~~
                 </div>
             </div>
             <!-- 身体基本数据 结束-->
@@ -177,6 +196,7 @@ $userName = $_GET["userName"];
 <script src="../js/materialize.js"></script>
 <script src="../js/LoginAjax.js"></script>
 <script src="../js/userAjax.js"></script>
+<script src="../js/bodyManageAjax.js"></script>
 
 <script type="text/javascript">
     // 根据左侧的导航栏点击刷新右侧界面
