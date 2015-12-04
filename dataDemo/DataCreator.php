@@ -27,25 +27,25 @@ class DataCreator {
             $userNameElement = $dom->createElement("userName", "winsky");
             $item->appendChild($userNameElement);
 
-            $date = date('Y-m-d', strtotime('-' . $i . ' day'));
-            $time = rand(6, 18) . ":" . rand(0, 60) . ":" . rand(0, 60);
+            $date = date('Y-m-d', strtotime('-' . (5000 - $i) . ' day'));
+            $time = rand(6, 18) . ":" . rand(0, 59) . ":" . rand(0, 59);
             $date = $date . " " . $time;
             $dateElement = $dom->createElement("date", $date);
             $item->appendChild($dateElement);
 
-            $meter = rand(0, 5) . "." . rand(0, 100);
+            $meter = rand(0, 5) . "." . rand(0, 99);
             $meterElement = $dom->createElement("meters", $meter);
             $item->appendChild($meterElement);
 
-            $minute = rand(0, 20) . "." . rand(0, 100);
+            $minute = rand(0, 20) . "." . rand(0, 99);
             $minuteElement = $dom->createElement("minute", $minute);
             $item->appendChild($minuteElement);
 
-            $speed = rand(10, 15) . "." . rand(0, 100);
+            $speed = rand(10, 15) . "." . rand(0, 99);
             $speedElement = $dom->createElement("speed", $speed);
             $item->appendChild($speedElement);
 
-            $calories = rand(0, 300) . "." . rand(0, 100);
+            $calories = rand(0, 300) . "." . rand(0, 9);
             $caloriesElement = $dom->createElement("calories", $calories);
             $item->appendChild($caloriesElement);
 
@@ -76,13 +76,13 @@ class DataCreator {
             $userNameElement = $dom->createElement("userName", "winsky");
             $item->appendChild($userNameElement);
 
-            $startDate = date('Y-m-d', strtotime('-' . $i . ' day'));
-            $time = rand(21, 24) . ":" . rand(0, 60) . ":" . rand(0, 60);
+            $startDate = date('Y-m-d', strtotime('-' . (5000 - $i) . ' day'));
+            $time = rand(21, 23) . ":" . rand(0, 59) . ":" . rand(0, 59);
             $startTime = $startDate . " " . $time;
             $startTimeElement = $dom->createElement("startTime", $startTime);
             $item->appendChild($startTimeElement);
 
-            $endDate = date('Y-m-d', strtotime('-' . ($i - 1) . ' day'));
+            $endDate = date('Y-m-d', strtotime('-' . (5000 - $i - 1) . ' day'));
             $time = rand(5, 9) . ":" . rand(0, 60) . ":" . rand(0, 60);
             $endTime = $endDate . " " . $time;
             $endTimeElement = $dom->createElement("endTime", $endTime);
@@ -100,7 +100,7 @@ class DataCreator {
             $wakeNumElement = $dom->createElement("wakeNum", $wakeNum);
             $item->appendChild($wakeNumElement);
 
-            $wakeTimes = $wakeNum * rand(10, 100);
+            $wakeTimes = $wakeNum * rand(50, 1000);
             $wakeTimesElement = $dom->createElement("wakeTimes", $wakeTimes);
             $item->appendChild($wakeTimesElement);
 
