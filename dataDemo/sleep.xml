@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sleepData>
     <data id="1">
+        <userName>winsky</userName>
         <!-- 睡眠开始时间 -->
-        <startTime>2015-11-06 12:30:00</startTime>
+        <startTime>2015-12-04 23:30:00</startTime>
         <!-- 睡眠结束时间 -->
-        <endTime>2015-11-07 08:45:00</endTime>
+        <endTime>2015-12-05 7:45:00</endTime>
         <!-- 深睡眠时长(分钟) -->
         <dsNum>113</dsNum>
         <!-- 浅睡眠时长(分钟) -->
@@ -14,22 +15,6 @@
         <!-- 清醒时长(分钟) -->
         <wakeTimes>0</wakeTimes>
         <!-- 睡眠质量评分 -->
-        <score>3.0</score>
-    </data>
-    <data id="2">
-        <!-- 睡眠开始时间 -->
-        <startTime>2015-11-06 12:30:00</startTime>
-        <!-- 睡眠结束时间 -->
-        <endTime>2015-11-07 08:45:00</endTime>
-        <!-- 深睡眠时长(分钟) -->
-        <dsNum>113</dsNum>
-        <!-- 浅睡眠时长(分钟) -->
-        <lsNum>384</lsNum>
-        <!-- 清醒次数 -->
-        <wakeNum>0</wakeNum>
-        <!-- 清醒时长(分钟) -->
-        <wakeTimes>0</wakeTimes>
-        <!-- 睡眠质量评分 -->
-        <score>3.0</score>
+        <score>9.0</score>
     </data>
 </sleepData>

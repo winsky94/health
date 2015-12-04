@@ -96,11 +96,11 @@ class DataCreator {
             $lsNumElement = $dom->createElement("lsNum", $lsNum);
             $item->appendChild($lsNumElement);
 
-            $wakeNum = rand(0, 10);
+            $wakeNum = rand(0, 5);
             $wakeNumElement = $dom->createElement("wakeNum", $wakeNum);
             $item->appendChild($wakeNumElement);
 
-            $wakeTimes = $wakeNum * rand(50, 1000);
+            $wakeTimes = $wakeNum * rand(10, 60);
             $wakeTimesElement = $dom->createElement("wakeTimes", $wakeTimes);
             $item->appendChild($wakeTimesElement);
 
@@ -116,4 +116,4 @@ class DataCreator {
 
 //DataCreator::createSportData();
 //echo "<br>";
-//DataCreator::createSleepData();
+DataCreator::createSleepData();

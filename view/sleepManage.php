@@ -78,13 +78,14 @@
     <script src="../js/jquery-2.1.1.min.js"></script>
 
 </head>
-<body onload="write_header();write_footer();getSleepData('2015-12-04')">
+<body onload="write_footer();getSleepData('');setTableData();write_header();">
 <header></header>
 
 <?php
 $userName = $_GET["userName"];
 ?>
 <input type="hidden" id="userName" value="<?php echo $userName ?>">
+<input type="hidden" id="date" value="<?php echo date('Y-m-d', time()); ?>">
 
 <div class="main container">
     <div class="row">
@@ -177,6 +178,40 @@ $userName = $_GET["userName"];
                 </div>
             </div>
             <!--统计数据 结束-->
+
+            <!--运动曲线图-->
+            <div style="margin-top: 10px;margin-left: 5px;">
+                <div id="main" style="height:400px"></div>
+                <div>
+                    <input type="hidden" id="userName" value="<?php echo $userName ?>">
+                    <!--                    <input type="button" onclick="refresh(true)" value="刷新">-->
+                    <!--                    <button type="button" class="btn btn-sm btn-success" onclick="refresh(true)">刷 新</button>-->
+                </div>
+                <script src="../eChart-2.2.7/build/dist/echarts.js"></script>
+                <script src="../js/sleepEChartsConfig.js"></script>
+            </div>
+            <!--运动曲线图 结束-->
+
+            <!-- 睡眠变化表-->
+            <div class="card grey lighten-4">
+                <table class="striped centered responsive-table display" id="example">
+                    <thead>
+                    <tr>
+                        <th data-field="startTime">开始时间</th>
+                        <th data-field="endTime">结束时间</th>
+                        <th data-field="dsNum">深睡(min)</th>
+                        <th data-field="lsNum">浅睡(min)</th>
+                        <th data-field="wakeNum">醒次</th>
+                        <th data-field="wakeTime">清醒(min)</th>
+                        <th data-field="score">评分</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="tableData"></tbody>
+                </table>
+            </div>
+            <!-- 睡眠变化表结束 -->
+
         </div>
         <!-- 右侧 9列 结束 -->
 

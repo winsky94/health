@@ -157,7 +157,6 @@ class HealthService {
 
         $data = array();
         foreach ($result as $rt) {
-            $id = $rt["id"];
             $height = $rt["height"];
             $weight = $rt["weight"];
             $weightGoal = $rt["weightGoal"];
@@ -176,8 +175,7 @@ class HealthService {
      * 用户上传自己的运动数据
      * @param $data
      */
-    public
-    function setUserSportData($data) {
+    public function setUserSportData($data) {
         $sql = "insert into " . $this->db_name_sport . " values(:id,:userName,:time,:meters,:minutes,:speed,:calories)";
 
         $conn = $this->DB->conn;
@@ -213,8 +211,7 @@ class HealthService {
      * @param $userName 用户名
      * @return string 数据
      */
-    public
-    function getSportData($userName) {
+    public function getSportData($userName) {
         $sql = "select * from " . $this->db_name_sport . " where userName='" . $userName . "'";
         $result = $this->DB->getList($sql);
 
@@ -301,60 +298,45 @@ class HealthService {
 
     /**
      * 得到用户的睡眠数据
-     * @param $userName 用户名
-     * @return string 数据
+     * @param $userName
+     * @param $num
+     * @param $date
+     * @return array
      */
-    public function getSleepData($userName) {
-        $sql = "select * from " . $this->db_name_sleep . " where userName='" . $userName . "'";
+    public function getSleepData($userName, $num, $date) {
+        if ($date == "今天") {
+            $date = date('y-m-d', time());
+        }
+        $sql = "select * from " . $this->db_name_sleep . " where userName='" . $userName . "' and substr(startTime,0,11)<='" . $date . "' order by startTime desc";
+        if ($num > 0) {
+            $sql = $sql . " limit " . $num;
+        }
         $result = $this->DB->getList($sql);
 
-        $doc = new DOMDocument("1.0", "utf-8");  #声明文档类型
-        $doc->formatOutput = true;               #设置可以输出操作
+        $data = array();
 
-        $root = $doc->createElement("sleepData");    #创建节点对象实体
-        $doc->appendChild($root);      #把节点添加进来
+        foreach ($result as $row) {
+            $startTime = $row["startTime"];
+            $endTime = $row["endTime"];
+            $dsNum = $row["dsNum"];
+            $lsNum = $row["lsNum"];
+            $wakeNum = $row["wakeNum"];
+            $wakeTime = $row["wakeTime"];
+            $score = $row["score"];
 
-        for ($i = 0; $i < sizeof($result); $i++) {
-            $rt = $result[$i];
-            $id = $rt["id"];
-            $startTime = $rt["startTime"];
-            $endTime = $rt["endTime"];
-            $dsNum = $rt["dsNum"];
-            $lsNum = $rt["lsNum"];
-            $wakeNum = $rt["wakeNum"];
-            $wakeTime = $rt["wakeTime"];
-            $score = $rt["score"];
+            $sleepData = array("startTime" => $startTime,
+                "endTime" => $endTime,
+                "dsNum" => $dsNum,
+                "lsNum" => $lsNum,
+                "wakeNum" => $wakeNum,
+                "wakeTime" => $wakeTime,
+                "score" => $score
+            );
 
-            $data = $doc->createElement("data");  #创建节点对象实体
-            $data = $root->appendChild($data);    #把节点添加到root节点的子节点
-
-            $dataId = $doc->createAttribute("id");  #创建节点属性对象实体
-            $data->appendChild($dataId);  #把属性添加到节点info中
-            $dataId->appendChild($doc->createTextNode($id));
-
-            $startTimeNode = $doc->createElement("startTime", $startTime);    #创建节点对象实体
-            $data->appendChild($startTimeNode);
-
-            $endTimeNode = $doc->createElement("endTime", $endTime);
-            $data->appendChild($endTimeNode);
-
-            $dsNumNode = $doc->createElement("dsNum", $dsNum);
-            $data->appendChild($dsNumNode);
-
-            $lsNumNode = $doc->createElement("lsNum", $lsNum);
-            $data->appendChild($lsNumNode);
-
-            $wakeNumNode = $doc->createElement("wakeNum", $wakeNum);
-            $data->appendChild($wakeNumNode);
-
-            $wakeTimeNode = $doc->createElement("wakeTime", $wakeTime);
-            $data->appendChild($wakeTimeNode);
-
-            $scoreNode = $doc->createElement("score", $score);
-            $data->appendChild($scoreNode);
+            array_push($data, $sleepData);
         }
 
-        return $doc->saveXML();
+        return json_encode($data);
     }
 
     public function getSleepDataByDay($userName, $day) {
@@ -404,3 +386,5 @@ $service = new HealthService();
 //print_r($service->getUserBodyData("winsky",5));
 
 //$service->getSleepDataByDay("winsky","2015-12-02");
+
+//print_r($service->getSleepData("winsky",7,"2015-12-04"));

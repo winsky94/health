@@ -127,10 +127,10 @@ $userName = $_GET["userName"];
                     $value = $data->value;
                     ?>
                     <td>
-                        <span style="float: right">周目标：</span>
+                        <span style="float: right" class="co8">周目标：</span>
                     </td>
                     <td>
-                        <select class="browser-default" id="type">
+                        <select class="browser-default co8" id="type">
                             <?php
                             if ($type == "距离(公里)") {
                                 ?>
