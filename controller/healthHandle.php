@@ -8,7 +8,7 @@
 
 require_once("../service/healthService.php");
 
-$service = new healthService();
+$service = new HealthService();
 $action = $_POST["action"];
 
 if ($action == "detailStatics") {
@@ -38,6 +38,35 @@ if ($action == "detailStatics") {
     }
 
     echo $message;
+} elseif ($action == "updateBody") {
+    $userName = $_POST["userName"];
+    $height = $_POST["height"];
+    $weight = $_POST["weight"];
+    $weightGoal = $_POST["weightGoal"];
+    $heart = $_POST["heart"];
+    $blood = $_POST["blood"];
+
+    if ($height == "") {
+        $message = "<message>请输入身高</message>";
+    } elseif ($weight == "") {
+        $message = "<message>请输入体重</message>";
+    } elseif ($weightGoal == "") {
+        $message = "<message>请输入目标体重</message>";
+    } elseif ($heart == "") {
+        $message = "<message>请输入心率</message>";
+    } elseif ($blood == "") {
+        $message = "<message>请输入血压</message>";
+    } else {
+        $result = $service->setUserBodyData($userName, $height, $weight, $weightGoal, $heart, $blood);
+        if ($result) {
+            $message = "<message>success</message>";
+        } else {
+            $message = "<message>修改失败</message>";
+        }
+    }
+
+    echo $message;
+
 }
 
 

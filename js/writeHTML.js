@@ -144,7 +144,7 @@ function write_edit_user_info() {
             </div>  \
             <a class="btn btn-primary" onclick="window.location.reload(true)">取消</a> \
             <div class="input-field cell"> \
-            	<font color="red" size="2"><span id="result" ></span></font> \
+            	<font color="red" size="3"><span id="result" style="margin-left: 100px;"></span></font> \
             </div> \
         </div> \
     </div>';
@@ -189,7 +189,7 @@ function write_changepw() {
                         </div> \
                         <a class="btn btn-primary" onclick="window.location.reload(true)">取消</a> \
                         <div class="input-field cell">  \
-                            <font color="red" size="2"><span id="result" ></span></font>  \
+                            <font color="red" size="3"><span id="result" style="margin-left: 100px;"></span></font>  \
                         </div> \
                     </div> \
             </div>';
@@ -327,106 +327,6 @@ function write_suggestion_list(suggestions) {
     }
 
     return txt;
-}
-
-function write_health_right_content(e){
-    var txt='\
-    <script src="../js/jQuery.js"></script>\
-        <script src="../js/radialIndicator.js"></script>\
-            <div style="display: inline-block;margin-left: 5px;">\
-                <div>\
-                    <script src="../js/dateButton.js"></script>\
-                    <input class="btn waves-light" type="button" onclick="HS_setDate(this)" value="今天">\
-                    </div>\
-\
-                    <!--绘制目标完成百分比图-->\
-                    <div style="margin-left: 50px; padding-top: 40px">\
-                        <div class="prg-cont rad-prg" id="indicatorContainer" style="display: inline;float: left"></div>\
-                        <script>\
-                            $("#indicatorContainer").radialIndicator({\
-                            barColor: {\
-                            0: "#FF0000",\
-                            33: "#FFFF00",\
-                            66: "#0066FF",\
-                            100: "#33CC33"\
-                        },\
-//                          radius: 70, //默认是50\
-                            barWidth: 10,\
-                            initValue: 0,\
-                            roundCorner: true,\
-                            percentage: true\
-                        });\
-\
-                            // 修改数字\
-                            var radialObj = $("#indicatorContainer").data("radialIndicator");\
-                            radialObj.animate(23);\
-                        </script>\
-                        <p style="margin-left: 30px;font-weight: bold;" class="co8">目标完成</p>\
-                    </div>\
-                    <!--绘制目标完成百分比图 结束-->\
-\
-                </div>\
-\
-\
-                <!--统计数据-->\
-                <div style="display:inline-block;margin-left: 50px;padding-bottom: 60px;">\
-                    <div class="steps_report_data" style="float:left;">\
-                        <ul>\
-                            <li class="rp_contentBoxFirst co6 tc">\
-                                <span class="co8">运动距离</span>\
-                                <br/>\
-                                <span class="f30 co6">0</span>公里\
-                            </li>\
-                            <li class="rp_contentBox co6 tc">\
-                                <span class="co8">运动时长</span>\
-                                <br/>\
-                                <span class="f30 co6">0</span>小时\
-                                <span class="f30 co6">0</span>分钟\
-                            </li>\
-                            <li class="rp_contentBoxL co6 tc">\
-                                <span class="co8">燃烧热量</span>\
-                                <br/>\
-                                <span class="f30 co6">0</span>大卡\
-                            </li>\
-\
-                            <li class="rp_contentBoxLast co6 tc" style="padding-top:0;">\
-                                <span class="co8">运动步数</span>\
-                                <br/>\
-                                <span class="f30 co6">0</span>步\
-                            </li>\
-                        </ul>\
-                    </div>\
-                </div>\
-                <!--统计数据 结束-->\
-\
-                <!--运动曲线图-->\
-                <div style="margin-top: 10px;margin-left: 5px;">\
-                    <h5>运动曲线图</h5>\
-                    <script src="../js/Chart.js"></script>\
-                    <canvas id="myChart" width="500px" height="200px"></canvas>\
-\
-                    <script type="text/javascript">\
-                        //Get the context of the canvas element we want to select\
-                        var ctx = document.getElementById("myChart").getContext("2d");\
-                        var data = {\
-                        labels: ["21", "22", "23", "24", "25", "26", "27", "28", "29", "30"],\
-                        datasets: [\
-                    {\
-                        fillColor: "rgba(151,187,205,0.5)",\
-                        strokeColor: "rgba(220,220,220,1)",\
-                        pointColor: "rgba(220,220,220,1)",\
-                        pointStrokeColor: "#fff",\
-                        data: [6500, 5900, 9000, 8100, 5600, 5500, 4000, 3000, 2500, 10000]\
-                    }\
-                        ]\
-                    }\
-                        var myNewChart = new Chart(ctx).Line(data);\
-                    </script>\
-                </div>\
-                <!--运动曲线图 结束-->\
-        ';
-
-    $("#right-content").html(txt);
 }
 
 

@@ -121,7 +121,7 @@ $userName = $_GET["userName"];
                 <table>
                     <?php
                     require_once("../service/healthService.php");
-                    $service = new healthService();
+                    $service = new HealthService();
                     $data = json_decode($service->getWeekGoal($userName));
                     $type = $data->goal_type;
                     $value = $data->value;
@@ -177,7 +177,7 @@ $userName = $_GET["userName"];
                 <!--绘制目标完成百分比图-->
                 <?php
                 require_once("../service/healthService.php");
-                $service = new healthService();
+                $service = new HealthService();
                 $data = $service->getStaticsPerWeek($userName);
                 $meters_total = $data["meters_total"];
                 $minutes_total_hour = $data["minutes_total_hour"];
