@@ -330,6 +330,88 @@ function write_suggestion_list(suggestions) {
     return txt;
 }
 
+function write_users_list(users) {
+    var txt = '';
+
+    for (var i = 0; i < users.length; i++) {
+        var user = users[i];
+        var name = user.getElementsByTagName("name")[0].firstChild.nodeValue;
+        var sex = user.getElementsByTagName("sex")[0].firstChild.nodeValue;
+        var age = user.getElementsByTagName("age")[0].firstChild.nodeValue;
+        var lastLoadTime = user.getElementsByTagName("lastLoadTime")[0].firstChild.nodeValue;
+        txt += '<div class="row">\
+                <div style="height: 100px;overflow:hidden;">\
+                    <div class="action_content float_left">\
+                        <div class="act_c_d float_left">\
+                            <div class="blank10"></div>\
+                            <div style="min-height: 30px;">\
+                                <a class="font16" style="font-weight:bold;" href="#" title=' + name + ' onclick="makeFriends(title);">' + name + '\
+                                </a>\
+                            </div>\
+                            <div>\
+                                性别：<span style="font-weight: 900">' + sex + '</span>\
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+                                年龄：<span style="font-weight: 900">' + age + '</span>\
+                            </div>\
+                            <div class="blank10"></div>\
+                            <div class="font16">\
+                                上次登录：<span style="font-weight: 900">' + lastLoadTime + '</span>\
+                            </div>\
+                        </div>\
+                        <div class="action_num_state">\
+                            <div style="text-align:center;margin-top:40px;">\
+                               <a class="font16" style="font-weight: bold" href="#" title=' + name + ' onclick="makeFriends(title);">关注</a>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>\
+            </div>';
+    }
+
+    return txt;
+}
+
+function write_friends_list(users) {
+    var txt = '';
+
+    for (var i = 0; i < users.length; i++) {
+        var user = users[i];
+        var name = user.getElementsByTagName("name")[0].firstChild.nodeValue;
+        var sex = user.getElementsByTagName("sex")[0].firstChild.nodeValue;
+        var age = user.getElementsByTagName("age")[0].firstChild.nodeValue;
+        var lastLoadTime = user.getElementsByTagName("lastLoadTime")[0].firstChild.nodeValue;
+        txt += '<div class="row">\
+                <div style="height: 100px;overflow:hidden;">\
+                    <div class="action_content float_left">\
+                        <div class="act_c_d float_left">\
+                            <div class="blank10"></div>\
+                            <div style="min-height: 30px;">\
+                                <a class="font16" style="font-weight:bold;" href="#" title=' + name + ' onclick="makeFriends(title);">' + name + '\
+                                </a>\
+                            </div>\
+                            <div>\
+                                性别：<span style="font-weight: 900">' + sex + '</span>\
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+                                年龄：<span style="font-weight: 900">' + age + '</span>\
+                            </div>\
+                            <div class="blank10"></div>\
+                            <div class="font16">\
+                                上次登录：<span style="font-weight: 900">' + lastLoadTime + '</span>\
+                            </div>\
+                        </div>\
+                        <div class="action_num_state">\
+                            <div style="text-align:center;margin-top:40px;">\
+                               <a href="../view/userInfo.php?userName=' + name + '" class="font16" style="font-weight: bold">查看详情</a>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>\
+            </div>';
+    }
+
+    return txt;
+}
+
 
 function write_chat_list(chats) {
     var txt = "";

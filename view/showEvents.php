@@ -112,19 +112,6 @@
 <!-- 滚动显示 -->
 <script type="text/javascript" src="../js/TweenMax.min.js"></script>
 <script type="text/javascript">
-    $(window).load(function () {
-        runList();
-    });
-    function runList() {
-        var _dom = jQ(".noticTipTxt");
-        var content_html = _dom.find("li").eq(0).html();
-        var _top = _dom.find("li").eq(1).height();
-        var _html = "<li>" + content_html + "</li>";
-        TweenMax.to(_dom, 3, {css: {top: (0 - _top - 10)}, ease: Cubic.easeOut, onComplete: runList});
-        _dom.append(_html);
-        _dom.find("li").eq(0).remove();
-        _dom.css("top", "0px");
-    }
 
     function joinEvent(title) {
         if (window.confirm('你确定要参加该活动吗？')) {

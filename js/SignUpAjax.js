@@ -102,7 +102,7 @@ function callback_signup(){
             if(responseMessage=='success'){
                 //注册成功，写入cookie
                 add_cookie('userName',userName,30*24);
-			    window.location.href="http://www.baidu.com";
+                window.location.href = "../view/index.html";
 		    }
 			else{
 				// 将数据显示在页面上

@@ -9,6 +9,7 @@
 require_once('../utils/SqliteHelper.php');
 require_once('../model/User.php');
 require_once("../utils/PasswordEncrypt.php");
+require_once("../utils/FinalVar.php");
 
 //header('Content-Type: text/xml');
 
@@ -259,6 +260,46 @@ class UserService {
             return false;
         }
     }
+
+    public function getReverseCustomer($userName) {
+        $sql = "select userName,sex,height,weight,lastLoadTime from " . $this->db_user_reverse_info . "," . $this->db_user_base_info . " where followedName='" . $userName . "' and userName=followerName;";
+        $result = $this->DB->getList($sql);
+        return $result;
+    }
+
+    public function getPageNum() {
+        $sql = "select count(*) from " . $this->db_user_base_info . " where type='user'";
+        $result = $this->DB->getList($sql);
+        $num = $result[0][0];
+
+        //注意，php中/得到的是完整的结果
+
+        //附：php对数的保留位数操作操作
+        //float ceil ( float value ) 返回不小于 value 的下一个整数，value 如果有小数部分则进一位。ceil() 返回的类型仍然是 float
+        //float floor ( float value ) 返回不大于 value 的下一个整数，将 value 的小数部分舍去取整。floor() 返回的类型仍然是 float
+        //float round ( float val [, int precision] ) 返回将 val 根据指定精度 precision（十进制小数点后数字的数目）进行四舍五入的结果
+
+        $result = ceil($num / numPerPage);
+        return $result;
+    }
+
+    public function getUsersByPage($pageNum) {
+        $start = ($pageNum - 1) * numPerPage;
+        $sql = "select * from " . $this->db_user_base_info . " where type='user' order by lastLoadTime desc limit " . $start . "," . numPerPage;
+        $result = $this->DB->getList($sql);
+
+        $users = array();
+        foreach ($result as $rt) {
+            $name = $rt["userName"];
+            $sex = $rt["sex"];
+            $age = $rt["age"];
+            $lastLoadTime = $rt["lastLoadTime"];
+            $user = new User($name, $age, $sex, -1, "", "", "", "", "");
+            $user->setLastLoadTime($lastLoadTime);
+            array_push($users, $user);
+        }
+        return $users;
+    }
 }
 
 $user = new UserService();
@@ -299,3 +340,7 @@ $user = new UserService();
 //$user->createReverseTable();
 
 //echo $user->reverse("winsky","bufeng");
+
+//print_r($user->getUsersByPage(1));
+
+//echo $user->getPageNum();

@@ -141,6 +141,12 @@ function write_header_login(userName, type) {
     			<li><a href="user.php?userName=' + userName + '">个人信息</a></li>\
     			<li><a href="../view/index.html" onclick="exit()">退出登录</a></li>\
     		</ul>\
+    		<!-- Dropdown Structure -->\
+    		<ul id="dropdown10" class="dropdown-content">\
+    			<li><a href="#">朋友圈</a></li>\
+    			<li><a href="../view/myFriends.php?userName=' + userName + '">我关注的</a></li>\
+    			<li><a href="../view/showAllUsers.php?userName=' + userName + '">全部用户</a></li>\
+    		</ul>\
 		    <div class="navbar-fixed"> \
         		<nav> \
             		<div class="nav-wrapper teal lighten-3"> \
@@ -163,7 +169,8 @@ function write_header_login(userName, type) {
 	                                    </a> \
 	                                </li>  \
 	                                <li> \
-	                                    <a href="#">朋友圈</a> \
+	                                    <a class="dropdown-button" title=朋友圈 href="#" data-activates="dropdown10">朋友圈<i class="material-icons right">arrow_drop_down</i> \
+	                                    </a> \
 	                                </li> \
 	                                <li> \
 	                                    <a href="#">兴趣组</a> \
@@ -218,10 +225,10 @@ function write_header_login(userName, type) {
 	                                    </a> \
 	                                </li>  \
                                 	<li> \
-                                    	<a href="#">查看预约客户</a> \
+                                    	<a href="../view/mySuggestion.php?userName=' + userName + '">已发布建议</a> \
                                 	</li> \
                                 	<li> \
-                                    	<a href="../view/mySuggestion.php?userName=' + userName + '">已发布建议</a> \
+                                    	<a href="../view/showReverseCustomer.php?userName=' + userName + '">查看预约客户</a> \
                                 	</li> \
 	                                <!-- Dropdown Trigger --> \
 	                                <li> \
