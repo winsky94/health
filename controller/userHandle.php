@@ -98,4 +98,10 @@ if ($action == "getUserInfo") {
     }
 
     echo $message;
+} elseif ($action == "reverse") {
+    $followedName = $_POST["followedName"];
+    $followerName = $_POST["followerName"];
+
+    $result = $userService->reverse($followerName, $followedName);
+    echo $result;
 }

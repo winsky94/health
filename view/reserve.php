@@ -37,8 +37,8 @@
                 $userService = new UserService();
                 $user = $userService->getUserByName($userName);
                 $lastLoadTime = $user->getLastLoadTime();
-                $height = $user->getHeight()."cm";
-                $weight = $user->getWeight()."kg";
+                $height = $user->getHeight() . "cm";
+                $weight = $user->getWeight() . "kg";
                 $age = $user->getAge();
                 $sex = $user->getSex();
                 $telephone = $user->getTelephone();
@@ -130,6 +130,7 @@
                     <th data-field="type">类型</th>
                     <th data-field="sex">性别</th>
                     <th data-field="lastLoadTime">上次登录时间</th>
+                    <th data-field="action">操作</th>
                 </tr>
                 </thead>
 
@@ -148,13 +149,19 @@
                     if ($lastLoadTime == "") {
                         $lastLoadTime = "—";
                     }
+                    ?>
+                    <tr>
+                        <td onclick='showDetail(this)'><?php echo $userName; ?></td>
+                        <td onclick='showDetail(this)'><?php echo $userType; ?></td>
+                        <td onclick='showDetail(this)'><?php echo $sex; ?></td>
+                        <td onclick='showDetail(this)'><?php echo $lastLoadTime; ?></td>
+                        <td>
+                            <button class="btn" onclick="reverse(this);">预约</button>
+                        </td>
+                    </tr>
 
-                    echo "<tr onclick='showDetail(this)'>";
-                    echo "<td>$userName</td>";
-                    echo "<td>$userType</td>";
-                    echo "<td>$sex</td>";
-                    echo "<td>$lastLoadTime</td>";
-                    echo "</tr>";
+                    <?php
+
                 }
 
                 ?>
@@ -172,23 +179,24 @@
 
 
 <!--  javaScripts -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/cookie.js"></script>
 <script src="../js/writeHTML.js"></script>
 <script src="../js/xmlhttp.js"></script>
-<script type="text/javascript" src="../js/LoginAjax.js"></script>
+<script src="../js/LoginAjax.js"></script>
 <script src="../js/jQuery.js"></script>
 <script src="../js/ChangeUserInfoAjax.js"></script>
 <script src="../js/ChangePWAjax.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/LoginAjax.js"></script>
 <script src="../js/userAjax.js"></script>
+<script src="../js/reverse.js"></script>
 
 <script type="text/javascript">
     // 表格单击一行跳转
-    function showDetail(tr) {
-        var cells = tr.cells;
+    function showDetail(td) {
+        var cells = td.parentNode.cells;
         var userName = cells[0].innerHTML;
         window.location.href = "../view/userInfo.php?userName=" + userName;
     }
@@ -209,6 +217,7 @@
     $(document).ready(function () {
         $('.userType').pushpin({top: 70});
     });
+
 </script>
 
 </body>

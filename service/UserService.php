@@ -17,11 +17,19 @@ class UserService {
     var $db_user_body_info = "userBody";
     var $db_user_sleep_info = "userSleep";
     var $db_user_sport_info = "userSport";
+    var $db_user_reverse_info = "reverse";
     var $DB = null;
 
     public function __construct() {
         //创建实例
         $this->DB = new SqliteHelper('../data.db'); //这个数据库" title="数据库" >数据库文件名字任意
+    }
+
+    public function createReverseTable() {
+        $sql = "drop table if exists " . $this->db_user_reverse_info;
+        $this->DB->query($sql);
+        $sql = "create table " . $this->db_user_reverse_info . "(id integer primary key,followerName varchar(20),followedName varchar(20));";
+        $this->DB->query($sql);
     }
 
     public function createTable() {
@@ -229,6 +237,28 @@ class UserService {
         $password = $p->process($password, $type);
         return $password;
     }
+
+    /**
+     * 建立预约关系
+     * @param $followerName 发起预约的人
+     * @param $followedName 被预备的对象
+     * @return array|bool
+     */
+    public function reverse($followerName, $followedName) {
+        $sql = "select * from " . $this->db_user_reverse_info . " where followerName='" . $followerName . "' and followedName='" . $followedName . "' limit 1;";
+        $result = $this->DB->getList($sql);
+        if (empty($result)) {
+            $sql = "insert into " . $this->db_user_reverse_info . " values(:id,:followerName,:followedName);";
+            $stmt = $this->DB->conn->prepare($sql);
+            $stmt->bindValue(":id", null);
+            $stmt->bindValue(":followerName", $followerName);
+            $stmt->bindValue(":followedName", "$followedName");
+            $result = $stmt->execute();
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }
 
 $user = new UserService();
@@ -265,3 +295,7 @@ $user = new UserService();
 
 //$u=$user->getUserByName("winsky");
 //echo $u->getLastLoadTime();
+
+//$user->createReverseTable();
+
+//echo $user->reverse("winsky","bufeng");
