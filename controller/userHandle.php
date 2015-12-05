@@ -104,4 +104,8 @@ if ($action == "getUserInfo") {
 
     $result = $userService->reverse($followerName, $followedName);
     echo $result;
+} elseif ($action = "delete") {
+    $userName = $_POST["userName"];
+    $result = $userService->delete($userName);
+    echo $result;
 }

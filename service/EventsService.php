@@ -169,6 +169,58 @@ class EventsService {
         $sql = "create table event_user(id integer primary key,userName varchar(40),eventTitle varchar(40));";
         $this->DB->query($sql);
     }
+
+    public function deleteEvent($title) {
+        $sql = "delete from " . $this->db_name . " where name='" . $title . "';";
+        $stmt = $this->DB->conn->prepare($sql);
+        $result = $stmt->execute();
+        if ($result) {
+            $sql = "delete from event_user where eventTitle='" . $title . "';";
+            $stmt = $this->DB->conn->prepare($sql);
+            $stmt->execute();
+        }
+
+        return $result;
+    }
+
+    public function updateEvent($event) {
+        $sql = "update " . $this->db_name . " set introduction=:introduction,startDate=:startDate,endDate=:endDate,detail=:detail where name=:name;";
+
+        $name = $event->getName();
+        $introduction = $event->getIntroduction();
+        $startDate = $event->getStartDate();
+        $endDate = $event->getEndDate();
+        $detail = $event->getDetail();
+
+        $stmt = $this->DB->conn->prepare($sql);
+        $stmt->bindValue(":name", $name);
+        $stmt->bindValue(":introduction", $introduction);
+        $stmt->bindValue(":startDate", $startDate);
+        $stmt->bindValue(":endDate", $endDate);
+        $stmt->bindValue(":detail", $detail);
+
+        $result = $stmt->execute();
+        return $result;
+    }
+
+    public function getEventsByTitle($title) {
+        $sql = "select * from " . $this->db_name . " where name= '" . $title . "' limit 1;";
+        $result = $this->DB->getList($sql);
+
+        $events = array();
+        foreach ($result as $rt) {
+            $name = $rt["name"];
+            $introduction = $rt["introduction"];
+            $startDate = $rt["startDate"];
+            $endDate = $rt["endDate"];
+            $detail = $rt["detail"];
+            $peopleNum = $rt["peopleNum"];
+            $event = new Event($name, $introduction, $startDate, $endDate, $detail, $peopleNum);
+            $event->setState($this->judgeStateByTime($startDate, $endDate));//每次获得活动时动态设置活动状态
+            array_push($events, $event);
+        }
+        return $events;
+    }
 }
 
 $eventsService = new EventsService();

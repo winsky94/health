@@ -174,6 +174,7 @@ class HealthService {
     /**
      * 用户上传自己的运动数据
      * @param $data
+     * @return bool
      */
     public function setUserSportData($data) {
         $sql = "insert into " . $this->db_name_sport . " values(:id,:userName,:time,:meters,:minutes,:speed,:calories)";
@@ -199,8 +200,10 @@ class HealthService {
                 $stmt->execute();
             }
             $conn->commit();
+            return true;
         } catch (PDOException $ex) {
             $conn->rollBack();
+            return false;
         }
 
 
@@ -368,6 +371,32 @@ class HealthService {
         return json_encode($data);
 
     }
+
+    public function updateSportData($userName, $date, $data) {
+        $sql = "update " . $this->db_name_sport . " set meters=:meters,minutes=:minutes,speed=:speed,calories=:calories where userName=:userName and upLoadTime='" . $date . "';";
+        $meters = $data[2];
+        $minutes = $data[3];
+        $speed = $data[4];
+        $calories = $data[5];
+
+        $stmt = $this->DB->conn->prepare($sql);
+        $stmt->bindValue(":meters", $meters);
+        $stmt->bindValue(":minutes", $minutes);
+        $stmt->bindValue(":speed", $speed);
+        $stmt->bindValue(":calories", $calories);
+        $stmt->bindValue(":userName", $userName);
+
+        $result = $stmt->execute();
+        return $result;
+    }
+
+    public function deleteSportData($userName, $date) {
+        $sql = "delete from " . $this->db_name_sport . " where userName=:userName and upLoadTime='" . $date . "'";
+        $stmt = $this->DB->conn->prepare($sql);
+        $stmt->bindValue(":userName", $userName);
+        $result = $stmt->execute();
+        return $result;
+    }
 }
 
 $service = new HealthService();
@@ -388,3 +417,9 @@ $service = new HealthService();
 //$service->getSleepDataByDay("winsky","2015-12-02");
 
 //print_r($service->getSleepData("winsky",7,"2015-12-04"));
+
+//$data=array("winsky","2002-03-28 14:47:0","1.34","20.24","13.48","200");
+//echo $service->updateSportData("winsky","2002-03-28 14:47:0",$data);
+
+//echo $service->setWeekGoal("winsky","时长(小时)",7);
+//echo $service->deleteSportData("winsky","2002-03-27 15:15:41");

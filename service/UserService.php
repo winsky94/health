@@ -134,9 +134,12 @@ class UserService {
         return $result;
     }
 
-    public function delete($id) {
-        $sql = "delete from " . $this->db_user_base_info . " where id=" . $id;
-        $this->DB->query($sql);
+    public function delete($userName) {
+        $sql = "delete from " . $this->db_user_base_info . " where userName=:userName;";
+        $stmt = $this->DB->conn->prepare($sql);
+        $stmt->bindValue(":userName", $userName);
+        $result = $stmt->execute();
+        return $result;
     }
 
     public function show() {

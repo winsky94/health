@@ -273,6 +273,9 @@ function write_event_list(events) {
                             <div style="min-height: 30px;">\
                                 <a class="font16" style="font-weight:bold;" href="#" title=' + name + ' onclick="joinEvent(title);">' + name + '\
                                 </a>\
+                                <a  href="#" title=' + name + ' onclick="deleteEvent(title)" class="font16" style="float: right;">删除</a>\
+                                <span></span>\
+                                <a  href="#" title=' + name + ' onclick="updateEvent(title)" class="font16" style="float: right;">修改&nbsp;&nbsp;&nbsp;</a>\
                             </div>\
                             <div>\
                                 开始日期：<span style="font-weight: 900">' + startDate + '</span>\
@@ -409,22 +412,5 @@ function write_friends_list(users) {
             </div>';
     }
 
-    return txt;
-}
-
-
-function write_chat_list(chats) {
-    var txt = "";
-    for (i = 0; i < chats.length; i++) {
-        var username = chats[i].getElementsByTagName("name")[0].firstChild.nodeValue;
-        var date = chats[i].getElementsByTagName("date")[0].firstChild.nodeValue;
-        var content = chats[i].getElementsByTagName("content")[0].firstChild.nodeValue;
-        txt = txt + "<article class='comment'>\
-        <a class='comment-img' href='#non'>\
-        <img src=\"images/portrait.jpg\" alt=\"\" width=\"50\" height=\"50\"></a>\
-        <div class=\"comment-body\"><div class=\"text\"><p>";
-        txt = txt + content + "</p></div><p class=\"attribution\">by&nbsp;<a href=\"#non\">";
-        txt = txt + userName + "</a>&nbsp;at&nbsp;" + date + "</p></div></article>";
-    }
     return txt;
 }

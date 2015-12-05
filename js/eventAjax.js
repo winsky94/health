@@ -103,6 +103,48 @@ function onEventsResponse(xmlHttp) {
     }
 }
 
+function deleteEvent(title) {
+    if (!confirm("确认要删除？")) {
+        return;
+    }
+
+    var xmlHttp = getXmlHttp();
+    if (xmlHttp != null) {
+        xmlHttp.open('POST', '../controller/EventHandle.php');
+        xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xmlHttp.onreadystatechange = function () {
+            onDeleteResponse(xmlHttp)
+        };
+        xmlHttp.send("action=delete&title=" + title);
+    } else {
+        alert('Your browser does not support XMLHttpRequest.');
+    }
+}
+
+function onDeleteResponse(xmlHttp) {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        //file_elements是一个数组
+        var text = xmlHttp.responseText;
+        try {
+            var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+            xmlDoc.async = "false";
+            xmlDoc.loadXML(text);
+        } catch (e) {
+            try {
+                var parser = new DOMParser();
+                xmlDoc = parser.parseFromString(text, "text/xml");
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+        if (text) {
+            get_events(1);
+        } else {
+            alert("删除失败");
+        }
+    }
+}
+
 function search_function() {
     var keyword = $("input[name='keyword']").val();
     var type;
@@ -151,4 +193,9 @@ function onSearchResponse(xmlhttp) {
         var txt = write_document_list(file_elements);
         $("#filelist").html(txt);
     }
+}
+
+function updateEvent(title) {
+    var userName = document.getElementById("login_user").innerHTML;
+    window.location.href = "../view/updateEvents.php?title=" + title + "&userName=" + userName;
 }
