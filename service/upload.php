@@ -103,19 +103,6 @@ class upload {
                     fwrite($fp, "\n");
                     flock($fp, LOCK_UN);
                     fclose($fp);
-
-                    //======================================
-//                    $path = $fileInfo['filePath'];
-//                    $arr = explode(".", $path);
-//                    $type = $arr[3];
-//                    if ($type == "xml") {
-//                        $this->xmlToSql($file_name);
-//                    } else {
-//                        $this->excelToSql($file_name);
-//                    }
-//                    //删除上传的文件
-//                    @unlink($file_name);
-                    //======================================
                 }
             }
         }
@@ -156,13 +143,6 @@ class upload {
         return false;
     }
 
-
-
-
-    public function test() {
-        $this->sportXmlToSql("../dataDemo/data_sport.xml");
-        $this->sleepXmlToSql("../dataDemo/data_sleep.xml");
-    }
 }//endclass
 
 //$upload=new upload();

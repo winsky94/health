@@ -44,6 +44,7 @@
                 $sex = $user->getSex();
                 $telephone = $user->getTelephone();
                 $email = $user->getEmail();
+                $type = $user->getType();
                 ?>
                 <h5 id="userName"><?php echo $userName; ?></h5>
             </li>
@@ -75,7 +76,17 @@
                     </div>
 
                     <div class="input-field col s6 ">
-                        <input id="type" type="text" name="type" class="validate" value="医生" disabled>
+                        <?php
+                        if ($type == "doctor") {
+                            ?>
+                            <input id="type" type="text" name="type" class="validate" value="医生" disabled>
+                            <?php
+                        } else {
+                            ?>
+                            <input id="type" type="text" name="type" class="validate" value="教练" disabled>
+                            <?php
+                        }
+                        ?>
                         <label for="type">角  色</label>
                     </div>
                 </div>

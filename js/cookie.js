@@ -70,9 +70,9 @@ function write_header_login(userName, type) {
 			</script> \
 			<!-- Dropdown Structure -->\
     		<ul id="dropdown1" class="dropdown-content">\
-      			<li><a href="">活动管理</a></li>\
+      			<li><a href="#">活动管理</a></li>\
       			<li><a href="../view/releaseEvents.php?userName=' + userName + '">发布活动</a></li>\
-      			<li><a href="../view/showEvents.php">查看活动</a></li>\
+      			<li><a href="../view/showEvents.php?userName=' + userName + '">查看活动</a></li>\
     		</ul>\
     		<!-- Dropdown Structure -->\
     		<ul id="dropdown2" class="dropdown-content">\
@@ -82,7 +82,7 @@ function write_header_login(userName, type) {
     		</ul>\
         <!-- Dropdown Structure -->\
         <ul id="dropdown8" class="dropdown-content">\
-          <li><a href="">用户管理</a></li>\
+          <li><a href="#">用户管理</a></li>\
           <li><a href="../view/userManage.php?type=user">个人用户</a></li>\
           <li><a href="../view/userManage.php?type=doctor-coach">医生教练</a></li>\
         </ul>\
@@ -91,7 +91,7 @@ function write_header_login(userName, type) {
            		<div class="nav-wrapper teal lighten-3"> \
                		<div class="container"> \
                    		<div class="row"> \
-                           	<a href="" class="brand-logo">uniFIT</a> \
+                           	<a href="index.html" class="brand-logo">uniFIT</a> \
                            	<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> \
                            	<ul class="right hide-on-med-and-down"> \
 	                           	<li> \
@@ -99,18 +99,18 @@ function write_header_login(userName, type) {
 	                               </li> \
 	                               <!-- Dropdown Trigger --> \
 	                           	<li> \
-	                           	    <a class="dropdown-button" id="action" title=活动管理 href="" data-activates="dropdown1">活动管理<i class="material-icons right">arrow_drop_down</i> \
+	                           	    <a class="dropdown-button" id="action" title=活动管理 href=#"" data-activates="dropdown1">活动管理<i class="material-icons right">arrow_drop_down</i> \
 	                           	    </a> \
 	                           	</li> \
                                	<li> \
-                                  <a class="dropdown-button" id="users" title=用户管理 href="" data-activates="dropdown8">用户管理<i class="material-icons right">arrow_drop_down</i> \
+                                  <a class="dropdown-button" id="users" title=用户管理 href="#" data-activates="dropdown8">用户管理<i class="material-icons right">arrow_drop_down</i> \
                                   </a> \
                               </li> \
 	                               <li> \
-	                                   <a href="">查看举报</a> \
+	                                   <a href="#">查看举报</a> \
 	                               </li> \
 	                               <li> \
-                                    <a class="dropdown-button" id="user-name" title="' + userName + '" href="" data-activates="dropdown2">' + userName + '<i class="material-icons right">arrow_drop_down</i> \
+                                    <a class="dropdown-button" id="user-name" title="' + userName + '" href="#" data-activates="dropdown2">' + userName + '<i class="material-icons right">arrow_drop_down</i> \
                                     </a> \
                                 </li> \
                            	</ul> \
@@ -131,7 +131,7 @@ function write_header_login(userName, type) {
 			</script> \
     		<!-- Dropdown Structure -->\
     		<ul id="dropdown4" class="dropdown-content">\
-    			<li><a href="">建议管理</a></li>\
+    			<li><a href="#">建议管理</a></li>\
       			<li><a href="../view/showSuggestions.php?userName=' + userName + '">查看建议</a></li>\
       			<li><a href="../view/reserve.php?userName=' + userName + '&type=doctor-coach">预约</a></li>\
     		</ul>\
@@ -146,7 +146,7 @@ function write_header_login(userName, type) {
             		<div class="nav-wrapper teal lighten-3"> \
                 		<div class="container"> \
                     		<div class="row"> \
-                            	<a href="" class="brand-logo">uniFIT</a> \
+                            	<a href="index.html" class="brand-logo">uniFIT</a> \
                             	<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> \
                             	<ul class="right hide-on-med-and-down"> \
                                 	<li> \
@@ -192,7 +192,7 @@ function write_header_login(userName, type) {
 			<!-- Dropdown Structure -->\
 			<!-- Dropdown Structure -->\
 			<ul id="dropdown6" class="dropdown-content">\
-    			<li><a href="">发布建议</a></li>\
+    			<li><a href="#">发布建议</a></li>\
     			<li><a href="../view/releaseSuggestion.php?userName=' + userName + '">在线填写</a></li>\
     			<li><a href="../view/uploadSuggestion.php?userName=' + userName + '">文件导入</a></li>\
     		</ul>\
@@ -206,7 +206,7 @@ function write_header_login(userName, type) {
             		<div class="nav-wrapper teal lighten-3"> \
                 		<div class="container"> \
                     		<div class="row"> \
-                            	<a href="#" class="brand-logo">uniFIT</a> \
+                            	<a href="index.html" class="brand-logo">uniFIT</a> \
                             	<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> \
                             	<ul class="right hide-on-med-and-down"> \
                                 	<li> \
@@ -214,7 +214,7 @@ function write_header_login(userName, type) {
                                 	</li> \
                                 	<!-- Dropdown Trigger --> \
                                 	<li> \
-	                                    <a class="dropdown-button" title=发布建议 href="" data-activates="dropdown6">发布建议<i class="material-icons right">arrow_drop_down</i> \
+	                                    <a class="dropdown-button" title=发布建议 href="#" data-activates="dropdown6">发布建议<i class="material-icons right">arrow_drop_down</i> \
 	                                    </a> \
 	                                </li>  \
                                 	<li> \
@@ -225,7 +225,7 @@ function write_header_login(userName, type) {
                                 	</li> \
 	                                <!-- Dropdown Trigger --> \
 	                                <li> \
-	                                    <a class="dropdown-button" id="user-name" title="' + userName + '" href="" data-activates="dropdown7">' + userName + '<i class="material-icons right">arrow_drop_down</i> \
+	                                    <a class="dropdown-button" id="user-name" title="' + userName + '" href="#" data-activates="dropdown7">' + userName + '<i class="material-icons right">arrow_drop_down</i> \
 	                                    </a> \
 	                                </li> \
 	                            </ul> \
@@ -255,7 +255,7 @@ function write_header_not_login() {
                 <div class="container"> \
                     <div class="row"> \
                         <div class="col l6 s12"> \
-                            <a href="" class="brand-logo">uniFIT</a> \
+                            <a href="index.html" class="brand-logo">uniFIT</a> \
                             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> \
                         </div> \
                         <ul class="right hide-on-med-and-down"> \

@@ -38,7 +38,7 @@
                     <?php
                     if (sizeof($result) == 0) {
                         ?>
-                        <p class="collection-item" style="font-size: 18px;font-weight: 900;">尚未参加过活动：</p>
+                        <p class="collection-item" style="font-size: 18px;font-weight: 900;">尚未参加过活动...</p>
                         <?php
                     } else {
                         ?>

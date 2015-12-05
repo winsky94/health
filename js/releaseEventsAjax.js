@@ -84,7 +84,8 @@ function callback_releaseEvent() {
                 var responseMessage = textNode.nodeValue;
 
                 if (responseMessage == 'success') {
-                    window.location.href = "../view/showEvents.php";
+                    var userName = document.getElementById("userName").innerText;
+                    window.location.href = "../view/showEvents.php?userName=" + userName;
                 }
                 else {
                     // 将数据显示在页面上
