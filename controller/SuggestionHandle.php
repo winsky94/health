@@ -8,15 +8,29 @@
 require_once("../service/SuggestionService.php");
 require_once("../model/Suggestion.php");
 
+
 $suggestionService = new SuggestionService();
 
 $action = $_POST["action"];
 
+
 if ($action == "getSuggestionsPageNum") {
-    echo $suggestionService->getPageNum();
+    if (isset($_POST["userName"])) {
+        $userName = $_POST["userName"];
+        echo $suggestionService->getPageNum($userName);
+    } else {
+        echo $suggestionService->getPageNum();
+    }
+
 } elseif ($action == "getSuggestions") {
     $pageNum = $_POST["pageNum"];
-    $suggestions = $suggestionService->getSuggestionsByPage($pageNum);
+    if (isset($_POST["userName"])) {
+        $userName = $_POST["userName"];
+        $suggestions = $suggestionService->getSuggestionsByPage($pageNum, $userName);
+    } else {
+        $suggestions = $suggestionService->getSuggestionsByPage($pageNum);
+    }
+
     header('Content-Type: text/xml');
 
     // 写xml信息

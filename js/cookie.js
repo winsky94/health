@@ -220,6 +220,9 @@ function write_header_login(userName, type) {
                                 	<li> \
                                     	<a href="#">查看预约客户</a> \
                                 	</li> \
+                                	<li> \
+                                    	<a href="../view/mySuggestion.php?userName=' + userName + '">已发布建议</a> \
+                                	</li> \
 	                                <!-- Dropdown Trigger --> \
 	                                <li> \
 	                                    <a class="dropdown-button" id="user-name" title="' + userName + '" href="" data-activates="dropdown7">' + userName + '<i class="material-icons right">arrow_drop_down</i> \

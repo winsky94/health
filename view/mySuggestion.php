@@ -125,7 +125,7 @@
 <script src="../js/ChangePWAjax.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/LoginAjax.js"></script>
-<script src="../js/showSuggestionAjax.js"></script>
+<script src="../js/showMySuggestionAjax.js"></script>
 
 <!--显示页码-->
 <script>

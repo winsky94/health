@@ -3,19 +3,19 @@
  */
 
 function get_user_info() {
-    var userName = $("#user-name").attr("title");
-    var xmlhttp = getXmlHttp();
-    if (xmlhttp != null) {
-        xmlhttp.onreadystatechange = function () {
-            onUserInfoResponse(xmlhttp)
+    var userName = document.getElementById("username").innerText;
+    var xmlHttp = getXmlHttp();
+    if (xmlHttp != null) {
+        xmlHttp.onreadystatechange = function () {
+            onUserInfoResponse(xmlHttp)
         };
 
         // post方式请求的代码并访问
-        xmlhttp.open("POST", "../controller/userHandle.php", true);
+        xmlHttp.open("POST", "../controller/userHandle.php", true);
         // post方式需要自己设置http的请求头
-        xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         // post方式发送数据
-        xmlhttp.send("action=getUserInfo" + "&userName=" + userName);
+        xmlHttp.send("action=getUserInfo" + "&userName=" + userName);
         // 4.发送数据，开始和服务器端进行交互
         // 同步方式下，send这句话全在服务器端数据回来后才执行完
         // 异步方式下，send这句话会立即完成执行

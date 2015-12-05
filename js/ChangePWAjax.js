@@ -100,7 +100,7 @@ function callback_changepw() {
                 var responseMessage = textNode.nodeValue;
 
                 if (responseMessage == 'success') {
-                    window.location.href = "../view/user.php" + userName;
+                    window.location.href = "../view/user.php?userName=" + userName;
                 }
                 else {
                     // 将数据显示在页面上

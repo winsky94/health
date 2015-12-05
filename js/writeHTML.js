@@ -312,6 +312,7 @@ function write_suggestion_list(suggestions) {
         var email = suggestion.getElementsByTagName("email")[0].firstChild.nodeValue;
         var telephone = suggestion.getElementsByTagName("telephone")[0].firstChild.nodeValue;
         var time = suggestion.getElementsByTagName("time")[0].firstChild.nodeValue;
+
         txt += '<li class="collection-item avatar">\
             <img src="../images/back1.jpg" class="circle">\
             <span class="title" style="font-weight: bold;">' + title + '</span>\

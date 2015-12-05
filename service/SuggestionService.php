@@ -65,7 +65,6 @@ class SuggestionService {
         return true;
     }
 
-
     /**
      * 获得全部的建议信息，按创建日期降序排列
      * @return array 建议对象数组
@@ -93,7 +92,18 @@ class SuggestionService {
 
     public function getSuggestionsByPage($pageNum) {
         $start = ($pageNum - 1) * numPerPage;
-        $sql = "select * from " . $this->db_name . " order by time desc limit " . $start . "," . numPerPage;
+        $sql = "select * from " . $this->db_name;
+
+
+        $paramNum = func_num_args();    #获取参数个数
+        $params = func_get_args();    #获取参数值
+
+        if ($paramNum == 2) {
+            $sql = $sql . " where author='" . $params[1] . "'";
+        }
+
+        $sql = $sql . " order by time desc limit " . $start . "," . numPerPage;
+
         $result = $this->DB->getList($sql);
 
         $suggestions = array();
@@ -114,16 +124,15 @@ class SuggestionService {
 
     public function getPageNum() {
         $sql = "select count(*) from " . $this->db_name;
+
+        $paramNum = func_num_args();    #获取参数个数
+        $params = func_get_args();    #获取参数值
+
+        if ($paramNum != 0) {
+            $sql = $sql . " where author='" . $params[0] . "'";
+        }
         $result = $this->DB->getList($sql);
         $num = $result[0][0];
-
-        //注意，php中/得到的是完整的结果
-
-        //附：php对数的保留位数操作操作
-        //float ceil ( float value ) 返回不小于 value 的下一个整数，value 如果有小数部分则进一位。ceil() 返回的类型仍然是 float
-        //float floor ( float value ) 返回不大于 value 的下一个整数，将 value 的小数部分舍去取整。floor() 返回的类型仍然是 float
-        //float round ( float val [, int precision] ) 返回将 val 根据指定精度 precision（十进制小数点后数字的数目）进行四舍五入的结果
-
         $result = ceil($num / numPerPage);
         return $result;
     }
@@ -132,9 +141,11 @@ class SuggestionService {
         $sql = "select * from " . $this->db_name;
         if ($keyword != "") {
             if ($type == "content") {
-                $sql = $sql . " where content='" . $keyword . "'";
+                $sql = $sql . " where content like '%" . $keyword . "%'";
             } elseif ($type == "title") {
-                $sql = $sql . " where title='" . $keyword . "'";
+                $sql = $sql . " where title like '%" . $keyword . "%'";
+            } else {
+                $sql = $sql . " where content like '%" . $keyword . "%' or title like '%" . $keyword . "%'";
             }
         }
 
@@ -157,13 +168,15 @@ class SuggestionService {
 
 }
 
-//$service = new SuggestionService();
-
+$service = new SuggestionService();
+//
 //$service->createTable();
-
-//for ($i = 0; $i < 27; $i++) {
+//
+//for ($i = 0; $i < 2; $i++) {
 //    $suggestion=new Suggestion("多跑步".$i."~","跑步有益于身心健康","捕风","医生","1195413185@qq.com","17766088236");
 //    $service->insert($suggestion);
 //}
 
-//echo date('Y-m-d H:i:s');
+//echo $service->getPageNum("捕风");
+
+//print_r($service->getSuggestionsByPage(1,"捕风"));

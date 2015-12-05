@@ -6,7 +6,7 @@
  * Date: 2015/11/30
  * Description：
  */
-require_once "../PHPExcel_1.8.0/Classes/PHPExcel.php";//修改为自己的目录
+require_once "../utils/PHPExcel_1.8.0/Classes/PHPExcel.php";//修改为自己的目录
 
 class ExcelUtil {
 
@@ -58,5 +58,6 @@ class ExcelUtil {
     }
 }
 
-//$result = ExcelUtil::getContents("../uploads/files/20151130/test.xls");
-//print_r($result);//格式化时间
+//$file="../uploads/files/20151205/suggestion.xls ";
+//$result = ExcelUtil::getContents($file);
+//print_r($result);

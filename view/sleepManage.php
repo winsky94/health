@@ -73,7 +73,7 @@
             text-align: center
         }
     </style>
-
+    <script src="../js/xmlhttp.js"></script>
     <script src="../js/sleepManageAjax.js"></script>
     <script src="../js/jquery-2.1.1.min.js"></script>
 
@@ -121,7 +121,7 @@ $userName = $_GET["userName"];
                 <div>
                     <!--                    <script src="../js/dateButton.js"></script>-->
                     <!--                    <input id="date" class="btn" type="button" onclick="HS_setDate(this)" value="今天" onFocus="updateSleep();">-->
-                    <script src="../My97DatePicker/WdatePicker.js"></script>
+                    <script src="../js/My97DatePicker/WdatePicker.js"></script>
                     <input class="btn" type="button" onClick="WdatePicker()" width='270px' onFocus="updateSleep()"
                            value="今天">
 
@@ -228,7 +228,6 @@ $userName = $_GET["userName"];
 <script src="../js/materialize.js"></script>
 <script src="../js/cookie.js"></script>
 <script src="../js/writeHTML.js"></script>
-<script src="../js/xmlhttp.js"></script>
 <script type="text/javascript" src="../js/LoginAjax.js"></script>
 
 <script src="../js/ChangeUserInfoAjax.js"></script>

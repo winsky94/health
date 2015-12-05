@@ -204,19 +204,22 @@ class UserService {
     public function getUserByName($userName) {
         $sql = "select * from " . $this->db_user_base_info . " where userName='" . $userName . "' limit 1";
         $result = $this->DB->getList($sql);
-        $rt = $result[0];
-        $password = $rt["password"];
-        $type = $rt["type"];
-        $age = $rt["age"];
-        $sex = $rt["sex"];
-        $height = $rt["height"];
-        $weight = $rt["weight"];
-        $telephone = $rt["telephone"];
-        $email = $rt["email"];
-        $lastLoadTime = $rt["lastLoadTime"];
+        if (sizeof($result) > 0) {
+            $rt = $result[0];
+            $password = $rt["password"];
+            $type = $rt["type"];
+            $age = $rt["age"];
+            $sex = $rt["sex"];
+            $height = $rt["height"];
+            $weight = $rt["weight"];
+            $telephone = $rt["telephone"];
+            $email = $rt["email"];
+            $lastLoadTime = $rt["lastLoadTime"];
 
-        $user = new User($userName, $age, $sex, $type, $password, $height, $weight, $email, $telephone);
-        $user->setLastLoadTime($lastLoadTime);
+            $user = new User($userName, $age, $sex, $type, $password, $height, $weight, $email, $telephone);
+            $user->setLastLoadTime($lastLoadTime);
+        }
+
         return $user;
     }
 
@@ -260,19 +263,5 @@ $user = new UserService();
 //$result=$user->getUserList("doctor-coach");
 //print_r($result);
 
-//$u=$user->getUserByName("admin");
+//$u=$user->getUserByName("winsky");
 //echo $u->getLastLoadTime();
-
-//$user->setUserBodyData("winsky",177,68,60,75,"128/78");
-
-//echo $user->getUserBodyData("winsky");
-
-//$user->setUserSportData("winsky",0.62,19.6,1.90,39.9);
-
-//echo $user->getSportData("winsky");
-
-//$user->setSleepData("winsky", "2015-11-06 12:30:00", "2015-11-07 08:45:00", 113, 384, 0, 0, 3.0);
-
-//echo $user->getSleepData("winsky");
-
-//$user->insertManySport();

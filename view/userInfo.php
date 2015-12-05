@@ -10,18 +10,6 @@
     <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-    <!--  javaScripts -->
-    <script src="../js/jquery-2.1.1.min.js"></script>
-    <script src="../js/materialize.js"></script>
-    <script src="../js/cookie.js"></script>
-    <script src="../js/writeHTML.js"></script>
-    <script src="../js/xmlhttp.js"></script>
-    <script type="text/javascript" src="../js/LoginAjax.js"></script>
-    <script src="../js/jQuery.js"></script>
-    <script src="../js/ChangeUserInfoAjax.js"></script>
-    <script src="../js/ChangePWAjax.js"></script>
-    <script src="../js/materialize.js"></script>
-    <script src="../js/LoginAjax.js"></script>
 
     <!--    <script type="text/javascript">-->
     <!--        $(document).ready(function () {-->
@@ -219,6 +207,17 @@ $lastLoadTime = $user->getLastLoadTime();
 
 
 <div id="footer"></div>
-
+<!--  javaScripts -->
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/materialize.js"></script>
+<script src="../js/cookie.js"></script>
+<script src="../js/writeHTML.js"></script>
+<script src="../js/xmlhttp.js"></script>
+<script type="text/javascript" src="../js/LoginAjax.js"></script>
+<script src="../js/jQuery.js"></script>
+<script src="../js/ChangeUserInfoAjax.js"></script>
+<script src="../js/ChangePWAjax.js"></script>
+<script src="../js/materialize.js"></script>
+<script src="../js/LoginAjax.js"></script>
 </body>
 </html>

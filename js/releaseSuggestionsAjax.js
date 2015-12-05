@@ -2,6 +2,7 @@
  * Created by Administrator on 2015/11/8.
  */
 var xmlHttp;
+var userName = document.getElementById("userName").innerText;
 function verify_releaseSuggestions() {
     //使用dom的方式获取文本框中的值
     //.value可以获取一个元素节点的value属性
@@ -85,7 +86,7 @@ function callback_releaseSuggestion() {
                 var responseMessage = textNode.nodeValue;
 
                 if (responseMessage == 'success') {
-                    window.location.href = "../view/showSuggestions.php";
+                    window.location.href = "../view/showSuggestions.php?userName=" + userName;
                 }
                 else {
                     // 将数据显示在页面上
