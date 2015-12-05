@@ -13,6 +13,8 @@ function verify_releaseSuggestions() {
     var email = document.getElementById("email").value;
     var telephone = document.getElementById("phoneNumber").value;
 
+    var goalUser = document.getElementById("goalUser").value;
+
     //创建XMLHttpRequest对象
     //需要针对IE和其他类型的浏览器建议这个对象的不同方式写不同的代码
 
@@ -57,7 +59,7 @@ function verify_releaseSuggestions() {
     //post方式需要自己设置http的请求头
     xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     //post方式发送数据
-    xmlHttp.send("action=release&title=" + title + "&content=" + content + "&author=" + author + "&type=" + type + "&email=" + email + "&telephone=" + telephone);
+    xmlHttp.send("action=release&title=" + title + "&content=" + content + "&author=" + author + "&type=" + type + "&email=" + email + "&telephone=" + telephone + "&goalUser=" + goalUser);
     //4.发送数据，开始和服务器端进行交互
     //同步方式下，send这句话全在服务器端数据回来后才执行完
     //异步方式下，send这句话会立即完成执行

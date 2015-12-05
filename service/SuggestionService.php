@@ -23,7 +23,7 @@ class SuggestionService {
     public function createTable() {
         $sql = "drop table if exists " . $this->db_name;
         $this->DB->query($sql);
-        $sql = "create table " . $this->db_name . "(id integer primary key,title varchar(40),content varchar(200),author varchar(20),type varchar(20),email varchar(20),telephone varchar(20),time varchar(20));";
+        $sql = "create table " . $this->db_name . "(id integer primary key,title varchar(40),content varchar(200),author varchar(20),type varchar(20),email varchar(20),telephone varchar(20),time varchar(20),goalUser varchar(20));";
         $this->DB->query($sql);
     }
 
@@ -35,7 +35,7 @@ class SuggestionService {
         $email = $suggestion->getEmail();
         $telephone = $suggestion->getTelephone();
         $time = $suggestion->getTime();
-
+        $goalUser = $suggestion->getGoalUser();
         if ($time == null || $time == "") {
             $time = date('Y-m-d H:i:s');
         }
@@ -50,7 +50,7 @@ class SuggestionService {
         }
 
 
-        $sql = "insert into " . $this->db_name . " values(:id,:title,:content,:author,:type,:email,:telephone,:time)";
+        $sql = "insert into " . $this->db_name . " values(:id,:title,:content,:author,:type,:email,:telephone,:time,:goalUser)";
         $stmt = $this->DB->conn->prepare($sql);
         $stmt->bindValue(":id", null);
         $stmt->bindValue(":title", $title);
@@ -60,6 +60,7 @@ class SuggestionService {
         $stmt->bindValue(":email", $email);
         $stmt->bindValue(":telephone", $telephone);
         $stmt->bindValue(":time", $time);
+        $stmt->bindValue(":goalUser", $goalUser);
 
         $stmt->execute();
         return true;
@@ -82,7 +83,8 @@ class SuggestionService {
             $email = $rt["email"];
             $telephone = $rt["telephone"];
             $time = $rt["time"];
-            $suggestion = new Suggestion($title, $content, $author, $type, $email, $telephone);
+            $goalUser = $rt["goalUser"];
+            $suggestion = new Suggestion($title, $content, $author, $type, $email, $telephone, $goalUser);
             $suggestion->setTime($time);
             array_push($suggestions, $suggestion);
         }
@@ -115,7 +117,8 @@ class SuggestionService {
             $email = $rt["email"];
             $telephone = $rt["telephone"];
             $time = $rt["time"];
-            $suggestion = new Suggestion($title, $content, $author, $type, $email, $telephone);
+            $goalUser = $rt["goalUser"];
+            $suggestion = new Suggestion($title, $content, $author, $type, $email, $telephone, $goalUser);
             $suggestion->setTime($time);
             array_push($suggestions, $suggestion);
         }
@@ -159,7 +162,8 @@ class SuggestionService {
             $email = $rt["email"];
             $telephone = $rt["telephone"];
             $time = $rt["time"];
-            $suggestion = new Suggestion($title, $content, $author, $type, $email, $telephone);
+            $goalUser = $rt["goalUser"];
+            $suggestion = new Suggestion($title, $content, $author, $type, $email, $telephone, $goalUser);
             $suggestion->setTime($time);
             array_push($suggestions, $suggestion);
         }
@@ -172,8 +176,8 @@ $service = new SuggestionService();
 //
 //$service->createTable();
 //
-//for ($i = 0; $i < 2; $i++) {
-//    $suggestion=new Suggestion("多跑步".$i."~","跑步有益于身心健康","捕风","医生","1195413185@qq.com","17766088236");
+//for ($i = 0; $i < 17; $i++) {
+//    $suggestion=new Suggestion("多跑步".$i."~","跑步有益于身心健康","捕风","医生","1195413185@qq.com","17766088236","");
 //    $service->insert($suggestion);
 //}
 

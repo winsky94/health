@@ -12,7 +12,7 @@
     <link href="../css/showEvents.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 </head>
-<body onload="write_header();">
+<body onload="write_header();write_footer();">
 <header></header>
 <?php
 $userLogIn = $_GET["userName"];
@@ -65,14 +65,13 @@ $userLogIn = $_GET["userName"];
             <!-- 页数导航 -->
             <br>
 
-            <div class="pagination" style="text-align: center">
-            </div>
+            <!--            <div class="pagination" style="text-align: center"></div>-->
 
         </div>
     </div>
     <!--中间9列结束-->
 </div>
-
+<div id="footer"></div>
 
 <!--  javaScripts -->
 <script src="../js/jquery-2.1.1.min.js"></script>

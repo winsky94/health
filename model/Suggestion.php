@@ -14,16 +14,17 @@ class Suggestion {
     private $email;//邮箱
     private $telephone;//联系电话
     private $time;//发布时间
+    private $goalUser;//目标客户
 
-    public function __construct($title, $content, $author, $type, $email, $telephone) {
+    public function __construct($title, $content, $author, $type, $email, $telephone, $goalUser) {
         $this->title = $title;
         $this->content = $content;
         $this->author = $author;
         $this->type = $type;
         $this->email = $email;
         $this->telephone = $telephone;
+        $this->goalUser = $goalUser;
     }
-
 
     public function getTime() {
         return $this->time;
@@ -79,5 +80,13 @@ class Suggestion {
 
     public function setTitle($title) {
         $this->title = $title;
+    }
+
+    public function getGoalUser() {
+        return $this->goalUser;
+    }
+
+    public function setGoalUser($goalUser) {
+        $this->time = $goalUser;
     }
 }

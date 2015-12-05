@@ -46,6 +46,7 @@ if ($action == "getSuggestionsPageNum") {
         $email = $dom->createElement("email", $suggestion->getEmail());
         $telephone = $dom->createElement("telephone", $suggestion->getTelephone());
         $time = $dom->createElement("time", $suggestion->getTime());
+        $goalUser = $dom->createElement("goalUser", $suggestion->getGoalUser());
 
         $suggestionElement->appendChild($title);
         $suggestionElement->appendChild($content);
@@ -54,6 +55,7 @@ if ($action == "getSuggestionsPageNum") {
         $suggestionElement->appendChild($email);
         $suggestionElement->appendChild($telephone);
         $suggestionElement->appendChild($time);
+        $suggestionElement->appendChild($goalUser);
 
         $rootElement->appendChild($suggestionElement);
     }
@@ -70,6 +72,8 @@ if ($action == "getSuggestionsPageNum") {
     $email = $_POST["email"];
     $telephone = $_POST["telephone"];
 
+    $goalUser = $_POST["goalUser"];
+
     if ($title == "") {
         $message = "<message>请输入建议标题</message>";
         echo $message;
@@ -77,7 +81,7 @@ if ($action == "getSuggestionsPageNum") {
         $message = "<message>请输入建议内容</message>";
         echo $message;
     } else {
-        $suggestion = new Suggestion($title, $content, $author, $type, $email, $telephone);
+        $suggestion = new Suggestion($title, $content, $author, $type, $email, $telephone, $goalUser);
         $result = $suggestionService->insert($suggestion);
         if ($result == true) {
             $message = "<message>success</message>";
@@ -107,6 +111,7 @@ if ($action == "getSuggestionsPageNum") {
         $email = $dom->createElement("email", $suggestion->getEmail());
         $telephone = $dom->createElement("telephone", $suggestion->getTelephone());
         $time = $dom->createElement("time", $suggestion->getTime());
+        $goalUser = $dom->createElement("goalUser", $suggestion->getGoalUser());
 
         $suggestionElement->appendChild($title);
         $suggestionElement->appendChild($content);
@@ -115,6 +120,7 @@ if ($action == "getSuggestionsPageNum") {
         $suggestionElement->appendChild($email);
         $suggestionElement->appendChild($telephone);
         $suggestionElement->appendChild($time);
+        $suggestionElement->appendChild($goalUser);
 
         $rootElement->appendChild($suggestionElement);
     }

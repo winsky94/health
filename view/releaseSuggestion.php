@@ -25,6 +25,12 @@
 </head>
 <body onload="write_header();write_footer();">
 <header></header>
+<?php
+if (isset($_GET["goalUser"])) {
+    $goalUser = $_GET["goalUser"];
+}
+?>
+<input id="goalUser" type="hidden" value="<?php echo $goalUser ?>">
 
 <div class="container main row">
     <!-- 左侧 用户信息 3列-->
@@ -38,8 +44,8 @@
                 $userService = new UserService();
                 $user = $userService->getUserByName($userName);
                 $lastLoadTime = $user->getLastLoadTime();
-                $height = $user->getHeight()."cm";
-                $weight = $user->getWeight()."kg";
+                $height = $user->getHeight() . "cm";
+                $weight = $user->getWeight() . "kg";
                 $age = $user->getAge();
                 $sex = $user->getSex();
                 $telephone = $user->getTelephone();
@@ -87,19 +93,19 @@
                             <?php
                         }
                         ?>
-                        <label for="type">角  色</label>
+                        <label for="type">角 色</label>
                     </div>
                 </div>
 
                 <div class="input-field col s12">
                     <div class="input-field col s6">
                         <input id="email" type="email" name="email" class="validate" value="1195413185@qq.com">
-                        <label for="email">邮  箱</label>
+                        <label for="email">邮 箱</label>
                     </div>
 
                     <div class="input-field col s6">
                         <input id="phoneNumber" type="tel" name="phoneNumber" class="validate" value="18013878510">
-                        <label for="phoneNumber">电  话</label>
+                        <label for="phoneNumber">电 话</label>
                     </div>
                 </div>
 

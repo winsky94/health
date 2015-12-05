@@ -88,11 +88,11 @@ function write_user_info(user_info) {
 
 function write_edit_user_info() {
     var userName = $("#userName").html();
-    var sex=$("#sex").html();
-    var age=$("#age").html();
-    var height=$("#height").html();
-    var weight=$("#weight").html();
-    var telephone=$("#telephone").html();
+    var sex = $("#sex").html();
+    var age = $("#age").html();
+    var height = $("#height").html();
+    var weight = $("#weight").html();
+    var telephone = $("#telephone").html();
     var email = $("#email").html();
 
     var txt = '\
@@ -315,11 +315,20 @@ function write_suggestion_list(suggestions) {
         var email = suggestion.getElementsByTagName("email")[0].firstChild.nodeValue;
         var telephone = suggestion.getElementsByTagName("telephone")[0].firstChild.nodeValue;
         var time = suggestion.getElementsByTagName("time")[0].firstChild.nodeValue;
+        var goalUser = "";
+        var obj = suggestion.getElementsByTagName("goalUser")[0];
+        if (obj.hasChildNodes()) {
+            goalUser = obj.firstChild.nodeValue;
+        }
 
         txt += '<li class="collection-item avatar">\
-            <img src="../images/back1.jpg" class="circle">\
-            <span class="title" style="font-weight: bold;">' + title + '</span>\
-            <p style="font-family: 微软雅黑;margin-left: 50px">\
+            <img src="../images/back1.jpg" class="circle">';
+        if (goalUser == "") {
+            txt += '<span class="title" style="font-weight: bold;">' + title + '</span>';
+        } else {
+            txt += '<span class="title" style="font-weight: bold;color: red;">' + title + '</span>';
+        }
+        txt += '<p style="font-family: 微软雅黑;margin-left: 50px">\
                 发布者：' + author + '\
                 <span style="margin-left: 20px">' + time + '</span>\
             </p>\

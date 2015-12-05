@@ -25,6 +25,7 @@ $userLogIn = $_GET["userName"];
             <th data-field="height" onclick=" sortTable('userInfo',3,'int');" id="height">身高(cm)</th>
             <th data-field="weight" onclick=" sortTable('userInfo',4,'int');" id="weight">体重(kg)</th>
             <th data-field="lastLoadTime" onclick=" sortTable('userInfo',5,'date');" id="lastLoadTime">上次登录时间</th>
+            <th data-field="action">操作</th>
         </tr>
         </thead>
 
@@ -45,17 +46,22 @@ $userLogIn = $_GET["userName"];
             if ($lastLoadTime == "") {
                 $lastLoadTime = "—";
             }
+            ?>
+            <tr>
+                <td onclick='showDetail(this)'><?php echo $userName; ?></td>
+                <td onclick='showDetail(this)'><?php echo $sex; ?></td>
+                <td onclick='showDetail(this)'><?php echo $height; ?></td>
+                <td onclick='showDetail(this)'><?php echo $weight; ?></td>
+                <td onclick='showDetail(this)'><?php echo $lastLoadTime; ?></td>
+                <td>
+                    <button class="btn" onclick="releaseSuggestion(this)">提建议</button>
+                </td>
+            </tr>
 
-            echo "<tr onclick='showDetail(this)'>";
-            echo "<td>$userName</td>";
-            echo "<td>$sex</td>";
-            echo "<td>$height</td>";
-            echo "<td>$weight</td>";
-            echo "<td>$lastLoadTime</td>";
-            echo "</tr>";
+            <?php
         }
-
         ?>
+
         </tbody>
     </table>
 </div>
@@ -71,10 +77,18 @@ $userLogIn = $_GET["userName"];
 <script src="../utils/TableSort.js"></script>
 <script>
     // 表格单击一行跳转
-    function showDetail(tr) {
-        var cells = tr.cells;
+    function showDetail(td) {
+        var cells = td.parentNode.cells;
         var userName = cells[0].innerHTML;
         window.location.href = "../view/userInfo.php?userName=" + userName;
+    }
+
+    function releaseSuggestion(e) {
+        var cells = e.parentNode.parentNode.cells;
+        var goalUser = cells[0].innerHTML;
+
+        var userName = document.getElementById("login_user").innerHTML;
+        window.location.href = "../view/releaseSuggestion.php?userName=" + userName + "&goalUser=" + goalUser;
     }
 
 </script>

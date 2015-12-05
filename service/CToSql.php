@@ -188,7 +188,7 @@ class CToSql {
             $type = $row[3];
             $email = $row[4];
             $telephone = $row[5];
-            $suggestion = new Suggestion($title, $content, $author, $type, $email, $telephone);
+            $suggestion = new Suggestion($title, $content, $author, $type, $email, $telephone, "");
             if (sizeof($row) > 6) {
                 if ($xml) {
                     $time = $row[6];
