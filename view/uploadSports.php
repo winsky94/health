@@ -116,6 +116,7 @@ $userName = $_GET["userName"];
 </script>
 
 <script type="text/javascript" src="../js/stream-v1.js"></script>
+<script src="../js/upload.js"></script>
 <script type="text/javascript">
     /**
      * 配置文件（如果没有默认字样，说明默认值就是注释下的值）
@@ -151,7 +152,7 @@ $userName = $_GET["userName"];
 //		onExtNameMismatch: function(name, filters) {alert('onExtNameMismatch')}, /** 文件的扩展名不匹配的响应事件 */
 //		onCancel : function(file) {alert('Canceled:  ' + file.name)}, /** 取消上传文件的响应事件 */
 //		onComplete: function(file) {alert('onComplete')}, /** 单个文件上传完毕的响应事件 */
-//		onQueueComplete: function() {alert('onQueueComplete')}, /** 所以文件上传完毕的响应事件 */
+        onQueueComplete: uploadFile, /** 所以文件上传完毕的响应事件 */
 //		onUploadError: function(status, msg) {alert('onUploadError')} /** 文件上传出错的响应事件 */
     };
     var _t = new Stream(config);

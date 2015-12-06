@@ -41,6 +41,5 @@ function uploadFile() {
         xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         //post方式发送数据
         xmlHttp.send("action=exportToSql");
-
     }
 }

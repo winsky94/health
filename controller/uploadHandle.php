@@ -8,7 +8,7 @@
 
 require_once("../service/CToSql.php");
 $action = $_POST["action"];
-
+//$action="exportToSql";
 if ($action == "exportToSql") {
     //文件路径
     $file_path = "../uploads/files.txt";

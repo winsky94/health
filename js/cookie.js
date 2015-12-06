@@ -173,7 +173,7 @@ function write_header_login(userName, type) {
 	                                    </a> \
 	                                </li> \
 	                                <li> \
-	                                    <a href="#">兴趣组</a> \
+	                                    <a href="../view/interest.php?userName=' + userName + '">兴趣组</a> \
 	                                </li> \
 	                                <!-- Dropdown Trigger --> \
 	                                <li> \

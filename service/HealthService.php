@@ -61,6 +61,8 @@ class HealthService {
         $sunday = $week[0];
         $saturday = $week[6];
 
+//        echo  $sunday," dfadasgfagf  ",$saturday;
+
         $sql = "select sum(meters) as meters_total,sum(minutes) as minutes_total,sum(calories) as calories_total from " . $this->db_name_sport . " where userName='" . $userName . "' and upLoadTime<='" . $saturday . "' and upLoadTime>='" . $sunday . "'";
         $data = $this->DB->getList($sql);
 
@@ -397,6 +399,34 @@ class HealthService {
         $result = $stmt->execute();
         return $result;
     }
+
+    public function getRank($userName) {
+        $data = array();
+        $my_data = $this->getStaticsPerWeek($userName)["meters_total"];
+        array_push($data, (int)$my_data);
+
+        $sql = "select friends from friends where name='" . $userName . "';";
+        $friends = $this->DB->getList($sql);
+
+        foreach ($friends as $friend) {
+            foreach ($friend as $myFriend) {
+                $friend_data = $this->getStaticsPerWeek($myFriend);
+                $meter_total = $friend_data["meters_total"];
+                array_push($data, (int)$meter_total);
+            }
+
+        }
+
+        rsort($data);
+        $rank = 1;
+        for ($i = 1; $i <= sizeof($data); $i++) {
+            if ($data[$i - 1] == $my_data) {
+                $rank = $i;
+                break;
+            }
+        }
+        return $rank;
+    }
 }
 
 $service = new HealthService();
@@ -423,3 +453,10 @@ $service = new HealthService();
 
 //echo $service->setWeekGoal("winsky","时长(小时)",7);
 //echo $service->deleteSportData("winsky","2002-03-27 15:15:41");
+
+// print_r($service->getStaticsPerWeek("winsky"));
+
+//$data=array("winsky","2015-12-06 14:47:0","1.34","20.24","13.48","200");
+//$d=array();
+//array_push($d,$data);
+//echo $service->setUserSportData($d);

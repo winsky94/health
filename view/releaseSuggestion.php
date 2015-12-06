@@ -144,7 +144,7 @@ if (isset($_GET["goalUser"])) {
 
 
 <!--  javaScripts -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
 <!--注销是为了使用字符计数功能-->
 <!--<script src="../js/materialize.js"></script>-->
 <script src="../js/cookie.js"></script>

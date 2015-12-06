@@ -1,13 +1,15 @@
 ﻿输出信息到调试文件
 error_log($file['name']."\r\n", 3, "../log.txt");
-
-21
-22 winsky 距离（公里）
-17766088236
-exportToSql
-exportToSql
-exportToSql
-here
-exportToSql
-exportToSql
-here
+../uploads/files/20151206/sport.xml
+xml
+begin
+../uploads/files/20151206/sport.xml
+xml
+begin
+xmltosql1
+xmltosql2
+../uploads/files/20151206/sport.xml
+xml
+begin
+xmltosql1
+xmltosql2

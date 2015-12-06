@@ -109,6 +109,23 @@ $userName = $_GET["userName"];
                     数据上传
                 </a>
             </div>
+
+            <div class="collection black-text">
+                <a class="collection-item waves-effect waves-light">
+                    <i class="small grey-text mdi-editor-insert-emoticon"></i>
+                    周运动总量好友排名
+                </a>
+                <a class="collection-item waves-effect waves-light center">
+                    第<span class="red-text" style="font-size: 36px;font-weight: bold;">
+                        <?php
+                        require_once("../service/HealthService.php");
+                        $healthService = new HealthService();
+                        $rank = $healthService->getRank($userName);
+                        echo $rank;
+                        ?>
+                    </span>名
+                </a>
+            </div>
         </div>
         <!-- 左侧 3列 结束-->
 

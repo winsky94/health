@@ -9,6 +9,7 @@
 
 require_once("../utils/ExcelUtil.php");
 require_once("../service/SuggestionService.php");
+require_once("../service/HealthService.php");
 
 class CToSql {
     public function excelToSql($file) {
@@ -17,15 +18,18 @@ class CToSql {
     }
 
     public function xmlToSql($file) {
+        error_log("xmltosql1" . "\r\n", 3, "../log.txt");
         if (strpos($file, "suggestion")) {
             $data = $this->suggestionXml($file);
             $this->toSql($data, true);
         } elseif (strpos($file, "sport")) {
+            error_log("xmltosql2" . "\r\n", 3, "../log.txt");
             $this->sportXmlToSql($file);
+            error_log("xmltosql3" . "\r\n", 3, "../log.txt");
         } elseif (strpos($file, "sleep")) {
             $this->sleepXmlToSql($file);
         }
-
+        error_log("xmltosql4" . "\r\n", 3, "../log.txt");
 
     }
 
@@ -41,6 +45,7 @@ class CToSql {
 
         $data = array();
         foreach ($suggestions as $suggestion) {
+            error_log("循环" . "\r\n", 3, "../log.txt");
             $titles = $suggestion->getElementsByTagName("title");
             $title = $titles->item(0)->nodeValue;
 
@@ -62,6 +67,7 @@ class CToSql {
             $times = $suggestion->getElementsByTagName("time");
             $time = $times->item(0)->nodeValue;
 
+
             $row = array();
             array_push($row, $title);
             array_push($row, $content);
@@ -74,7 +80,6 @@ class CToSql {
             }
             array_push($data, $row);
         }
-
         return $data;
     }
 
@@ -101,7 +106,7 @@ class CToSql {
             $meter = $sport->getElementsByTagName("meters");
             $meters = $meter->item(0)->nodeValue;
 
-            $minute = $sport->getElementsByTagName("minute");
+            $minute = $sport->getElementsByTagName("minutes");
             $minutes = $minute->item(0)->nodeValue;
 
             $speeds = $sport->getElementsByTagName("speed");
