@@ -6,23 +6,9 @@
         <!-- 身高(厘米) -->
         <height>177</height>
         <!-- 体重(公斤) -->
-        <weight>160</weight>
+        <weight>80</weight>
         <!-- 目标体重(公斤) -->
-        <weightGoal>150</weightGoal>
-        <!-- 心率 -->
-        <heart>75</heart>
-        <!-- 血压 -->
-        <blood>104/85</blood>
-    </data>
-    <data id="2">
-        <!-- 对应身体数据的日期 -->
-        <date>2015-11-07 11:11:11</date>
-        <!-- 身高(厘米) -->
-        <height>177</height>
-        <!-- 体重(公斤) -->
-        <weight>160</weight>
-        <!-- 目标体重(公斤) -->
-        <weightGoal>150</weightGoal>
+        <weightGoal>75</weightGoal>
         <!-- 心率 -->
         <heart>75</heart>
         <!-- 血压 -->

@@ -77,7 +77,7 @@ function write_header_login(userName, type) {
     		<!-- Dropdown Structure -->\
     		<ul id="dropdown2" class="dropdown-content">\
     			<li><a id="login_user" href="#">' + userName + '</a></li>\
-    			<li><a href="user.php?userName=' + userName + '">个人信息</a></li>\
+    			<li><a href="doctor.php?userName=' + userName + '">个人信息</a></li>\
     			<li><a href="../view/index.html" onclick="exit();">退出登录</a></li>\
     		</ul>\
         <!-- Dropdown Structure -->\
@@ -205,7 +205,7 @@ function write_header_login(userName, type) {
     		</ul>\
 			<ul id="dropdown7" class="dropdown-content">\
     			<li><a id="login_user" href="#">' + userName + '</a></li>\
-    			<li><a href="user.php?userName=' + userName + '">个人信息</a></li>\
+    			<li><a href="doctor.php?userName=' + userName + '">个人信息</a></li>\
     			<li><a href="../view/index.html" onclick="exit()">退出登录</a></li>\
     		</ul>\
     		<div class="navbar-fixed"> \

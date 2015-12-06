@@ -26,6 +26,7 @@
 <body onload="write_header();write_footer();">
 <header></header>
 <?php
+$goalUser = "";
 if (isset($_GET["goalUser"])) {
     $goalUser = $_GET["goalUser"];
 }

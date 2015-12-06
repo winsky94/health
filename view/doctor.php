@@ -44,7 +44,7 @@
     </style>
 
 </head>
-<body onload="write_header();write_footer();get_user_info();verify_showAllInterest('');write_quick_back_button();"
+<body onload="write_header();write_footer();get_user_info();"
       id="top">
 <header></header>
 
@@ -71,25 +71,17 @@
 
         <div class="col s12 l9">
             <div class="row" style="margin-left: 15px">
-                <div class="col s4">
-                    <ul class="tabs">
-                        <li class="tab col s3"><a href="#info">个人信息</a></li>
-                        <li class="tab col s3"><a href="#interests_list">我的兴趣</a></li>
-                    </ul>
-                </div>
 
                 <div id="info" class="col s12 l9"></div>
-
-                <div id="interests_list" class="col s12 l10">
-                </div>
-                <!--右侧快速返回顶部-->
-                <div id="back-up"></div>
-                <!--右侧快速返回顶部结束-->
             </div>
+            <!--右侧快速返回顶部-->
+            <div id="back-up"></div>
+            <!--右侧快速返回顶部结束-->
         </div>
-
-
     </div>
+
+
+</div>
 </div>
 
 <div id="footer"></div>

@@ -114,6 +114,12 @@
 <script type="text/javascript">
 
     function joinEvent(title) {
+        var state = document.getElementById("state").innerHTML;
+        if (state.indexOf("已结束") > 0) {
+            alert("活动已结束，不能参加~~~");
+            return;
+        }
+
         if (window.confirm('你确定要参加该活动吗？')) {
             var userName = document.getElementById("login_user").innerText;
             join(userName, title);

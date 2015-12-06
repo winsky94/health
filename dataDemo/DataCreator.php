@@ -38,7 +38,7 @@ class DataCreator {
             $item->appendChild($meterElement);
 
             $minute = rand(0, 20) . "." . rand(0, 99);
-            $minuteElement = $dom->createElement("minute", $minute);
+            $minuteElement = $dom->createElement("minutes", $minute);
             $item->appendChild($minuteElement);
 
             $speed = rand(10, 15) . "." . rand(0, 99);

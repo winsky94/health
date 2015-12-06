@@ -1,10 +1,11 @@
 //用户名检验方法
 //这个方法将使用XMLHTTPRequest对象进行AJAX的异步数据交互
 var xmlHttp;
+var userName;
 function verify_change_user_info() {
     // 使用dom的方式获取文本框中的值
     // .value可以获取一个元素节点的value属性
-    userName = document.getElementById("userName").value;
+    userName = document.getElementById("userName").innerHTML;
     var sex = document.getElementById("sex").value;
     var age = document.getElementById("age").value;
     var height = document.getElementById("height").value;

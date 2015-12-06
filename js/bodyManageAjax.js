@@ -58,10 +58,9 @@ function on_update_response(xmlHttp) {
                 var responseMessage = textNode.nodeValue;
 
                 if (responseMessage == 'success') {
-                    //window.location.href = "../view/user.php?userName=" + userName;
-
+                    window.location.reload();
                     //修改理想体重
-                    document.getElementById("idealWeight").innerHTML = (21.2 * height * height / 10000).toFixed(1);
+                    //document.getElementById("idealWeight").innerHTML = (21.2 * height * height / 10000).toFixed(1);
                 }
                 else {
                     // 将数据显示在页面上

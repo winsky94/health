@@ -95,11 +95,20 @@ $userName = $_GET["userName"];
             require_once("../service/healthService.php");
             $healthService = new HealthService();
             $data = $healthService->getUserBodyData($userName, 1);
-            $height = $data[0]["height"];
-            $weight = $data[0]["weight"];
-            $weightGoal = $data[0]["weightGoal"];
-            $heart = $data[0]["heart"];
-            $blood = $data[0]["blood"];
+            if (sizeof($data) == 1) {
+                $height = $data[0]["height"];
+                $weight = $data[0]["weight"];
+                $weightGoal = $data[0]["weightGoal"];
+                $heart = $data[0]["heart"];
+                $blood = $data[0]["blood"];
+            } else {
+                $height = 0;
+                $weight = 0;
+                $weightGoal = 0;
+                $heart = 0;
+                $blood = 0;
+            }
+
 
             ?>
             <div class="card grey lighten-4">

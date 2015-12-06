@@ -61,7 +61,6 @@ class HealthService {
         $sunday = $week[0];
         $saturday = $week[6];
 
-//        echo  $sunday," dfadasgfagf  ",$saturday;
 
         $sql = "select sum(meters) as meters_total,sum(minutes) as minutes_total,sum(calories) as calories_total from " . $this->db_name_sport . " where userName='" . $userName . "' and upLoadTime<='" . $saturday . "' and upLoadTime>='" . $sunday . "'";
         $data = $this->DB->getList($sql);
@@ -69,6 +68,13 @@ class HealthService {
         $meters_total = $data[0]["meters_total"];
         $minutes_total = $data[0]["minutes_total"];
         $calories_total = $data[0]["calories_total"];
+
+        if ($meters_total == "") {
+            $meters_total = 0;
+        }
+        if ($calories_total == "") {
+            $calories_total = 0;
+        }
 
         $minutes_total_hour = floor($minutes_total / 24);
         $minutes_total_minute = $minutes_total % 24;
@@ -460,3 +466,5 @@ $service = new HealthService();
 //$d=array();
 //array_push($d,$data);
 //echo $service->setUserSportData($d);
+
+//print_r($service->getUserBodyData("winsky",1));

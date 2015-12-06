@@ -18,18 +18,14 @@ class CToSql {
     }
 
     public function xmlToSql($file) {
-        error_log("xmltosql1" . "\r\n", 3, "../log.txt");
         if (strpos($file, "suggestion")) {
             $data = $this->suggestionXml($file);
             $this->toSql($data, true);
         } elseif (strpos($file, "sport")) {
-            error_log("xmltosql2" . "\r\n", 3, "../log.txt");
             $this->sportXmlToSql($file);
-            error_log("xmltosql3" . "\r\n", 3, "../log.txt");
         } elseif (strpos($file, "sleep")) {
             $this->sleepXmlToSql($file);
         }
-        error_log("xmltosql4" . "\r\n", 3, "../log.txt");
 
     }
 
