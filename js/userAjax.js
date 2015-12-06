@@ -3,7 +3,7 @@
  */
 
 function get_user_info() {
-    var userName = document.getElementById("username").innerText;
+    var userName = document.getElementById("userName").innerText;
     var xmlHttp = getXmlHttp();
     if (xmlHttp != null) {
         xmlHttp.onreadystatechange = function () {

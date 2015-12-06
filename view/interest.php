@@ -82,46 +82,22 @@
                 <div class="input-field col s12 l6">
                     <i class="mdi-editor-mode-edit prefix"></i>
                     <textarea id="content" class="materialize-textarea" length="140"></textarea>
-                    <label for="content">发布兴趣贴...</label>
+                    <label for="content">发布兴趣帖...</label>
                 </div>
 
                 <div class="table-container col s12 l6 center">
                     <div class="row-container">
                         <div class="input-field cell">
-                            <button class="btn btn-primary" onclick="alert('监听')">发布</button>
+                            <button class="btn btn-primary" onclick="verify_releaseInterest()">发布</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- 发布帖子结束-->
-
+            <div style="margin-top:150px; "></div>
             <!-- 展示帖子-->
-            <div>
+            <div id="interests_list">
                 <!--动态内容-->
-                <div class="card-panel grey lighten-5 z-depth-1" style="margin-top:150px; ">
-                    <div class="row">
-                        <div class="col s2 left-align">
-                            <img src="../images/back2.jpg" width="80" height="80" alt="" style="border-radius: 50%">
-                        </div>
-                        <div class="col s10">
-                            <div class="section green-text" style="font-weight: 800;font-size: 18px">
-                                winsky
-                            </div>
-                        <span>
-                            这里是动态的正文；这里是动态的正文；这里是动态的正文；这里是动态的正文；这里是动态的正文；这里是动态的正文；这里是动态的正文；这里是动态的正文；这里是动态的正文；
-                        </span><br>
-                        <span>
-                            <img src="../images/back1.jpg " width="100px" height="100px">
-                        </span><br>
-                        <span class="left green-text">
-                            2015-10-20 21:32:20
-                        </span>
-                        <span class="right green-text">
-                            评论(0) 赞(0)
-                        </span>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- 展示帖子结束-->
         </div>
@@ -145,6 +121,12 @@
 <script src="../js/ChangePWAjax.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/LoginAjax.js"></script>
+<script src="../js/releaseInterestAjax.js"></script>
+<script src="../js/showInterestAjax.js"></script>
+
+<script>
+    verify_showAllInterest("all");
+</script>
 
 </body>
 </html>

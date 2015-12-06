@@ -34,10 +34,10 @@ class UserService {
     }
 
     public function createTable() {
-        $sql = "drop table if exists " . $this->db_user_base_info;
-        $this->DB->query($sql);
-        $sql = "create table " . $this->db_user_base_info . "(id integer primary key,userName varchar(40),password int, type varchar(20) ,age int,sex varchar(20),height int,weight int,telephone varchar(40), email varchar(40),lastLoadTime date default '—')";
-        $this->DB->query($sql);
+//        $sql = "drop table if exists " . $this->db_user_base_info;
+//        $this->DB->query($sql);
+//        $sql = "create table " . $this->db_user_base_info . "(id integer primary key,userName varchar(40),password int, type varchar(20) ,age int,sex varchar(20),height int,weight int,telephone varchar(40), email varchar(40),lastLoadTime date default '—')";
+//        $this->DB->query($sql);
 
         $sql = "drop table if exists " . $this->db_user_body_info;
         $this->DB->query($sql);
