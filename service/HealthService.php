@@ -32,13 +32,24 @@ class HealthService {
         $sql = "select * from " . $this->db_name_sport . " where userName='" . $userName . "' and upLoadTime<='" . $date . "' limit 7";
         $result = $this->DB->getList($sql);
 
-        $sports = array("data1" => $result[0]["meters"],
-            "data2" => $result[1]["meters"],
-            "data3" => $result[2]["meters"],
-            "data4" => $result[3]["meters"],
-            "data5" => $result[4]["meters"],
-            "data6" => $result[5]["meters"],
-            "data7" => $result[6]["meters"]);
+        if (sizeof($result) > 0) {
+            $sports = array("data1" => $result[0]["meters"],
+                "data2" => $result[1]["meters"],
+                "data3" => $result[2]["meters"],
+                "data4" => $result[3]["meters"],
+                "data5" => $result[4]["meters"],
+                "data6" => $result[5]["meters"],
+                "data7" => $result[6]["meters"]);
+        } else {
+            $sports = array("data1" => 0,
+                "data2" => 0,
+                "data3" => 0,
+                "data4" => 0,
+                "data5" => 0,
+                "data6" => 0,
+                "data7" => 0);
+        }
+
 
 //        $dates = array("date1" => $this->handleDate($result[0]["upLoadTime"]),
 //            "date2" => $this->handleDate($result[1]["upLoadTime"]),
@@ -65,9 +76,16 @@ class HealthService {
         $sql = "select sum(meters) as meters_total,sum(minutes) as minutes_total,sum(calories) as calories_total from " . $this->db_name_sport . " where userName='" . $userName . "' and upLoadTime<='" . $saturday . "' and upLoadTime>='" . $sunday . "'";
         $data = $this->DB->getList($sql);
 
-        $meters_total = $data[0]["meters_total"];
-        $minutes_total = $data[0]["minutes_total"];
-        $calories_total = $data[0]["calories_total"];
+        if (sizeof($data) == 1) {
+            $meters_total = $data[0]["meters_total"];
+            $minutes_total = $data[0]["minutes_total"];
+            $calories_total = $data[0]["calories_total"];
+        } else {
+            $meters_total = 0;
+            $minutes_total = 0;
+            $calories_total = 0;
+        }
+
 
         if ($meters_total == "") {
             $meters_total = 0;
@@ -116,8 +134,14 @@ class HealthService {
     public function getWeekGoal($userName) {
         $sql = "select * from " . $this->db_name_goal . " where userName='" . $userName . "' limit 1;";
         $data = $this->DB->getList($sql);
-        $type = $data[0]["type"];
-        $value = $data[0]["value"];
+        if (sizeof($data) == 1) {
+            $type = $data[0]["type"];
+            $value = $data[0]["value"];
+        } else {
+            $type = "距离(公里)";
+            $value = 0;
+        }
+
 
         $result = array("goal_type" => $type, "value" => $value);
 

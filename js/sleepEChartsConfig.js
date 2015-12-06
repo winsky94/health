@@ -41,10 +41,10 @@ function on_data_response(xmlHttp, ec) {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
         var text = jQuery.parseJSON(xmlHttp.responseText);
 
-        var startTimeData = [];
-        var endTimeData = [];
-        var scoreData = [];
-        var xData = [];
+        var startTimeData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var endTimeData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var scoreData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var xData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         for (var i = 0; i < text.length; i++) {
             var sleepData = text[i];

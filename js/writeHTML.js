@@ -305,6 +305,7 @@ function write_event_list(events) {
 
 function write_suggestion_list(suggestions) {
     var txt = '';
+    var userName=document.getElementById("userName").innerHTML;
     for (var i = 0; i < suggestions.length; i++) {
         var suggestion = suggestions[i];
         var title = suggestion.getElementsByTagName("title")[0].firstChild.nodeValue;
@@ -322,10 +323,10 @@ function write_suggestion_list(suggestions) {
 
         txt += '<li class="collection-item avatar">\
             <img src="../images/back1.jpg" class="circle">';
-        if (goalUser == "") {
-            txt += '<span class="title" style="font-weight: bold;">' + title + '</span>';
-        } else {
+        if (goalUser == userName) {
             txt += '<span class="title" style="font-weight: bold;color: red;">' + title + '</span>';
+        } else {
+            txt += '<span class="title" style="font-weight: bold;">' + title + '</span>';
         }
         txt += '<p style="font-family: 微软雅黑;margin-left: 50px">\
                 发布者：' + author + '\
